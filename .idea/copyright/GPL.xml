@@ -1,0 +1,7 @@
+<component name="CopyrightManager">
+  <copyright>
+    <option name="keyword" value="This file is part of Governor." />
+    <option name="notice" value="This file is part of Governor.&#10;&#10;Governor is free software: you can redistribute it and/or modify it under&#10; the terms of the GNU General Public License as published by the Free &#10; Software Foundation, either version 3 of the License, or (at your option) &#10; any later version.&#10;&#10;Governor is distributed in the hope that it will be useful, but WITHOUT&#10; ANY WARRANTY; without even the implied warranty of &#10; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the &#10; GNU General Public License for more details.&#10;&#10;You should have received a copy of the GNU General Public License &#10;along with Governor. If not, see &lt;https://www.gnu.org/licenses/&gt;." />
+    <option name="myName" value="GPL" />
+  </copyright>
+</component>
