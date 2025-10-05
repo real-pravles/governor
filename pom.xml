@@ -22,8 +22,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.pravles</groupId>
-    <artifactId>basic-process-app</artifactId>
-    <version>0.1</version>
+    <artifactId>governor</artifactId>
+    <version>1.0</version>
 
     <properties>
         <maven.compiler.source>20</maven.compiler.source>
