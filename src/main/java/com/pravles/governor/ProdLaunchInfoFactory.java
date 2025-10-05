@@ -43,6 +43,7 @@ public class ProdLaunchInfoFactory extends AbstractLaunchInfoFactory {
                         "extract-data-from-low-code-file",
                         "create-OR-input",
                         "run-OR",
+                        "calc-tech-ceiling",
                         "TBD")
                 .stream()
                 .forEach(f -> {
