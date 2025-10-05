@@ -15,7 +15,7 @@
 ; along with Governor. If not, see <https://www.gnu.org/licenses/>.
 ;
 
-(ns create-OR-input)
+(ns run-OR)
 
 (require '[clojure.string :as str]
          '[clojure.java.io :as io]
