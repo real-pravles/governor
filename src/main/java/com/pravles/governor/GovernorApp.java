@@ -20,6 +20,8 @@ package com.pravles.governor;
 import com.pravles.processengine.util.LaunchInfoFactory;
 import com.pravles.processengine.util.ProcessEngineLauncher;
 
+import java.io.File;
+
 public class GovernorApp {
     public static void main(final String[] args) {
         final GovernorApp app = new GovernorApp();
@@ -27,8 +29,21 @@ public class GovernorApp {
     }
 
     void run(final String[] args) {
-        final LaunchInfoFactory lif = new ProdLaunchInfoFactory();
+        if (args.length != 1) {
+            System.out.println("Usage: java -jar governor.jar <Directory with" +
+                    " governor.edn>");
+            return;
+        }
+        final File dir = new File(args[0]);
+        if (!(dir.exists() && dir.canRead() && dir.canWrite()
+                && dir.isDirectory())) {
+            System.err.println(String.format("Directory '%s' does not exist and/or is not readable and/or not writeable and/or is not a directory",
+                    dir.getAbsolutePath()));
+            return;
+        }
+
+        final LaunchInfoFactory lif =
+                new ProdLaunchInfoFactory(dir.getAbsolutePath());
         new ProcessEngineLauncher().run(lif);
     }
-
 }
