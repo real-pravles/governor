@@ -28,5 +28,8 @@
 
 (defn гав
   [old-ctx]
-  (println "Привет из прекрасного мира Кложура!")
-  old-ctx)
+  (let []
+    (.put old-ctx "input-data-invalid?" false)
+   old-ctx
+    )
+)
