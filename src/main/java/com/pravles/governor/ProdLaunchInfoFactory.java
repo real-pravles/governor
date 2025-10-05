@@ -41,7 +41,7 @@ public class ProdLaunchInfoFactory extends AbstractLaunchInfoFactory {
         Arrays.asList("validate-input",
                         "output-error-message",
                         "extract-data-from-low-code-file",
-                        "TBD",
+                        "create-OR-input",
                         "TBD",
                         "TBD")
                 .stream()
