@@ -40,7 +40,7 @@ public class ProdLaunchInfoFactory extends AbstractLaunchInfoFactory {
     protected void initFnBindings(final Map<String, ActivityFunction> fnBindings) {
         Arrays.asList("validate-input",
                         "output-error-message",
-                        "TBD",
+                        "extract-data-from-low-code-file",
                         "TBD",
                         "TBD",
                         "TBD")
