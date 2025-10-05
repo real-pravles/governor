@@ -24,6 +24,7 @@ import com.pravles.processengine.util.PpmnDiagramInfo;
 import com.pravles.util.ClojureActivityFunction;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,18 @@ public class ProdLaunchInfoFactory extends AbstractLaunchInfoFactory {
 
     @Override
     protected void initFnBindings(final Map<String, ActivityFunction> fnBindings) {
+        Arrays.asList("validate-input",
+                        "output-error-message",
+                        "TBD",
+                        "TBD",
+                        "TBD",
+                        "TBD")
+                .stream()
+                .forEach(f -> {
+                    fnBindings.put(f,
+                            new ClojureActivityFunction(f));
+                });
+
         fnBindings.put("привет-мир",
                 new ClojureActivityFunction("hello-world"));
     }
