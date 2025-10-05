@@ -1,0 +1,12 @@
+[:comment "Governor instrutions start here"]
+
+  [:control-state-root-file-is-located-in
+   "@{basedir}/r.dot"]
+  
+  [:write-schedule-to-file "@{basedir}/schedule.org"]
+  
+  [:comment "Scheduling settings (start)"]
+  
+  [:comment "Scheduling settings (end)"]
+
+[:comment "Governor instrutions end here"]
