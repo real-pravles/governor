@@ -43,16 +43,12 @@ public class ProdLaunchInfoFactory extends AbstractLaunchInfoFactory {
                         "extract-data-from-low-code-file",
                         "create-OR-input",
                         "run-OR",
-                        "calc-tech-ceiling",
-                        "TBD")
+                        "calc-tech-ceiling")
                 .stream()
                 .forEach(f -> {
                     fnBindings.put(f,
                             new ClojureActivityFunction(f));
                 });
-
-        fnBindings.put("привет-мир",
-                new ClojureActivityFunction("hello-world"));
     }
 
     @Override

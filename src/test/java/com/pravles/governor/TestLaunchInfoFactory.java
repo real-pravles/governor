@@ -33,9 +33,9 @@ public class TestLaunchInfoFactory extends ProdLaunchInfoFactory {
     }
 
     @Override
-    protected void initFnBindings(Map<String, ActivityFunction> fnBindings) {
-        fnBindings.put("привет-мир",
-                new TestActivity(HELLO_WORLD));
+    protected void initFnBindings(final Map<String, ActivityFunction>
+                                              fnBindings) {
+        super.initFnBindings(fnBindings);
     }
 
     @Override
