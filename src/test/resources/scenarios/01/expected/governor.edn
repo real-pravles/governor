@@ -1,0 +1,43 @@
+[:comment "Governor instrutions start here"]
+
+  [:control-state-root-file-is-located-in
+   "@{basedir}/r.dot"]
+  
+  [:write-schedule-to-file "@{basedir}/schedule.org"]
+  
+  [:comment "Scheduling settings (start)"]
+
+  [:comment "When can I work?"]
+
+    [:on [:monday :wednesday :friday]
+     :i-can-work-from "06:00"
+     :through "08:00"]
+    
+    [:on [:monday :tuesday
+          :wednesday :thursday :friday]
+         :i-can-work-for "1h"
+         :after "17:00"]
+    
+    [:on [:saturday :sunday]
+      :i-can-work-for "5h"]
+
+  [:comment "Effort estimates"]
+
+    [:in-process "w"
+     :assume-activity-requires-effort-of "20h"]
+
+    [:in-process "p"
+     :assume-activity-requires-effort-of "12h"]
+
+
+  [:comment "Priorities"]
+
+    [:process "w"
+     :has-priority 100]
+    
+    [:process "p"
+     :has-priority 200]
+
+  [:comment "Scheduling settings (end)"]
+
+[:comment "Governor instrutions end here"]

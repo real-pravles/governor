@@ -55,7 +55,7 @@ class GovernorAppTest {
         final String baseDir = String.format("src/test/resources/scenarios/%s", scenario);
         final String inputDir = format("%s/input", baseDir);
         final String actualOutputDir = format("%s/actual", baseDir);
-        final String expectedOutputDir = format( "%s/expected-result",
+        final String expectedOutputDir = format( "%s/expected",
                 baseDir);
 
         new File(actualOutputDir).mkdir();
