@@ -15,7 +15,7 @@
  * along with Governor. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.pravles;
+package com.pravles.governor;
 
 import com.pravles.processengine.api.ActivityFunction;
 import com.pravles.processengine.api.ConditionFunction;

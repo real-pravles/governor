@@ -15,14 +15,14 @@
  * along with Governor. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.pravles;
+package com.pravles.governor;
 
 import com.pravles.processengine.util.LaunchInfoFactory;
 import com.pravles.processengine.util.ProcessEngineLauncher;
 
-public class ProcessDrivenApp {
+public class GovernorApp {
     public static void main(final String[] args) {
-        final ProcessDrivenApp app = new ProcessDrivenApp();
+        final GovernorApp app = new GovernorApp();
         app.run(args);
     }
 
