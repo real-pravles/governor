@@ -15,7 +15,7 @@
  * along with Governor. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.pravles;
+package com.pravles.governor;
 
 import com.pravles.governor.ProdLaunchInfoFactory;
 import com.pravles.processengine.TestActivity;
@@ -25,9 +25,12 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class TestLaunchInfoFactory extends ProdLaunchInfoFactory {
-
     public static final String HELLO_WORLD = "hello-world";
     public static final String EXECUTED_ACTIVITIES = "executedActivities";
+
+    public TestLaunchInfoFactory(final String baseDir) {
+        super(baseDir);
+    }
 
     @Override
     protected void initFnBindings(Map<String, ActivityFunction> fnBindings) {

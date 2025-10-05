@@ -22,6 +22,7 @@ import com.pravles.processengine.api.ConditionFunction;
 import com.pravles.processengine.util.AbstractLaunchInfoFactory;
 import com.pravles.processengine.util.PpmnDiagramInfo;
 import com.pravles.util.ClojureActivityFunction;
+import lombok.RequiredArgsConstructor;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +31,10 @@ import java.util.Map;
 import static com.pravles.processengine.util.PpmnDiagramInfo.ROOT;
 import static java.util.Arrays.asList;
 
+@RequiredArgsConstructor
 public class ProdLaunchInfoFactory extends AbstractLaunchInfoFactory {
+    private final String baseDir;
+
     @Override
     protected void initFnBindings(final Map<String, ActivityFunction> fnBindings) {
         fnBindings.put("привет-мир",
@@ -44,7 +48,9 @@ public class ProdLaunchInfoFactory extends AbstractLaunchInfoFactory {
 
     @Override
     protected Map<String, Object> composeInitialContext() {
-        return new HashMap<>();
+        final Map<String, Object> ctx = new HashMap<>();
+        ctx.put("baseDir", baseDir);
+        return ctx;
     }
 
     @Override
