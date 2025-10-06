@@ -32,7 +32,7 @@
   [old-ctx]
   (let [base-dir (get old-ctx "baseDir")
         low-code-file (str base-dir "/governor.edn")
-        low-code-data (with-open [r (io/reader "governor.edn")]
+        low-code-data (with-open [r (io/reader low-code-file)]
           (let [pbr (java.io.PushbackReader. r)]
             (loop [objects []]
               (let [obj (edn/read {:eof ::eof} pbr)]
