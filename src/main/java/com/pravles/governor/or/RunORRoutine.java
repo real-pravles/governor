@@ -17,6 +17,7 @@
 
 package com.pravles.governor.or;
 
+import clojure.lang.Keyword;
 import com.google.ortools.Loader;
 import com.google.ortools.sat.CpModel;
 import com.google.ortools.sat.CpSolver;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class RunORRoutine implements ActivityFunction {
     @Override
@@ -158,6 +160,20 @@ public class RunORRoutine implements ActivityFunction {
             }
         }
         model.maximize(objective);
+
+        final List lowCode = (List) ctx.get("low-code");
+
+        final String name = "include-solver-stats-in-schedule-file?";
+
+        final Object y = lowCode.stream().filter(x -> x instanceof List)
+                .map(x -> (List) x)
+                .filter(x -> !((List) x).isEmpty())
+//                .filter(x -> Keyword.intern(name).equals(((List) x).get(0))
+                .filter(x -> ((List) x).get(0).equals(Keyword.intern(name)))
+                .collect(Collectors.toList())
+        ;
+
+        System.out.println("Hello");
 
         // Solve the model
         CpSolver solver = new CpSolver();

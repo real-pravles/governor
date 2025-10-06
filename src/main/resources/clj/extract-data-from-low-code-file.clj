@@ -42,7 +42,7 @@
         ]
    (println "extract-data-from-low-code-file")
     (println "basedir:" (get old-ctx "baseDir"))
-    (println "low-code-data: " low-code-data)
+    (.put old-ctx "low-code" low-code-data)
     old-ctx
     )
 )
