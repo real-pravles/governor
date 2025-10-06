@@ -28,5 +28,6 @@
 
 (defn гав
   [old-ctx]
-  (println "Привет из прекрасного мира Кложура!")
-  old-ctx)
+  (let [summary (get old-ctx "summary") ]
+   (println summary)
+  old-ctx))

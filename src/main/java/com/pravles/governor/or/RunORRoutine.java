@@ -157,12 +157,31 @@ public class RunORRoutine implements ActivityFunction {
         solver.getParameters().setMaxTimeInSeconds(10.0);
 
         System.out.println("Solving with Google OR-Tools (task splitting enabled)...");
-        CpSolverStatus status = solver.solve(model);
+        final CpSolverStatus status = solver.solve(model);
+
+        final String summary = composeMessage(status, solver, timeSlots, tasks,
+                hours);
+
+        ctx.put("summary", summary);
+
+        return ctx;
+    }
+
+    private String composeMessage(final CpSolverStatus status,
+                                final CpSolver solver,
+                                final List<TimeSlot> timeSlots,
+                                final List<Task> tasks,
+                                final IntVar[][] hours) {
+        final StringBuilder sb = new StringBuilder();
+        final String nl = System.lineSeparator();
 
         if (status == CpSolverStatus.OPTIMAL || status == CpSolverStatus.FEASIBLE) {
-            System.out.println("\nStatus: " + status);
-            System.out.println("Objective value: " + solver.objectiveValue());
-            System.out.println("\n=== SCHEDULE ===");
+
+            sb.append(nl);
+            sb.append("Status: " + status);
+            sb.append("Objective value: " + solver.objectiveValue());
+            sb.append(nl);
+            sb.append("=== SCHEDULE ===");
 
             // Print schedule grouped by time slot
             for (TimeSlot slot : timeSlots) {
@@ -180,16 +199,21 @@ public class RunORRoutine implements ActivityFunction {
                 }
 
                 if (!workInSlot.isEmpty()) {
-                    System.out.printf("\n%s (%.1f/%.1fh used):\n",
-                            slot.day, totalHoursInSlot, slot.availableHours);
+                    sb.append(nl);
+                    sb.append(String.format("%s (%.1f/%.1fh used):", slot.day
+                            , totalHoursInSlot, slot.availableHours));
+                    sb.append(nl);
                     for (String work : workInSlot) {
-                        System.out.println("  - " + work);
+                        sb.append("  - " + work);
+                        sb.append(nl);
                     }
                 }
             }
 
             // Print total hours per task (verification)
-            System.out.println("\n=== TASK COMPLETION ===");
+            sb.append(nl);
+            sb.append("=== TASK COMPLETION ===");
+            sb.append(nl);
             for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
                 double totalScheduled = 0;
@@ -198,19 +222,22 @@ public class RunORRoutine implements ActivityFunction {
                     totalScheduled += solver.value(hours[i][j]) / 10.0;
                 }
 
-                System.out.printf("%s: %.1f/%.1f hours scheduled\n",
-                        task.project, totalScheduled, task.totalHoursNeeded);
+                sb.append(String.format("%s: %.1f/%.1f hours scheduled",
+                        task.project, totalScheduled, task.totalHoursNeeded
+                        ));
+                sb.append(nl);
             }
 
             // Statistics
-            System.out.println("\n=== SOLVER STATISTICS ===");
-            System.out.println("Wall time: " + solver.wallTime() + "s");
-            System.out.println("Branches: " + solver.numBranches());
-
+            sb.append(nl);
+            sb.append("=== SOLVER STATISTICS ===");
+            sb.append(nl);
+            sb.append("Wall time: " + solver.wallTime() + "s" + nl);
+            sb.append("Branches: " + solver.numBranches() + nl);
         } else {
-            System.out.println("No solution found. Status: " + status);
+            sb.append("No solution found. Status: " + status + nl);
         }
 
-        return ctx;
+        return sb.toString();
     }
 }
