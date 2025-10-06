@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class RunORRoutine implements ActivityFunction {
@@ -165,13 +166,22 @@ public class RunORRoutine implements ActivityFunction {
 
         final String name = "include-solver-stats-in-schedule-file?";
 
-        final Object y = lowCode.stream().filter(x -> x instanceof List)
+        boolean includeSolverStatsInScheduleFile;
+        final Optional<List> settingValueOpt =
+                lowCode.stream().filter(x -> x instanceof List)
                 .map(x -> (List) x)
                 .filter(x -> !((List) x).isEmpty())
 //                .filter(x -> Keyword.intern(name).equals(((List) x).get(0))
                 .filter(x -> ((List) x).get(0).equals(Keyword.intern(name)))
-                .collect(Collectors.toList())
+                .findFirst()
         ;
+
+        if (settingValueOpt.isEmpty()) {
+            includeSolverStatsInScheduleFile = false;
+        } else {
+            includeSolverStatsInScheduleFile =
+                    (Boolean) settingValueOpt.get().get(1);
+        }
 
         System.out.println("Hello");
 
