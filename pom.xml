@@ -40,6 +40,7 @@
         <commons-lang.version>3.17.0</commons-lang.version>
         <process-engine.version>1.1</process-engine.version>
         <edn-java.version>0.7.1</edn-java.version>
+        <google-or-tools.version>9.12.4544</google-or-tools.version>
     </properties>
     <dependencies>
         <!-- Logging (start) -->
@@ -119,6 +120,10 @@
             <version>${commons-lang.version}</version>
         </dependency>
         <!-- Miscellaneous (end) -->
+        <dependency>
+            <groupId>com.google.ortools</groupId>
+            <artifactId>ortools-java</artifactId>
+            <version>${google-or-tools.version}</version>
+        </dependency>
     </dependencies>
-
 </project>
