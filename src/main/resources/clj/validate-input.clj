@@ -25,10 +25,19 @@
 
 (def nl (System/getProperty "line.separator"))
 
-
 (defn гав
   [old-ctx]
-  (let []
+  (let [
+         base-dir (get old-ctx "baseDir")
+        low-code-file (str base-dir "/governor.edn")
+         f (java.io.File. low-code-file)
+        low-code-file-invalid (not (and
+                                    (.isFile f)
+                                    (.canRead f)
+                                    (.exists f)
+                                     ))
+
+         ]
     (.put old-ctx "input-data-invalid?" false)
    old-ctx
     )
