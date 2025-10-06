@@ -2,7 +2,8 @@
 
   [:control-state-root-file-is-located-in
    "@{basedir}/r.dot"]
-  
+
+  [:include-solver-stats-in-schedule-file? false]
   [:write-schedule-to-file "@{basedir}/schedule.org"]
   
   [:comment "Scheduling settings (start)"]

@@ -28,5 +28,12 @@
 
 (defn гав
   [old-ctx]
-  (println "Привет из прекрасного мира Кложура!")
-  old-ctx)
+  (let [base-dir (get old-ctx "baseDir")
+        low-code-file (str base-dir "/governor.edn")
+
+        ]
+   (println "extract-data-from-low-code-file")
+    (println "basedir:" (get old-ctx "baseDir"))
+    old-ctx
+    )
+)

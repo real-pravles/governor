@@ -187,6 +187,7 @@ public class RunORRoutine implements ActivityFunction {
 
             sb.append(nl);
             sb.append("Status: " + status);
+            sb.append(nl);
             sb.append("Objective value: " + solver.objectiveValue());
             sb.append(nl);
             sb.append("=== SCHEDULE ===");
