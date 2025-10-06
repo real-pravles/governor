@@ -22,11 +22,14 @@ public class Task {
     String project;
     int priority;
     double totalHoursNeeded;
+    double minSessionHours;  // Minimum hours per session
 
-    Task(String id, String project, int priority, double totalHoursNeeded) {
+    Task(String id, String project, int priority, double totalHoursNeeded,
+         double minSessionHours) {
         this.id = id;
         this.project = project;
         this.priority = priority;
         this.totalHoursNeeded = totalHoursNeeded;
+        this.minSessionHours = minSessionHours;
     }
 }

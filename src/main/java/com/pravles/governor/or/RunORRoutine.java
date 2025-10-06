@@ -50,8 +50,10 @@ public class RunORRoutine implements ActivityFunction {
 
         // Define tasks - now as single tasks with total hours
         List<Task> tasks = Arrays.asList(
-                new Task("novel", "Novel", 10, 20.0),        // 20 hours total
-                new Task("substack", "SubStack", 5, 8.0)     // 8 hours total
+                new Task("novel", "Novel", 10, 20.0, 1.0),        // 20 hours
+                // total
+                new Task("substack", "SubStack", 5, 8.0, 0.25)     // 8 hours
+                // total
         );
 
         // Create the CP-SAT model
@@ -99,19 +101,39 @@ public class RunORRoutine implements ActivityFunction {
             model.addLessOrEqual(slotHours, (long)(slot.availableHours * 10));
         }
 
-        // Optional Constraint 3: Minimum hours per session (avoid tiny fragments)
-        // If you work on a task in a slot, work at least 1 hour on it
+        // Optional Constraint 3: Task-specific minimum hours per session
+        // Novel: If worked on, must be at least 1 hour
+        // SubStack: If worked on, must be at least 15 minutes (0.25 hours)
+        // We use: hours[i][j] == 0 OR hours[i][j] >= minHoursScaled
         for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            long minHoursScaled = (long)(task.minSessionHours * 10);
+            long maxPossibleHours = (long)(Math.min(task.totalHoursNeeded,
+                    timeSlots.get(i < timeSlots.size() ? i : 0).availableHours) * 10);
+
             for (int j = 0; j < timeSlots.size(); j++) {
-                // Create boolean: is this task worked on in this slot?
+                // Create boolean variable indicating if we work on this task in this slot
                 IntVar isWorked = model.newBoolVar("task_" + i + "_slot_" + j + "_worked");
 
-                // If hours > 0, then isWorked = 1
-                model.addGreaterOrEqual(hours[i][j], 1).onlyEnforceIf(isWorked);
-                model.addEquality(hours[i][j], 0).onlyEnforceIf(isWorked.not());
+                // Big-M formulation to enforce: hours == 0 OR hours >= minHours
+                // If isWorked == 0: hours[i][j] == 0
+                // If isWorked == 1: hours[i][j] >= minHoursScaled
 
-                // If working on it, must do at least 1 hour (10 in scaled units)
-                model.addGreaterOrEqual(hours[i][j], 10).onlyEnforceIf(isWorked);
+                long M = maxPossibleHours + 1; // Big-M value
+
+                // hours[i][j] <= M * isWorked
+                // (if isWorked = 0, then hours must be 0)
+                LinearExprBuilder lhs = LinearExpr.newBuilder();
+                lhs.add(hours[i][j]);
+                lhs.addTerm(isWorked, -M);
+                model.addLessOrEqual(lhs, 0);
+
+                // hours[i][j] >= minHoursScaled * isWorked
+                // (if isWorked = 1, then hours >= minHours; if 0, then >= 0)
+                LinearExprBuilder lhs2 = LinearExpr.newBuilder();
+                lhs2.add(hours[i][j]);
+                lhs2.addTerm(isWorked, -minHoursScaled);
+                model.addGreaterOrEqual(lhs2, 0);
             }
         }
 
