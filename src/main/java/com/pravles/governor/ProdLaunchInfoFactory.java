@@ -43,7 +43,8 @@ public class ProdLaunchInfoFactory extends AbstractLaunchInfoFactory {
                         "output-error-message",
                         "extract-data-from-low-code-file",
                         "create-OR-input",
-                        "calc-tech-ceiling")
+                        "calc-tech-ceiling",
+                        "write-summary")
                 .stream()
                 .forEach(f -> {
                     fnBindings.put(f,
