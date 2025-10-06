@@ -17,7 +17,6 @@
 
 package com.pravles.governor.or;
 
-import clojure.lang.Keyword;
 import com.google.ortools.Loader;
 import com.google.ortools.sat.CpModel;
 import com.google.ortools.sat.CpSolver;
@@ -25,14 +24,13 @@ import com.google.ortools.sat.CpSolverStatus;
 import com.google.ortools.sat.IntVar;
 import com.google.ortools.sat.LinearExpr;
 import com.google.ortools.sat.LinearExprBuilder;
+import com.pravles.governor.LowCodeUtils;
 import com.pravles.processengine.api.ActivityFunction;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class RunORRoutine implements ActivityFunction {
     @Override
@@ -162,27 +160,6 @@ public class RunORRoutine implements ActivityFunction {
         }
         model.maximize(objective);
 
-        final List lowCode = (List) ctx.get("low-code");
-
-        final String name = "include-solver-stats-in-schedule-file?";
-
-        boolean includeSolverStatsInScheduleFile;
-        final Optional<List> settingValueOpt =
-                lowCode.stream().filter(x -> x instanceof List)
-                .map(x -> (List) x)
-                .filter(x -> !((List) x).isEmpty())
-//                .filter(x -> Keyword.intern(name).equals(((List) x).get(0))
-                .filter(x -> ((List) x).get(0).equals(Keyword.intern(name)))
-                .findFirst()
-        ;
-
-        if (settingValueOpt.isEmpty()) {
-            includeSolverStatsInScheduleFile = false;
-        } else {
-            includeSolverStatsInScheduleFile =
-                    (Boolean) settingValueOpt.get().get(1);
-        }
-
         System.out.println("Hello");
 
         // Solve the model
@@ -193,8 +170,11 @@ public class RunORRoutine implements ActivityFunction {
         System.out.println("Solving with Google OR-Tools (task splitting enabled)...");
         final CpSolverStatus status = solver.solve(model);
 
+        final boolean includeSolverStatsInScheduleFile =
+                LowCodeUtils.extractBooleanSetting((List) ctx.get("low-code"),
+                        "include-solver-stats-in-schedule-file?", false);
         final String summary = composeMessage(status, solver, timeSlots, tasks,
-                hours);
+                hours, includeSolverStatsInScheduleFile);
 
         ctx.put("summary", summary);
 
@@ -202,10 +182,11 @@ public class RunORRoutine implements ActivityFunction {
     }
 
     private String composeMessage(final CpSolverStatus status,
-                                final CpSolver solver,
-                                final List<TimeSlot> timeSlots,
-                                final List<Task> tasks,
-                                final IntVar[][] hours) {
+                                  final CpSolver solver,
+                                  final List<TimeSlot> timeSlots,
+                                  final List<Task> tasks,
+                                  final IntVar[][] hours,
+                                  final boolean includeSolverStats) {
         final StringBuilder sb = new StringBuilder();
         final String nl = System.lineSeparator();
 
@@ -264,11 +245,13 @@ public class RunORRoutine implements ActivityFunction {
             }
 
             // Statistics
-            sb.append(nl);
-            sb.append("=== SOLVER STATISTICS ===");
-            sb.append(nl);
-            sb.append("Wall time: " + solver.wallTime() + "s" + nl);
-            sb.append("Branches: " + solver.numBranches() + nl);
+            if (includeSolverStats) {
+                sb.append(nl);
+                sb.append("=== SOLVER STATISTICS ===");
+                sb.append(nl);
+                sb.append("Wall time: " + solver.wallTime() + "s" + nl);
+                sb.append("Branches: " + solver.numBranches() + nl);
+            }
         } else {
             sb.append("No solution found. Status: " + status + nl);
         }
