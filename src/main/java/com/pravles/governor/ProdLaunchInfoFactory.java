@@ -69,6 +69,10 @@ public class ProdLaunchInfoFactory extends AbstractLaunchInfoFactory {
                         .builder()
                         .diagramId(ROOT)
                         .inputStream(istream("/main.ppmn.fodg"))
+                        .build(),
+                PpmnDiagramInfo.builder()
+                        .diagramId("run-or")
+                        .inputStream(istream("/run-or.ppmn.fodg"))
                         .build());
     }
 }
