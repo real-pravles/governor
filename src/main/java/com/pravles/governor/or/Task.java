@@ -15,15 +15,18 @@
  * along with Governor. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.pravles.governor;
+package com.pravles.governor.or;
 
-import com.pravles.processengine.api.ActivityFunction;
+public class Task {
+    String id;
+    String project;
+    int priority;
+    double totalHoursNeeded;
 
-import java.util.Map;
-
-public class RunORRoutine implements ActivityFunction {
-    @Override
-    public Map<String, Object> apply(final Map<String, Object> ctx) {
-        return ctx;
+    Task(String id, String project, int priority, double totalHoursNeeded) {
+        this.id = id;
+        this.project = project;
+        this.priority = priority;
+        this.totalHoursNeeded = totalHoursNeeded;
     }
 }
