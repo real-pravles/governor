@@ -54,7 +54,8 @@
         are-there-diagrams-to-process? (-> state
                                            (:diagrams-to-process)
                                            (seq)
-                                           (not (nil?)))
+                                           (nil?)
+                                           (not))
         ]
     (println "are-there-diagrams-to-process?: " are-there-diagrams-to-process?)
     (cond (= mode :root-file-not-read) (process-root-diagram-if-possible state
@@ -86,7 +87,7 @@
     (println "root-file-name: " root-file-name)
     (println "root-file-readable: " root-file-readable)
     (if root-file-readable
-      (process-diagram root-file-name state ctx)
+      ;; (process-diagram root-file-name state ctx)
       ;; Below we add the diagram file to the list of files to process if the diagram can be read
       (-> state
           (update :counter inc)
