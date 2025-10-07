@@ -55,8 +55,11 @@
                                            (:diagrams-to-process)
                                            (seq)
                                            (nil?)
-                                           (not))
-        ]
+                                           (not))]
+    (println "process-iteration")
+    (println "state: " state)
+    (println "diagrams: " (-> state
+                              (:diagrams-to-process)))
     (println "are-there-diagrams-to-process?: " are-there-diagrams-to-process?)
     (cond (= mode :root-file-not-read) (process-root-diagram-if-possible state
                                                                          ctx))
@@ -69,7 +72,8 @@
   [state ctx]
   (let [low-code (get ctx "low-code")
         root-file-expr (->> low-code
-                            (filter #(= :control-state-root-file-is-located-in (first %)))
+                            (filter #(= :control-state-root-file-is-located-in
+                                        (first %)))
                             (first))
         base-dir (get ctx "baseDir")
         root-file-name (if (not (nil? root-file-expr))
@@ -77,18 +81,18 @@
                              (second)
                              (str/replace "@{basedir}" base-dir))
                          nil)
-        root-file-readable (if (not (nil? root-file-name))
-                             (let [file (new java.io.File root-file-name)]
-                               (and (.exists file) (.isFile file) (.canRead file)))
-                             false)]
-
+        root-file-readable
+          (if (not (nil? root-file-name))
+            (let [file (new java.io.File root-file-name)]
+              (and (.exists file) (.isFile file) (.canRead file)))
+            false)]
     (println "process-root-diagram")
     (println "root-file-expr: " root-file-expr)
     (println "root-file-name: " root-file-name)
     (println "root-file-readable: " root-file-readable)
     (if root-file-readable
-      ;; (process-diagram root-file-name state ctx)
-      ;; Below we add the diagram file to the list of files to process if the diagram can be read
+      ;; Below we add the diagram file to the list of files to process if
+      ;; the diagram can be read
       (-> state
           (update :counter inc)
           (update :mode :root-file-read)
