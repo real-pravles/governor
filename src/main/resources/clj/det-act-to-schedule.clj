@@ -47,11 +47,8 @@
 (defn process-iteration
   [state ctx]
   (let [mode (:mode state)]
-    (cond
-      (= mode :root-file-not-read) (process-root-diagram state ctx))
+    (cond (= mode :root-file-not-read) (process-root-diagram state ctx))
     (println "foo")
     (update state :counter inc)))
 
-(defn process-root-diagram
-  [state ctx]
-  (println "process-root-diagram"))
+(defn process-root-diagram [state ctx] (println "process-root-diagram"))
