@@ -38,10 +38,14 @@
         base-dir (get old-ctx "baseDir")
         target-path (if (nil? target-path-template)
                       nil
-                      (str/replace target-path-template "@{basedir}" base-dir);; TODO: Replace @basedir with actual basedir
-
-                      )
-        ]
+                      (str/replace target-path-template "@{basedir}" base-dir) ;; TODO:
+                                                                               ;; Replace
+                                                                               ;; @basedir
+                                                                               ;; with
+                                                                               ;; actual
+                                                                               ;; basedir
+                    )]
+    (when (not (nil? target-path)) (spit target-path summary))
     (println "write-summary (start)")
     (println "target-path: " target-path)
     (println "target-path-template:" target-path-template)
