@@ -28,6 +28,17 @@
 
 (defn гав
   [old-ctx]
-  (let [summary (get old-ctx "summary") ]
-   (println summary)
-  old-ctx))
+  (let [summary (get old-ctx "summary")
+        low-code (get old-ctx "low-code")
+        target-path-template (->> low-code
+                                  (filter #(= :write-schedule-to-file
+                                              (first %)))
+                                  (first))]
+    (println "write-summary (start)")
+    (println "target-path-template:" target-path-template)
+    (println "low-code (start)")
+    (println low-code)
+    (println "low-code (end)")
+    (println summary)
+    (println "write-summary (end)")
+    old-ctx))
