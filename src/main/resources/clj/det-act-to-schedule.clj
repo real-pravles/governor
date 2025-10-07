@@ -35,17 +35,23 @@
     (println "det-act-to-schedule called")
     old-ctx))
 
-(defn run-loop [ctx]
-  (loop [state {:counter 0}]
-    (if (continue-loop? state)
-      (recur (process-iteration state))
-      state)))
+(defn run-loop
+  [ctx]
+  (loop [state {:counter 0, :mode :root-file-not-read}]
+    (if (continue-loop? state) (recur (process-iteration state ctx)) state)))
 
-(defn continue-loop?
-  [state]
-  (< (:counter state) 3))
+(defn continue-loop? [state] (< (:counter state) 3))
+
+(declare process-root-diagram)
 
 (defn process-iteration
-  [state]
-  (println "foo")
-  (update state :counter inc))
+  [state ctx]
+  (let [mode (:mode state)]
+    (cond
+      (= mode :root-file-not-read) (process-root-diagram state ctx))
+    (println "foo")
+    (update state :counter inc)))
+
+(defn process-root-diagram
+  [state ctx]
+  (println "process-root-diagram"))
