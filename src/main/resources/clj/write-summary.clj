@@ -25,7 +25,6 @@
 
 (def nl (System/getProperty "line.separator"))
 
-
 (defn гав
   [old-ctx]
   (let [summary (get old-ctx "summary")
@@ -38,20 +37,6 @@
         base-dir (get old-ctx "baseDir")
         target-path (if (nil? target-path-template)
                       nil
-                      (str/replace target-path-template "@{basedir}" base-dir) ;; TODO:
-                                                                               ;; Replace
-                                                                               ;; @basedir
-                                                                               ;; with
-                                                                               ;; actual
-                                                                               ;; basedir
-                    )]
+                      (str/replace target-path-template "@{basedir}" base-dir))]
     (when (not (nil? target-path)) (spit target-path summary))
-    (println "write-summary (start)")
-    (println "target-path: " target-path)
-    (println "target-path-template:" target-path-template)
-    (println "low-code (start)")
-    (println low-code)
-    (println "low-code (end)")
-    (println summary)
-    (println "write-summary (end)")
     old-ctx))
