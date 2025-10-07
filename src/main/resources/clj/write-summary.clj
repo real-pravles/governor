@@ -34,7 +34,14 @@
                                   (filter #(= :write-schedule-to-file
                                               (first %)))
                                   (first)
-                                  (second))]
+                                  (second))
+
+        target-path (if (nil? target-path-template)
+                      nil
+                      nil ;; TODO: Replace @basedir with actual basedir
+
+                      )
+        ]
     (println "write-summary (start)")
     (println "target-path-template:" target-path-template)
     (println "low-code (start)")
