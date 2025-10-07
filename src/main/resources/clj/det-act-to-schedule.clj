@@ -63,7 +63,7 @@
         root-file-expr (->> low-code
                             (filter #(= :write-schedule-to-file (first %)))
                             (first))
-        base-dir (get old-ctx "baseDir")
+        base-dir (get ctx "baseDir")
         root-file-name (if (not (nil? root-file-expr))
                          (-> root-file-expr
                              (second)
@@ -73,18 +73,14 @@
                              (let [file (new java.io.File)]
                                (and (.exists file) (.isFile file) (.canRead)))
                              (false))]
-    ;; TODO: Implement the following logic
-    ;; TODO: If no root diagram found, add error to state
-    ;; TODO: Modify continue-loop so that it stops, if no root diagram was
-    ;; found
-    ;;    (if (nil? root-file-expr))
+
+    (println "process-root-diagram")
+    (println "root-file-expr: " root-file-expr)
     (if root-file-readable
       state
       (-> state
           (update :counter inc)
-          (assoc :root-file-not-found? true)))
-    (println "process-root-diagram")
-    (println "root-file-expr: " root-file-expr)))
+          (assoc :root-file-not-found? true)))))
 
 (defn process-diagram
   [diagram-file-name state ctx]
