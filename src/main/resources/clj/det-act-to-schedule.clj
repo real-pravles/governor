@@ -62,7 +62,7 @@
   [state ctx]
   (let [low-code (get ctx "low-code")
         root-file-expr (->> low-code
-                            (filter #(= :write-schedule-to-file (first %)))
+                            (filter #(= :control-state-root-file-is-located-in (first %)))
                             (first))
         base-dir (get ctx "baseDir")
         root-file-name (if (not (nil? root-file-expr))
@@ -77,6 +77,7 @@
 
     (println "process-root-diagram")
     (println "root-file-expr: " root-file-expr)
+    (println "root-file-name: " root-file-name)
     (println "root-file-readable: " root-file-readable)
     (if root-file-readable
       (process-diagram root-file-name state ctx)
