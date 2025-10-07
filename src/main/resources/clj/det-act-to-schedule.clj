@@ -51,4 +51,20 @@
     (println "foo")
     (update state :counter inc)))
 
-(defn process-root-diagram [state ctx] (println "process-root-diagram"))
+(defn process-root-diagram [state ctx]
+  (let [
+        low-code (get old-ctx "low-code")
+        root-file-expr (->> low-code
+                                  (filter #(= :write-schedule-to-file
+                                              (first %)))
+                                  (first))
+
+
+
+        ]
+    ;; TODO: If no root diagram found, add error to state
+    ;; TODO: Modify continue-loop so that it stops, if no root diagram was found
+    (println "process-root-diagram")
+    (println "root-file-expr: " root-file-expr)
+    )
+  )
