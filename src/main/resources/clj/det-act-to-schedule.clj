@@ -45,3 +45,7 @@
   [state]
   (< (:counter state) 3))
 
+(defn process-iteration
+  [state]
+  (println "foo")
+  (update state :counter inc)))
