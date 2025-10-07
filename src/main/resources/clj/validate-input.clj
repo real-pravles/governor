@@ -29,7 +29,7 @@
   [old-ctx]
   (let [
          base-dir (get old-ctx "baseDir")
-        low-code-file (str base-dir "/governor.edn")
+        low-code-file (get old-ctx "settings-file")
          f (java.io.File. low-code-file)
         low-code-file-invalid (not (and
                                     (.isFile f)

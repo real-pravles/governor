@@ -64,6 +64,7 @@ public class ProdLaunchInfoFactory extends AbstractLaunchInfoFactory {
     protected Map<String, Object> composeInitialContext() {
         final Map<String, Object> ctx = new HashMap<>();
         ctx.put("baseDir", new File(governorSettingsFile).getParent());
+        ctx.put("settings-file", new File(governorSettingsFile).getAbsolutePath());
         return ctx;
     }
 

@@ -48,4 +48,4 @@
 (defn process-iteration
   [state]
   (println "foo")
-  (update state :counter inc)))
+  (update state :counter inc))

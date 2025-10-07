@@ -31,7 +31,7 @@
 (defn гав
   [old-ctx]
   (let [base-dir (get old-ctx "baseDir")
-        low-code-file (str base-dir "/governor.edn")
+        low-code-file (get old-ctx "settings-file")
         low-code-data (with-open [r (io/reader low-code-file)]
           (let [pbr (java.io.PushbackReader. r)]
             (loop [objects []]
