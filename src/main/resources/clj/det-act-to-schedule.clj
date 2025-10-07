@@ -22,6 +22,7 @@
          '[clojure.pprint :as pprint])
 (import 'org.apache.commons.lang3.StringUtils)
 (import 'us.bpsm.edn.Keyword)
+(import 'java.io.File)
 
 (def nl (System/getProperty "line.separator"))
 
@@ -70,14 +71,14 @@
                              (str/replace "@{basedir}" base-dir))
                          nil)
         root-file-readable (if (not (nil? root-file-name))
-                             (let [file (new java.io.File)]
-                               (and (.exists file) (.isFile file) (.canRead)))
-                             (false))]
+                             (let [file (new java.io.File root-file-name)]
+                               (and (.exists file) (.isFile file) (.canRead file)))
+                             false)]
 
     (println "process-root-diagram")
     (println "root-file-expr: " root-file-expr)
     (if root-file-readable
-      state
+      (process-diagram root-file-name state ctx)
       (-> state
           (update :counter inc)
           (assoc :root-file-not-found? true)))))
@@ -87,5 +88,4 @@
   (println "process-diagram (start)")
   (println "diagram-file-name: " diagram-file-name)
   (println "process-diagram (end)")
-
-  )
+  state)
