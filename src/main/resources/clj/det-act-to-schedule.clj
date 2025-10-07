@@ -77,6 +77,7 @@
 
     (println "process-root-diagram")
     (println "root-file-expr: " root-file-expr)
+    (println "root-file-readable: " root-file-readable)
     (if root-file-readable
       (process-diagram root-file-name state ctx)
       (-> state
