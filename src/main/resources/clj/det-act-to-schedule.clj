@@ -42,24 +42,33 @@
 
 (defn continue-loop? [state] (< (:counter state) 3))
 
-(declare process-root-diagram)
+(declare process-root-diagram-if-possible)
 
 (defn process-iteration
   [state ctx]
   (let [mode (:mode state)]
-    (cond (= mode :root-file-not-read) (process-root-diagram state ctx))
+    (cond (= mode :root-file-not-read) (process-root-diagram-if-possible state
+                                                                         ctx))
     (println "foo")
     (update state :counter inc)))
 
-(defn process-root-diagram
+(defn process-root-diagram-if-possible
   [state ctx]
   (let [low-code (get ctx "low-code")
         root-file-expr (->> low-code
                             (filter #(= :write-schedule-to-file (first %)))
-                            (first))]
+                            (first))
+        base-dir (get old-ctx "baseDir")
+        root-file-template (if (not (nil? root-file-expr))
+                             (-> root-file-expr
+                                 (second)
+                                 (str/replace "@{basedir}" base-dir))
+                             nil)
+        roo]
     ;; TODO: Implement the following logic
     ;; TODO: If no root diagram found, add error to state
     ;; TODO: Modify continue-loop so that it stops, if no root diagram was
     ;; found
+    ;;    (if (nil? root-file-expr))
     (println "process-root-diagram")
     (println "root-file-expr: " root-file-expr)))
