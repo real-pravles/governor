@@ -81,6 +81,11 @@
     (println "root-file-readable: " root-file-readable)
     (if root-file-readable
       (process-diagram root-file-name state ctx)
+      ;; Below we add the diagram file to the list of files to process if the diagram can be read
+      (-> state
+          (update :counter inc)
+          (update :diagrams-to-process (fnil conj []) root-file-name))
+      ;; Below we return an error if the diagram file cannot be read
       (-> state
           (update :counter inc)
           (assoc :root-file-not-found? true)))))
