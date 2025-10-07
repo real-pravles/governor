@@ -33,7 +33,8 @@
         target-path-template (->> low-code
                                   (filter #(= :write-schedule-to-file
                                               (first %)))
-                                  (first))]
+                                  (first)
+                                  (second))]
     (println "write-summary (start)")
     (println "target-path-template:" target-path-template)
     (println "low-code (start)")
