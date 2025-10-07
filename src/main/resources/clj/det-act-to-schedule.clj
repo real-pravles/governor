@@ -40,7 +40,10 @@
   (loop [state {:counter 0, :mode :root-file-not-read}]
     (if (continue-loop? state) (recur (process-iteration state ctx)) state)))
 
-(defn continue-loop? [state] (< (:counter state) 3))
+(defn continue-loop?
+  [state]
+  (let [root-file-found (not (:root-file-not-found? state))]
+    (and (< (:counter state) 3) root-file-found)))
 
 (declare process-root-diagram-if-possible)
 
@@ -59,16 +62,24 @@
                             (filter #(= :write-schedule-to-file (first %)))
                             (first))
         base-dir (get old-ctx "baseDir")
-        root-file-template (if (not (nil? root-file-expr))
-                             (-> root-file-expr
-                                 (second)
-                                 (str/replace "@{basedir}" base-dir))
-                             nil)
-        roo]
+        root-file-name (if (not (nil? root-file-expr))
+                         (-> root-file-expr
+                             (second)
+                             (str/replace "@{basedir}" base-dir))
+                         nil)
+        root-file-readable (if (not (nil? root-file-name))
+                             (let [file (new java.io.File)]
+                               (and (.exists file) (.isFile file) (.canRead)))
+                             (false))]
     ;; TODO: Implement the following logic
     ;; TODO: If no root diagram found, add error to state
     ;; TODO: Modify continue-loop so that it stops, if no root diagram was
     ;; found
     ;;    (if (nil? root-file-expr))
+    (if root-file-readable
+      state
+      (-> state
+          (update :counter inc)
+          (assoc :root-file-not-found? true)))
     (println "process-root-diagram")
     (println "root-file-expr: " root-file-expr)))
