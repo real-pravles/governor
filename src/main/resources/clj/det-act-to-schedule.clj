@@ -38,7 +38,11 @@
 
 (defn run-loop
   [ctx]
-  (loop [state {:counter 0, :mode :root-file-not-read}]
+  (loop [state {:counter 0, :mode :root-file-not-read
+
+:diagrams-to-process []
+
+                }]
     (if (continue-loop? state) (recur (process-iteration state ctx)) state)))
 
 (defn continue-loop?
@@ -61,10 +65,14 @@
     (println "diagrams: " (-> state
                               (:diagrams-to-process)))
     (println "are-there-diagrams-to-process?: " are-there-diagrams-to-process?)
-    (cond (= mode :root-file-not-read) (process-root-diagram-if-possible state
-                                                                         ctx))
     (println "foo")
-    (update state :counter inc)))
+    (cond (= mode :root-file-not-read) (process-root-diagram-if-possible state
+                                                                         ctx)
+:else  (update state :counter inc) 
+
+          )
+
+    ))
 
 (declare process-diagram)
 
@@ -96,7 +104,7 @@
       (-> state
           (update :counter inc)
           (update :mode :root-file-read)
-          (update :diagrams-to-process (fnil conj []) root-file-name))
+          (update :diagrams-to-process conj root-file-name))
       ;; Below we return an error if the diagram file cannot be read
       (-> state
           (update :counter inc)
