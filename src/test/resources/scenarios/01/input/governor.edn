@@ -1,4 +1,4 @@
-[:comment "Governor instrutions start here"]
+[:comment "Governor instructions start here"]
 
   [:control-state-root-file-is-located-in
    "@{basedir}/r.dot"]
@@ -41,4 +41,4 @@
 
   [:comment "Scheduling settings (end)"]
 
-[:comment "Governor instrutions end here"]
+[:comment "Governor instructions end here"]

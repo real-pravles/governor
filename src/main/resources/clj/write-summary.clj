@@ -35,14 +35,15 @@
                                               (first %)))
                                   (first)
                                   (second))
-
+        base-dir (get old-ctx "baseDir")
         target-path (if (nil? target-path-template)
                       nil
-                      nil ;; TODO: Replace @basedir with actual basedir
+                      (str/replace target-path-template "@{basedir}" base-dir);; TODO: Replace @basedir with actual basedir
 
                       )
         ]
     (println "write-summary (start)")
+    (println "target-path: " target-path)
     (println "target-path-template:" target-path-template)
     (println "low-code (start)")
     (println low-code)
