@@ -55,6 +55,8 @@
     (println "foo")
     (update state :counter inc)))
 
+(declare process-diagram)
+
 (defn process-root-diagram-if-possible
   [state ctx]
   (let [low-code (get ctx "low-code")
@@ -83,3 +85,11 @@
           (assoc :root-file-not-found? true)))
     (println "process-root-diagram")
     (println "root-file-expr: " root-file-expr)))
+
+(defn process-diagram
+  [diagram-file-name state ctx]
+  (println "process-diagram (start)")
+  (println "diagram-file-name: " diagram-file-name)
+  (println "process-diagram (end)")
+
+  )
