@@ -30,20 +30,20 @@ public class GovernorApp {
 
     void run(final String[] args) {
         if (args.length != 1) {
-            System.out.println("Usage: java -jar governor.jar <Directory with" +
-                    " governor.edn>");
+            System.out.println("Usage: java -jar governor.jar governor.edn");
             return;
         }
-        final File dir = new File(args[0]);
-        if (!(dir.exists() && dir.canRead() && dir.canWrite()
-                && dir.isDirectory())) {
-            System.err.println(String.format("Directory '%s' does not exist and/or is not readable and/or not writeable and/or is not a directory",
-                    dir.getAbsolutePath()));
+        final File governorSettingsFile = new File(args[0]);
+        if (!(governorSettingsFile.exists() && governorSettingsFile.canRead() && governorSettingsFile.canRead()
+                && governorSettingsFile.isFile())) {
+            System.err.println(String.format("File'%s' does not exist and/or " +
+                            "is not readable and/or is not a file",
+                    governorSettingsFile.getAbsolutePath()));
             return;
         }
 
         final LaunchInfoFactory lif =
-                new ProdLaunchInfoFactory(dir.getAbsolutePath());
+                new ProdLaunchInfoFactory(governorSettingsFile.getAbsolutePath());
         new ProcessEngineLauncher().run(lif);
     }
 }

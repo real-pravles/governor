@@ -55,6 +55,8 @@ class GovernorAppTest {
         final String baseDir = String.format("src/test/resources/scenarios/%s", scenario);
         final String inputDir = format("%s/input", baseDir);
         final String actualOutputDir = format("%s/actual", baseDir);
+        final String governorSettingsFile = format("%s/governor.edn",
+                actualOutputDir);
         final String expectedOutputDir = format( "%s/expected",
                 baseDir);
 
@@ -63,7 +65,8 @@ class GovernorAppTest {
         copyDirectory(new File(inputDir),
                 new File(actualOutputDir));
 
-        final LaunchInfoFactory lif = new TestLaunchInfoFactory(actualOutputDir);
+        final LaunchInfoFactory lif =
+                new TestLaunchInfoFactory(governorSettingsFile);
 
         // When
         final Map<String, Object> actualCtx =

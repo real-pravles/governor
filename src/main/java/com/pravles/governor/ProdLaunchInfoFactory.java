@@ -25,6 +25,7 @@ import com.pravles.processengine.util.PpmnDiagramInfo;
 import com.pravles.util.ClojureActivityFunction;
 import lombok.RequiredArgsConstructor;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +36,7 @@ import static java.util.Arrays.asList;
 
 @RequiredArgsConstructor
 public class ProdLaunchInfoFactory extends AbstractLaunchInfoFactory {
-    private final String baseDir;
+    private final String governorSettingsFile;
 
     @Override
     protected void initFnBindings(final Map<String, ActivityFunction> fnBindings) {
@@ -61,7 +62,7 @@ public class ProdLaunchInfoFactory extends AbstractLaunchInfoFactory {
     @Override
     protected Map<String, Object> composeInitialContext() {
         final Map<String, Object> ctx = new HashMap<>();
-        ctx.put("baseDir", baseDir);
+        ctx.put("baseDir", new File(governorSettingsFile).getParent());
         return ctx;
     }
 
