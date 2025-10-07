@@ -50,7 +50,13 @@
 
 (defn process-iteration
   [state ctx]
-  (let [mode (:mode state)]
+  (let [mode (:mode state)
+        are-there-diagrams-to-process? (-> state
+                                           (:diagrams-to-process)
+                                           (seq)
+                                           (not (nil?)))
+        ]
+    (println "are-there-diagrams-to-process?: " are-there-diagrams-to-process?)
     (cond (= mode :root-file-not-read) (process-root-diagram-if-possible state
                                                                          ctx))
     (println "foo")
@@ -84,6 +90,7 @@
       ;; Below we add the diagram file to the list of files to process if the diagram can be read
       (-> state
           (update :counter inc)
+          (update :mode :root-file-read)
           (update :diagrams-to-process (fnil conj []) root-file-name))
       ;; Below we return an error if the diagram file cannot be read
       (-> state
