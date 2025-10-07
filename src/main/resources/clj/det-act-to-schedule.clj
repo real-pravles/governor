@@ -25,8 +25,23 @@
 
 (def nl (System/getProperty "line.separator"))
 
+(declare process-iteration)
+(declare continue-loop?)
+(declare run-loop)
 
 (defn гав
   [old-ctx]
-  (println "det-act-to-schedule called")
-  old-ctx)
+  (let [activities-to-schedule (run-loop old-ctx)]
+    (println "det-act-to-schedule called")
+    old-ctx))
+
+(defn run-loop [ctx]
+  (loop [state {:counter 0}]
+    (if (continue-loop? state)
+      (recur (process-iteration state))
+      state)))
+
+(defn continue-loop?
+  [state]
+  (< (:counter state) 3))
+
