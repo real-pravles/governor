@@ -28,5 +28,5 @@
 
 (defn гав
   [old-ctx]
-  (println "Привет из прекрасного мира Кложура!")
+  (println "det-act-to-schedule called")
   old-ctx)
