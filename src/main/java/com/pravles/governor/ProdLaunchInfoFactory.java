@@ -45,7 +45,8 @@ public class ProdLaunchInfoFactory extends AbstractLaunchInfoFactory {
                         "extract-data-from-low-code-file",
                         "create-OR-input",
                         "calc-tech-ceiling",
-                        "write-summary")
+                        "write-summary",
+                        "det-act-to-schedule")
                 .stream()
                 .forEach(f -> {
                     fnBindings.put(f,
