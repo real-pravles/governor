@@ -33,14 +33,11 @@
 (defn гав
   [old-ctx]
   (let [run-loop-result (run-loop old-ctx)
-        activities-to-schedule nil
-
-        ]
+        activities-to-schedule nil]
     (println "det-act-to-schedule called")
     (println "run-loop-result (start)")
     (println run-loop-result)
     (println "run-loop-result (end)")
-
     (.put old-ctx "activities" activities-to-schedule)
     old-ctx))
 
@@ -172,15 +169,14 @@
   (let [process-id (-> "src/test/resources/scenarios/01/actual/r.w.dot"
                        (clojure.string/split #"\.")
                        butlast
-                       last)
-        x (->> diagram-lines
-               (filter #(str/includes? % "⬤"))
-               (filter #(str/includes? % "▢"))
-               (filter #(str/includes? % "shape=box"))
-               (filter #(str/includes? % "style=rounded"))
-               (map graphviz-element-id)
-               (map (fn [activity] {:process process-id, :activity activity})))]
+                       last)]
+    (->> diagram-lines
+         (filter #(str/includes? % "⬤"))
+         (filter #(str/includes? % "▢"))
+         (filter #(str/includes? % "shape=box"))
+         (filter #(str/includes? % "style=rounded"))
+         (map graphviz-element-id)
+         (map (fn [activity] {:process process-id, :activity activity})))
     (println "extract-activities (start)")
     (println "x: " x)
-    (println "extract-activities (end)")
-    []))
+    (println "extract-activities (end)")))
