@@ -38,11 +38,7 @@
 
 (defn run-loop
   [ctx]
-  (loop [state {:counter             0, :mode :root-file-not-read
-
-                :diagrams-to-process []
-
-                }]
+  (loop [state {:counter 0, :mode :root-file-not-read, :diagrams-to-process []}]
     (if (continue-loop? state) (recur (process-iteration state ctx)) state)))
 
 (defn continue-loop?
@@ -52,20 +48,13 @@
                                            (:diagrams-to-process)
                                            (seq)
                                            (nil?)
-                                           (not))
-        ]
-
+                                           (not))]
     (and (< (:counter state) 3)
-         (or
-           are-there-diagrams-to-process?
-           root-file-found)
-
-         )
-
-    ))
+         (or are-there-diagrams-to-process? root-file-found))))
 
 (declare process-root-diagram-if-possible)
 
+(declare process-diagram)
 (defn process-iteration
   [state ctx]
   (let [mode (:mode state)
@@ -75,26 +64,21 @@
                                            (nil?)
                                            (not))
         next-diagram-to-process (-> state
-                                           (:diagrams-to-process)
-                                           (first))
-
-        ]
+                                    (:diagrams-to-process)
+                                    (first))]
     (println "process-iteration")
     (println "state: " state)
-    (println "diagrams: " (-> state
-                              (:diagrams-to-process)))
+    (println "diagrams: "
+             (-> state
+                 (:diagrams-to-process)))
     (println "are-there-diagrams-to-process?: " are-there-diagrams-to-process?)
     (println "foo")
     (cond (= mode :root-file-not-read) (process-root-diagram-if-possible state
                                                                          ctx)
-are-there-diagrams-to-process? (process-diagram next-diagram-to-process state ctx)
-          :else (update state :counter inc)
+          are-there-diagrams-to-process?
+            (process-diagram next-diagram-to-process state ctx)
+          :else (update state :counter inc))))
 
-          )
-
-    ))
-
-(declare process-diagram)
 
 (defn process-root-diagram-if-possible
   [state ctx]
@@ -110,10 +94,10 @@ are-there-diagrams-to-process? (process-diagram next-diagram-to-process state ct
                              (str/replace "@{basedir}" base-dir))
                          nil)
         root-file-readable
-        (if (not (nil? root-file-name))
-          (let [file (new java.io.File root-file-name)]
-            (and (.exists file) (.isFile file) (.canRead file)))
-          false)]
+          (if (not (nil? root-file-name))
+            (let [file (new java.io.File root-file-name)]
+              (and (.exists file) (.isFile file) (.canRead file)))
+            false)]
     (println "process-root-diagram")
     (println "root-file-expr: " root-file-expr)
     (println "root-file-name: " root-file-name)
@@ -132,7 +116,18 @@ are-there-diagrams-to-process? (process-diagram next-diagram-to-process state ct
 
 (defn process-diagram
   [diagram-file-name state ctx]
-  (println "process-diagram (start)")
-  (println "diagram-file-name: " diagram-file-name)
-  (println "process-diagram (end)")
-  state)
+  (let [
+        ;; TODO: Extract subprocesses
+        sub-processes nil
+        ;; TODO: Extract activities waiting for scheduling
+        relevant-activities nil]
+    (println "process-diagram (start)")
+    (println "diagram-file-name: " diagram-file-name)
+    (println "process-diagram (end)")
+
+    ;; TODO: Add subprocesses to the state
+    ;; TODO: Remove diagram-file-name from the list of files to process
+    ;; TODO: Add relevant-activities to the list of activities to schedule
+(update state :diagrams-to-process #(remove #{diagram-file-name} %))
+
+    ))
