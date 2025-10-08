@@ -32,8 +32,11 @@
 
 (defn гав
   [old-ctx]
-  (let [run-loop-result (run-loop old-ctx)
-        activities-to-schedule nil]
+  (let [
+        activities-to-schedule (-> old-ctx
+                                   (run-loop)
+                                   (:activities))
+        ]
     (println "det-act-to-schedule called")
     (println "run-loop-result (start)")
     (println run-loop-result)
