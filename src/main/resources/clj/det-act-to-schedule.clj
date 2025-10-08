@@ -38,17 +38,31 @@
 
 (defn run-loop
   [ctx]
-  (loop [state {:counter 0, :mode :root-file-not-read
+  (loop [state {:counter             0, :mode :root-file-not-read
 
-:diagrams-to-process []
+                :diagrams-to-process []
 
                 }]
     (if (continue-loop? state) (recur (process-iteration state ctx)) state)))
 
 (defn continue-loop?
   [state]
-  (let [root-file-found (not (:root-file-not-found? state))]
-    (and (< (:counter state) 3) root-file-found)))
+  (let [root-file-found (not (:root-file-not-found? state))
+        are-there-diagrams-to-process? (-> state
+                                           (:diagrams-to-process)
+                                           (seq)
+                                           (nil?)
+                                           (not))
+        ]
+
+    (and (< (:counter state) 3)
+         (or
+           are-there-diagrams-to-process?
+           root-file-found)
+
+         )
+
+    ))
 
 (declare process-root-diagram-if-possible)
 
@@ -59,7 +73,12 @@
                                            (:diagrams-to-process)
                                            (seq)
                                            (nil?)
-                                           (not))]
+                                           (not))
+        next-diagram-to-process (-> state
+                                           (:diagrams-to-process)
+                                           (first))
+
+        ]
     (println "process-iteration")
     (println "state: " state)
     (println "diagrams: " (-> state
@@ -68,7 +87,8 @@
     (println "foo")
     (cond (= mode :root-file-not-read) (process-root-diagram-if-possible state
                                                                          ctx)
-:else  (update state :counter inc) 
+are-there-diagrams-to-process? (process-diagram next-diagram-to-process state ctx)
+          :else (update state :counter inc)
 
           )
 
@@ -90,10 +110,10 @@
                              (str/replace "@{basedir}" base-dir))
                          nil)
         root-file-readable
-          (if (not (nil? root-file-name))
-            (let [file (new java.io.File root-file-name)]
-              (and (.exists file) (.isFile file) (.canRead file)))
-            false)]
+        (if (not (nil? root-file-name))
+          (let [file (new java.io.File root-file-name)]
+            (and (.exists file) (.isFile file) (.canRead file)))
+          false)]
     (println "process-root-diagram")
     (println "root-file-expr: " root-file-expr)
     (println "root-file-name: " root-file-name)
