@@ -177,6 +177,6 @@
          (filter #(str/includes? % "style=rounded"))
          (map graphviz-element-id)
          (map (fn [activity] {:process process-id, :activity activity})))
-    (println "extract-activities (start)")
-    (println "x: " x)
-    (println "extract-activities (end)")))
+
+
+    ))
