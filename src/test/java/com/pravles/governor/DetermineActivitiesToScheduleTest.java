@@ -18,6 +18,7 @@
 package com.pravles.governor;
 
 import clojure.lang.Keyword;
+import com.pravles.governor.or.Task;
 import com.pravles.processengine.util.LaunchInfoFactory;
 import com.pravles.processengine.util.ProcessEngineLauncher;
 import org.apache.commons.io.FileUtils;
@@ -81,6 +82,11 @@ public class DetermineActivitiesToScheduleTest {
         assertTrue(activities.contains(of(intern("process"), "p", intern("activity"), "first_naked_post")));
 
         assertTrue(activities.contains(of(intern("process"), "w", intern("activity"), "sc024")));
+
+        final List<Map> effortEstimates = (List<Map>) actualCtx.get("effort-estimates");
+        assertTrue(effortEstimates.contains(new Task("first_naked_post", "p", 5, 12.0, 0.25)));
+
+        assertTrue(effortEstimates.contains(new Task("sc024", "p", 10, 20.0, 1.0)));
 
 
         System.out.println("Hello");

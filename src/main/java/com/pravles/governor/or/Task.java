@@ -17,6 +17,9 @@
 
 package com.pravles.governor.or;
 
+import lombok.Data;
+
+@Data
 public class Task {
     String id;
     String project;
@@ -24,7 +27,7 @@ public class Task {
     double totalHoursNeeded;
     double minSessionHours;  // Minimum hours per session
 
-    Task(String id, String project, int priority, double totalHoursNeeded,
+    public Task(String id, String project, int priority, double totalHoursNeeded,
          double minSessionHours) {
         this.id = id;
         this.project = project;

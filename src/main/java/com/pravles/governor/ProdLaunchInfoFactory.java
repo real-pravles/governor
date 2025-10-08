@@ -46,7 +46,8 @@ public class ProdLaunchInfoFactory extends AbstractLaunchInfoFactory {
                         "create-OR-input",
                         "calc-tech-ceiling",
                         "write-summary",
-                        "det-act-to-schedule")
+                        "det-act-to-schedule",
+                        "create-effort-estimates")
                 .stream()
                 .forEach(f -> {
                     fnBindings.put(f,
