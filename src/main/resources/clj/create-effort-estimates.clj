@@ -50,7 +50,6 @@
   [ctx]
   (let [low-code (get ctx "low-code")]
     (println "extract-assumed-efforts")
-    (println "x: " x)
     (->> low-code
          (filter (fn [t]
                    (and (= :in-process (first t))
