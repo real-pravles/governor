@@ -137,12 +137,20 @@
 
 (defn extract-subprocess-files
   [parent-diagram-file-name diagram-lines]
-  (let [sub-process-lines (->> diagram-lines
+  (let [
+        prefix (str/replace 
+parent-diagram-file-name #"\.dot$" "")
+
+        sub-process-lines (->> diagram-lines
                                (filter #(str/includes? % "⬤"))
                                (filter #(str/includes? % "shape=box"))
                                (filter #(str/includes? % "style=rounded"))
                                (filter #(str/includes? % "penwidth=5"))
-                               (map graphviz-element-id))
+                               (map graphviz-element-id)
+                               (map #(str prefix "." % ".dot"))
+
+
+                               )
         sub-process-ids nil]
     (println "extract-subprocess-files (start)")
     (println "x:" sub-process-lines)
