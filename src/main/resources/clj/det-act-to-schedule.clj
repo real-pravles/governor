@@ -51,13 +51,22 @@
 
 (defn continue-loop?
   [state]
+  (println "continue-loop?, state:" state)
   (let [root-file-found (not (:root-file-not-found? state))
         are-there-diagrams-to-process? (-> state
                                            (:diagrams-to-process)
                                            (seq)
                                            (nil?)
                                            (not))]
-(or are-there-diagrams-to-process? root-file-found)
+    (cond ;; root-file-found true
+      (:root-file-not-found? state) false
+
+      (and are-there-diagrams-to-process?
+           (= :root-file-read (:mode state ))
+
+           )
+           true
+          :else false)
 
 ))
 
