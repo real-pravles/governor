@@ -43,7 +43,7 @@
 
 (defn run-loop
   [ctx]
-  (loop [state {:counter 0,
+  (loop [state {
                 :mode :root-file-not-read,
                 :diagrams-to-process [],
                 :activities []}]
@@ -57,8 +57,9 @@
                                            (seq)
                                            (nil?)
                                            (not))]
-    (and (< (:counter state) 3)
-         (or are-there-diagrams-to-process? root-file-found))))
+(or are-there-diagrams-to-process? root-file-found)
+
+))
 
 (declare process-root-diagram-if-possible)
 
@@ -85,7 +86,7 @@
                                                                          ctx)
           are-there-diagrams-to-process?
             (process-diagram next-diagram-to-process state ctx)
-          :else (update state :counter inc))))
+          :else state)))
 
 
 (defn process-root-diagram-if-possible
@@ -114,12 +115,10 @@
       ;; Below we add the diagram file to the list of files to process if
       ;; the diagram can be read
       (-> state
-          (update :counter inc)
           (update :mode :root-file-read)
           (update :diagrams-to-process conj root-file-name))
       ;; Below we return an error if the diagram file cannot be read
       (-> state
-          (update :counter inc)
           (assoc :root-file-not-found? true)))))
 
 (declare extract-subprocess-files)
