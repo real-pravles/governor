@@ -157,12 +157,18 @@
 
 (defn extract-activities
   [parent-diagram-file-name diagram-lines]
-  (let [x (->> diagram-lines
+  (let [
+        process-id (-> "src/test/resources/scenarios/01/actual/r.w.dot"
+    (clojure.string/split #"\.")
+    butlast
+    last)
+
+        x (->> diagram-lines
          (filter #(str/includes? % "⬤"))
          (filter #(str/includes? % "▢"))
          (filter #(str/includes? % "shape=box"))
          (filter #(str/includes? % "style=rounded"))
-
+(map graphviz-element-id)
          
          )]
     (println "extract-activities (start)")
