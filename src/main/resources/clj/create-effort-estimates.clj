@@ -48,18 +48,14 @@
 
 (defn extract-assumed-efforts
   [ctx]
-  (let [low-code (get ctx "low-code")
-        x (->> low-code
-               (filter (fn [t]
-                         (and (= :in-process (first t))
-                              (= :assume-activity-requires-effort-of
-                                 (get t 2)))))
-               (map parse-effort)
-
-
-               )]
+  (let [low-code (get ctx "low-code")]
     (println "extract-assumed-efforts")
     (println "x: " x)
-    nil))
+    (->> low-code
+         (filter (fn [t]
+                   (and (= :in-process (first t))
+                        (= :assume-activity-requires-effort-of (get t 2)))))
+         (map parse-effort)
+         (into {} (map (fn [[_ name _ effort]] [name effort]))))))
 
 (defn extract-min-session-hours [ctx] nil)
