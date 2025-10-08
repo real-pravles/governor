@@ -30,24 +30,23 @@
 
 (defn гав
   [old-ctx]
-  (let [
-        activities (get old-ctx "activities")
+  (let [activities (get old-ctx "activities")
         assumed-efforts (extract-assumed-efforts old-ctx)
-        assumed-min-session-hours (extract-min-session-hours old-ctx)
-        ]
+        assumed-min-session-hours (extract-min-session-hours old-ctx)]
     (println "create-effort-estimates")
     (println "activities: " activities)
     old-ctx))
 
 (defn extract-assumed-efforts
   [ctx]
-  (let []
+  (let [low-code (get ctx "low-code")
+        x (->> low-code
+               (filter (fn [t]
+                         (and (= :in-process (first t))
+                              (= :assume-activity-requires-effort-of
+                                 (get t 2))))))]
     (println "extract-assumed-efforts")
-    (println "ctx: " ctx)
-    nil
-    )
-  )
+    (println "x: " x)
+    nil))
 
-(defn extract-min-session-hours
-  [ctx]
-  nil)
+(defn extract-min-session-hours [ctx] nil)
