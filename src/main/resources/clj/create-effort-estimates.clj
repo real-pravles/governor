@@ -34,6 +34,7 @@
         assumed-efforts (extract-assumed-efforts old-ctx)
         assumed-min-session-hours (extract-min-session-hours old-ctx)]
     (println "create-effort-estimates")
+    (println "assumed-efforts: " assumed-efforts)
     (println "activities: " activities)
     old-ctx))
 
