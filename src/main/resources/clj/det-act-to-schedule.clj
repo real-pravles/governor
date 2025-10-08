@@ -124,7 +124,8 @@
         sub-process-files (extract-subprocess-files diagram-file-name
                                                     diagram-txt)
         ;; TODO: Extract activities waiting for scheduling
-        relevant-activities nil]
+        relevant-activities (extract-activities parent-diagram-file-name
+                                                diagram-lines)]
     (println "process-diagram (start)")
     (println "diagram-txt: " diagram-txt)
     (println "diagram-file-name: " diagram-file-name)
@@ -153,3 +154,18 @@
       (clojure.string/split #"\[")
       first
       (clojure.string/replace #"[\s\"]" "")))
+
+(defn extract-activities
+  [parent-diagram-file-name diagram-lines]
+  (let [x (->> diagram-lines
+         (filter #(str/includes? % "⬤"))
+         (filter #(str/includes? % "▢"))
+         (filter #(str/includes? % "shape=box"))
+         (filter #(str/includes? % "style=rounded"))
+
+         
+         )]
+    (println "extract-activities (start)")
+    (println "x: " x)
+    (println "extract-activities (end)")
+    []))
