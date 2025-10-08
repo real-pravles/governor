@@ -117,11 +117,13 @@
 (defn process-diagram
   [diagram-file-name state ctx]
   (let [
+        diagram-txt (slurp diagram-file-name)
         ;; TODO: Extract subprocesses
         sub-processes nil
         ;; TODO: Extract activities waiting for scheduling
         relevant-activities nil]
     (println "process-diagram (start)")
+    (println "diagram-txt: " diagram-txt)
     (println "diagram-file-name: " diagram-file-name)
     (println "process-diagram (end)")
 
