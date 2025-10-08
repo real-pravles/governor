@@ -38,7 +38,10 @@
 
 (defn run-loop
   [ctx]
-  (loop [state {:counter 0, :mode :root-file-not-read, :diagrams-to-process []}]
+  (loop [state {:counter 0,
+                :mode :root-file-not-read,
+                :diagrams-to-process [],
+                :activities []}]
     (if (continue-loop? state) (recur (process-iteration state ctx)) state)))
 
 (defn continue-loop?
@@ -119,8 +122,9 @@
 
 (defn process-diagram
   [diagram-file-name state ctx]
-  (let [diagram-lines (with-open [rdr (clojure.java.io/reader diagram-file-name)]
-                      (doall (line-seq rdr)))
+  (let [diagram-lines (with-open [rdr (clojure.java.io/reader
+                                        diagram-file-name)]
+                        (doall (line-seq rdr)))
         sub-process-files (extract-subprocess-files diagram-file-name
                                                     diagram-lines)
         ;; TODO: Extract activities waiting for scheduling
@@ -133,7 +137,8 @@
     ;; TODO: Add relevant-activities to the list of activities to schedule
     (-> state
         (update :diagrams-to-process #(remove #{diagram-file-name} %))
-        (update :diagrams-to-process #(into % sub-process-files)))))
+        (update :diagrams-to-process #(into % sub-process-files))
+        (update :activities #(into % relevant-activities)))))
 
 (declare graphviz-element-id)
 
@@ -157,20 +162,17 @@
 
 (defn extract-activities
   [parent-diagram-file-name diagram-lines]
-  (let [
-        process-id (-> "src/test/resources/scenarios/01/actual/r.w.dot"
-    (clojure.string/split #"\.")
-    butlast
-    last)
-
+  (let [process-id (-> "src/test/resources/scenarios/01/actual/r.w.dot"
+                       (clojure.string/split #"\.")
+                       butlast
+                       last)
         x (->> diagram-lines
-         (filter #(str/includes? % "⬤"))
-         (filter #(str/includes? % "▢"))
-         (filter #(str/includes? % "shape=box"))
-         (filter #(str/includes? % "style=rounded"))
-(map graphviz-element-id)
-         
-         )]
+               (filter #(str/includes? % "⬤"))
+               (filter #(str/includes? % "▢"))
+               (filter #(str/includes? % "shape=box"))
+               (filter #(str/includes? % "style=rounded"))
+               (map graphviz-element-id)
+               (map (fn [activity] {:process process-id, :activity activity})))]
     (println "extract-activities (start)")
     (println "x: " x)
     (println "extract-activities (end)")
