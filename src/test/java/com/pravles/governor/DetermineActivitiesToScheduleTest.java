@@ -41,6 +41,7 @@ import static java.util.Map.of;
 import static org.apache.commons.io.FileUtils.cleanDirectory;
 import static org.apache.commons.io.FileUtils.copyDirectory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DetermineActivitiesToScheduleTest {
@@ -84,10 +85,11 @@ public class DetermineActivitiesToScheduleTest {
         assertTrue(activities.contains(of(intern("process"), "w", intern("activity"), "sc024")));
 
         final List<Map> effortEstimates = (List<Map>) actualCtx.get("effort-estimates");
+        assertNotNull(effortEstimates);
+
         assertTrue(effortEstimates.contains(new Task("first_naked_post", "p", 5, 12.0, 0.25)));
 
         assertTrue(effortEstimates.contains(new Task("sc024", "p", 10, 20.0, 1.0)));
-
 
         System.out.println("Hello");
     }
