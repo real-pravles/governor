@@ -32,43 +32,30 @@
 
 (defn гав
   [old-ctx]
-  (let [
-        activities-to-schedule (-> old-ctx
+  (let [activities-to-schedule (-> old-ctx
                                    (run-loop)
-                                   (:activities))
-        ]
-    (println "det-act-to-schedule called")
+                                   (:activities))]
     (.put old-ctx "activities" activities-to-schedule)
     old-ctx))
 
 (defn run-loop
   [ctx]
-  (loop [state {
-                :mode :root-file-not-read,
-                :diagrams-to-process [],
-                :activities []}]
+  (loop [state
+           {:mode :root-file-not-read, :diagrams-to-process [], :activities []}]
     (if (continue-loop? state) (recur (process-iteration state ctx)) state)))
 
 (defn continue-loop?
   [state]
-  (println "continue-loop?, state:" state)
   (let [root-file-found (not (:root-file-not-found? state))
         are-there-diagrams-to-process? (-> state
                                            (:diagrams-to-process)
                                            (seq)
                                            (nil?)
                                            (not))]
-    (cond ;; root-file-found true
-      (:root-file-not-found? state) false
-
-      (and are-there-diagrams-to-process?
-           (= :root-file-read (:mode state ))
-
-           )
-           true
-          :else false)
-
-))
+    (cond (= :root-file-not-read (:mode state)) true
+          (:root-file-not-found? state) false
+          are-there-diagrams-to-process? true
+          :else false)))
 
 (declare process-root-diagram-if-possible)
 
@@ -84,13 +71,6 @@
         next-diagram-to-process (-> state
                                     (:diagrams-to-process)
                                     (first))]
-    (println "process-iteration")
-    (println "state: " state)
-    (println "diagrams: "
-             (-> state
-                 (:diagrams-to-process)))
-    (println "are-there-diagrams-to-process?: " are-there-diagrams-to-process?)
-    (println "foo")
     (cond (= mode :root-file-not-read) (process-root-diagram-if-possible state
                                                                          ctx)
           are-there-diagrams-to-process?
@@ -116,10 +96,6 @@
             (let [file (new java.io.File root-file-name)]
               (and (.exists file) (.isFile file) (.canRead file)))
             false)]
-    (println "process-root-diagram")
-    (println "root-file-expr: " root-file-expr)
-    (println "root-file-name: " root-file-name)
-    (println "root-file-readable: " root-file-readable)
     (if root-file-readable
       ;; Below we add the diagram file to the list of files to process if
       ;; the diagram can be read
@@ -140,13 +116,8 @@
                         (doall (line-seq rdr)))
         sub-process-files (extract-subprocess-files diagram-file-name
                                                     diagram-lines)
-        ;; TODO: Extract activities waiting for scheduling
         relevant-activities (extract-activities diagram-file-name
                                                 diagram-lines)]
-    (println "process-diagram (start)")
-    (println "diagram-txt: " diagram-lines)
-    (println "diagram-file-name: " diagram-file-name)
-    (println "process-diagram (end)")
     (-> state
         (update :diagrams-to-process #(remove #{diagram-file-name} %))
         (update :diagrams-to-process #(into % sub-process-files))
@@ -174,7 +145,7 @@
 
 (defn extract-activities
   [parent-diagram-file-name diagram-lines]
-  (let [process-id (-> parent-diagram-file-name 
+  (let [process-id (-> parent-diagram-file-name
                        (clojure.string/split #"\.")
                        butlast
                        last)]
@@ -184,7 +155,4 @@
          (filter #(str/includes? % "shape=box"))
          (filter #(str/includes? % "style=rounded"))
          (map graphviz-element-id)
-         (map (fn [activity] {:process process-id, :activity activity})))
-
-
-    ))
+         (map (fn [activity] {:process process-id, :activity activity})))))
