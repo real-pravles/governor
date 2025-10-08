@@ -32,8 +32,16 @@
 
 (defn гав
   [old-ctx]
-  (let [activities-to-schedule (run-loop old-ctx)]
+  (let [run-loop-result (run-loop old-ctx)
+        activities-to-schedule nil
+
+        ]
     (println "det-act-to-schedule called")
+    (println "run-loop-result (start)")
+    (println run-loop-result)
+    (println "run-loop-result (end)")
+
+    (.put old-ctx "activities" activities-to-schedule)
     old-ctx))
 
 (defn run-loop
@@ -134,7 +142,6 @@
     (println "diagram-txt: " diagram-lines)
     (println "diagram-file-name: " diagram-file-name)
     (println "process-diagram (end)")
-    ;; TODO: Add relevant-activities to the list of activities to schedule
     (-> state
         (update :diagrams-to-process #(remove #{diagram-file-name} %))
         (update :diagrams-to-process #(into % sub-process-files))
