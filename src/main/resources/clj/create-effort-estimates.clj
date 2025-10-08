@@ -38,38 +38,16 @@
     (println "activities: " activities)
     old-ctx))
 
-;; (defn parse-effort
-;;   [v]
-;;   (let [last-idx (dec (count v))
-;;         last-val (get v last-idx)]
-;;     (if (and (string? last-val) (re-matches #"\d+h" last-val))
-;;       (assoc v
-;;         last-idx (Double/parseDouble (subs last-val 0 (dec (count last-val)))))
-;;       v)))
-
 (defn parse-effort
   [v]
   (let [last-idx (dec (count v))
         last-val (get v last-idx)]
-    (if (and (string? last-val)
-             (re-matches #"\d+[hm]" last-val))
+    (if (and (string? last-val) (re-matches #"\d+[hm]" last-val))
       (let [num-str (subs last-val 0 (dec (count last-val)))
             num (Double/parseDouble num-str)
             unit (last last-val)
-            hours (if (= unit \m)
-                    (/ num 60.0)
-                    num)
-
-            ]
-        (assoc v last-idx hours)
-        )
-
-
-      )
-
-    )
-
-  )
+            hours (if (= unit \m) (/ num 60.0) num)]
+        (assoc v last-idx hours)))))
 
 (defn extract-assumed-efforts
   [ctx]
@@ -81,4 +59,12 @@
          (map parse-effort)
          (into {} (map (fn [[_ name _ effort]] [name effort]))))))
 
-(defn extract-min-session-hours [ctx] nil)
+(defn extract-min-session-hours
+  [ctx]
+  (let [low-code (get ctx "low-code")]
+    (->> low-code
+         (filter (fn [t]
+                   (and (= :in-process (first t))
+                        (= :assume-min-session-duration-of (get t 2)))))
+         (map parse-effort)
+         (into {} (map (fn [[_ name _ effort]] [name effort]))))))
