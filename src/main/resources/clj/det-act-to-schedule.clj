@@ -118,15 +118,12 @@
 
 (defn process-diagram
   [diagram-file-name state ctx]
-  (let [diagram-txt diagram-txt
-        (with-open [rdr (clojure.java.io/reader diagram-file-name)]
+  (let [diagram-txt (with-open [rdr (clojure.java.io/reader diagram-file-name)]
           (doall (line-seq rdr)))
           ;; TODO: Extract subprocesses
-          sub-processes
-        (extract-subprocess-files diagram-file-name diagram-txt)
+          sub-processes (extract-subprocess-files diagram-file-name diagram-txt)
           ;; TODO: Extract activities waiting for scheduling
-          relevant-activities
-        nil]
+          relevant-activities nil]
     (println "process-diagram (start)")
     (println "diagram-txt: " diagram-txt)
     (println "diagram-file-name: " diagram-file-name)
@@ -142,4 +139,7 @@
                (filter #(str/includes? % "⬤")))]
     (println "extract-subprocess-files (start)")
     (println "x:" x)
-    (println "extract-subprocess-files (end)")))
+    (println "extract-subprocess-files (end)"))
+
+
+  )
