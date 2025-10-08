@@ -114,22 +114,28 @@
           (update :counter inc)
           (assoc :root-file-not-found? true)))))
 
+(declare extract-subprocess-files)
+
 (defn process-diagram
   [diagram-file-name state ctx]
-  (let [
-        diagram-txt (slurp diagram-file-name)
+  (let [diagram-txt (slurp diagram-file-name)
         ;; TODO: Extract subprocesses
-        sub-processes nil
+        sub-processes (extract-subprocess-files diagram-file-name diagram-txt)
         ;; TODO: Extract activities waiting for scheduling
         relevant-activities nil]
     (println "process-diagram (start)")
     (println "diagram-txt: " diagram-txt)
     (println "diagram-file-name: " diagram-file-name)
     (println "process-diagram (end)")
-
     ;; TODO: Add subprocesses to the state
     ;; TODO: Remove diagram-file-name from the list of files to process
     ;; TODO: Add relevant-activities to the list of activities to schedule
-(update state :diagrams-to-process #(remove #{diagram-file-name} %))
+    (update state :diagrams-to-process #(remove #{diagram-file-name} %))))
+
+(defn extract-subprocess-files [parent-diagram-file-name diagram-txt]
+
+  (let []
+(println "extract-subprocess-files (start)")
+(println "extract-subprocess-files (end)")
 
     ))
