@@ -28,5 +28,11 @@
 
 (defn гав
   [old-ctx]
-  (println "create-effort-estimates")
-  old-ctx)
+  (let [
+        activities (get old-ctx "activities")
+        assumed-efforts nil
+        assumed-min-session-hours nil
+        ]
+    (println "create-effort-estimates")
+    (println "activities: " activities)
+    old-ctx))
