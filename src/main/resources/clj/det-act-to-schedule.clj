@@ -119,15 +119,15 @@
 
 (defn process-diagram
   [diagram-file-name state ctx]
-  (let [diagram-txt (with-open [rdr (clojure.java.io/reader diagram-file-name)]
+  (let [diagram-lines (with-open [rdr (clojure.java.io/reader diagram-file-name)]
                       (doall (line-seq rdr)))
         sub-process-files (extract-subprocess-files diagram-file-name
-                                                    diagram-txt)
+                                                    diagram-lines)
         ;; TODO: Extract activities waiting for scheduling
-        relevant-activities (extract-activities parent-diagram-file-name
+        relevant-activities (extract-activities diagram-file-name
                                                 diagram-lines)]
     (println "process-diagram (start)")
-    (println "diagram-txt: " diagram-txt)
+    (println "diagram-txt: " diagram-lines)
     (println "diagram-file-name: " diagram-file-name)
     (println "process-diagram (end)")
     ;; TODO: Add relevant-activities to the list of activities to schedule
