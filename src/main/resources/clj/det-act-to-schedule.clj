@@ -115,12 +115,12 @@
           (assoc :root-file-not-found? true)))))
 
 (declare extract-subprocess-files)
+(declare extract-activities)
 
 (defn process-diagram
   [diagram-file-name state ctx]
   (let [diagram-txt (with-open [rdr (clojure.java.io/reader diagram-file-name)]
                       (doall (line-seq rdr)))
-        ;; TODO: Extract subprocesses
         sub-process-files (extract-subprocess-files diagram-file-name
                                                     diagram-txt)
         ;; TODO: Extract activities waiting for scheduling
@@ -129,8 +129,6 @@
     (println "diagram-txt: " diagram-txt)
     (println "diagram-file-name: " diagram-file-name)
     (println "process-diagram (end)")
-    ;; TODO: Add subprocesses to the state
-    ;; TODO: Remove diagram-file-name from the list of files to process
     ;; TODO: Add relevant-activities to the list of activities to schedule
     (-> state
         (update :diagrams-to-process #(remove #{diagram-file-name} %))
