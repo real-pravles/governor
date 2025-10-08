@@ -25,14 +25,29 @@
 
 (def nl (System/getProperty "line.separator"))
 
+(declare extract-assumed-efforts)
+(declare extract-min-session-hours)
 
 (defn гав
   [old-ctx]
   (let [
         activities (get old-ctx "activities")
-        assumed-efforts nil
-        assumed-min-session-hours nil
+        assumed-efforts (extract-assumed-efforts old-ctx)
+        assumed-min-session-hours (extract-min-session-hours old-ctx)
         ]
     (println "create-effort-estimates")
     (println "activities: " activities)
     old-ctx))
+
+(defn extract-assumed-efforts
+  [ctx]
+  (let []
+    (println "extract-assumed-efforts")
+    (println "ctx: " ctx)
+    nil
+    )
+  )
+
+(defn extract-min-session-hours
+  [ctx]
+  nil)
