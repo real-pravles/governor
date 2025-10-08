@@ -37,6 +37,15 @@
     (println "activities: " activities)
     old-ctx))
 
+(defn parse-effort
+  [v]
+  (let [last-idx (dec (count v))
+        last-val (get v last-idx)]
+    (if (and (string? last-val) (re-matches #"\d+h" last-val))
+      (assoc v
+        last-idx (Double/parseDouble (subs last-val 0 (dec (count last-val)))))
+      v)))
+
 (defn extract-assumed-efforts
   [ctx]
   (let [low-code (get ctx "low-code")
@@ -44,7 +53,11 @@
                (filter (fn [t]
                          (and (= :in-process (first t))
                               (= :assume-activity-requires-effort-of
-                                 (get t 2))))))]
+                                 (get t 2)))))
+               (map parse-effort)
+
+
+               )]
     (println "extract-assumed-efforts")
     (println "x: " x)
     nil))
