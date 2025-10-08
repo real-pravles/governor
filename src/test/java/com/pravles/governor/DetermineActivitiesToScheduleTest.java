@@ -17,6 +17,7 @@
 
 package com.pravles.governor;
 
+import clojure.lang.Keyword;
 import com.pravles.processengine.util.LaunchInfoFactory;
 import com.pravles.processengine.util.ProcessEngineLauncher;
 import org.apache.commons.io.FileUtils;
@@ -28,14 +29,18 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import static clojure.lang.Keyword.intern;
 import static com.pravles.TestUtils.assertFilesEqual;
 import static java.lang.String.format;
+import static java.util.Map.of;
 import static org.apache.commons.io.FileUtils.cleanDirectory;
 import static org.apache.commons.io.FileUtils.copyDirectory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DetermineActivitiesToScheduleTest {
     static Stream<Arguments> scenarios() {
@@ -72,5 +77,12 @@ public class DetermineActivitiesToScheduleTest {
         // Then
         assertEquals(new File(governorSettingsFile).getAbsolutePath(),
                 actualCtx.get("settings-file"));
+        final List<Map> activities = (List<Map>) actualCtx.get("activities");
+        assertTrue(activities.contains(of(intern("process"), "p", intern("activity"), "first_naked_post")));
+
+        assertTrue(activities.contains(of(intern("process"), "w", intern("activity"), "sc024")));
+
+
+        System.out.println("Hello");
     }
 }

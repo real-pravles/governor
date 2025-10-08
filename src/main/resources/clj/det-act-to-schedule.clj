@@ -38,9 +38,6 @@
                                    (:activities))
         ]
     (println "det-act-to-schedule called")
-    (println "run-loop-result (start)")
-    (println run-loop-result)
-    (println "run-loop-result (end)")
     (.put old-ctx "activities" activities-to-schedule)
     old-ctx))
 
@@ -169,7 +166,7 @@
 
 (defn extract-activities
   [parent-diagram-file-name diagram-lines]
-  (let [process-id (-> "src/test/resources/scenarios/01/actual/r.w.dot"
+  (let [process-id (-> parent-diagram-file-name 
                        (clojure.string/split #"\.")
                        butlast
                        last)]
