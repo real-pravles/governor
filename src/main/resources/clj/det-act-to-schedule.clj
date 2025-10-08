@@ -119,11 +119,11 @@
 (defn process-diagram
   [diagram-file-name state ctx]
   (let [diagram-txt (with-open [rdr (clojure.java.io/reader diagram-file-name)]
-          (doall (line-seq rdr)))
-          ;; TODO: Extract subprocesses
-          sub-processes (extract-subprocess-files diagram-file-name diagram-txt)
-          ;; TODO: Extract activities waiting for scheduling
-          relevant-activities nil]
+                      (doall (line-seq rdr)))
+        ;; TODO: Extract subprocesses
+        sub-processes (extract-subprocess-files diagram-file-name diagram-txt)
+        ;; TODO: Extract activities waiting for scheduling
+        relevant-activities nil]
     (println "process-diagram (start)")
     (println "diagram-txt: " diagram-txt)
     (println "diagram-file-name: " diagram-file-name)
@@ -133,13 +133,24 @@
     ;; TODO: Add relevant-activities to the list of activities to schedule
     (update state :diagrams-to-process #(remove #{diagram-file-name} %))))
 
+(declare graphviz-element-id)
+
 (defn extract-subprocess-files
   [parent-diagram-file-name diagram-lines]
-  (let [x (->> diagram-lines
-               (filter #(str/includes? % "⬤")))]
+  (let [sub-process-lines (->> diagram-lines
+                               (filter #(str/includes? % "⬤"))
+                               (filter #(str/includes? % "shape=box"))
+                               (filter #(str/includes? % "style=rounded"))
+                               (filter #(str/includes? % "penwidth=5"))
+                               (map graphviz-element-id))
+        sub-process-ids nil]
     (println "extract-subprocess-files (start)")
-    (println "x:" x)
-    (println "extract-subprocess-files (end)"))
+    (println "x:" sub-process-lines)
+    (println "extract-subprocess-files (end)")))
 
-
-  )
+(defn graphviz-element-id
+  [graphviz-line]
+  (-> graphviz-line
+      (clojure.string/split #"\[")
+      first
+      (clojure.string/replace #"[\s\"]" "")))
