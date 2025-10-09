@@ -96,7 +96,7 @@
 (defn extract-from-through-rules
   [ctx]
   (let [low-code (get ctx "low-code")
-        rules (-> low-code
+        rules (->> low-code
                   (filter is-from-through-rule))
 
         ]
