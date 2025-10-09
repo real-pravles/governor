@@ -27,6 +27,11 @@
 
 
 (defn гав
-  [old-ctx]
-  (println "compose-time-slot-data")
-  old-ctx)
+  [ctx]
+  (let [low-code (get ctx "low-code")
+        first-day (->> low-code
+                       (filter #(= :schedule-from (first %))))
+        number-of-weeks-to-schedule nil]
+    (println "compose-time-slot-data")
+    (println "first-day: " first-day)
+    ctx))
