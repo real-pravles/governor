@@ -43,8 +43,8 @@
               (fn [activity]
                 (let [
                       project (:process activity)
-                      priority (get prirorities project)
-                      effort 12.0
+                      priority (get priorities project)
+                      effort (get assumed-efforts project)
                       min-session-duration 0.25
                       name (:activity activity)]
                   (Task. name project priority effort min-session-duration)))))]
