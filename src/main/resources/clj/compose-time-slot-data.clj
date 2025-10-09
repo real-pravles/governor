@@ -86,6 +86,8 @@
     ;; Return state (potentially modified)
     state))
 
+(declare is-from-through-rule)
+
 ;; Function for extracting rules like these:
 ;;
 ;;    [:on [:monday :wednesday :friday]
@@ -93,10 +95,18 @@
 ;;     :through "08:00"]
 (defn extract-from-through-rules
   [ctx]
-  (let []
+  (let [low-code (get ctx "low-code")
+        rules (-> low-code
+                  (filter is-from-through-rule))
 
+        ]
+    (println "rules: " rules)
     {})
   )
+
+(defn is-from-through-rule
+  [clex]
+  false)
 
 ;; Function for extracting rules like these:
 ;;
