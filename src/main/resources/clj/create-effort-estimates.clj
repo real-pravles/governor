@@ -45,7 +45,7 @@
                       project (:process activity)
                       priority (get priorities project)
                       effort (get assumed-efforts project)
-                      min-session-duration 0.25
+                      min-session-duration (get assumed-min-session-hours project)
                       name (:activity activity)]
                   (Task. name project priority effort min-session-duration)))))]
     (println "create-effort-estimates")
