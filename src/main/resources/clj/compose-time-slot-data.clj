@@ -30,7 +30,11 @@
   [ctx]
   (let [low-code (get ctx "low-code")
         first-day (->> low-code
-                       (filter #(= :schedule-from (first %))))
+                       (filter #(= :schedule-from (first %)))
+                       (first)
+                       (second)
+
+                       )
         number-of-weeks-to-schedule nil]
     (println "compose-time-slot-data")
     (println "first-day: " first-day)
