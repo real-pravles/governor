@@ -48,12 +48,6 @@
                       min-session-duration (get assumed-min-session-hours project)
                       name (:activity activity)]
                   (Task. name project priority effort min-session-duration)))))]
-    (println "create-effort-estimates")
-    (println "assumed-efforts: " assumed-efforts)
-    (println "assumed-min-session-hours: " assumed-min-session-hours)
-    (println "priorities: " priorities)
-    (println "activities: " activities)
-    (println "effort-estimates: " effort-estimates)
     (.put old-ctx "effort-estimates" effort-estimates)
     old-ctx))
 
