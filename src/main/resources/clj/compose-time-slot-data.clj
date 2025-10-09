@@ -22,7 +22,7 @@
          '[clojure.pprint :as pprint])
 
 (import 'org.apache.commons.lang3.time.DateUtils)
-(import 'java.text SimpleDateFormat)
+(import 'java.text.SimpleDateFormat)
 
 (def nl (System/getProperty "line.separator"))
 
