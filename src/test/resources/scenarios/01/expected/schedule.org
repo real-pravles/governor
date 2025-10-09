@@ -1,49 +1,52 @@
 
 Status: OPTIMAL
-Objective value: 2400.0
+Objective value: 2600.0
 === SCHEDULE ===
-Monday (week 1) (2,0/2,0h used):
-  - Novel: 2,0h
+Monday (week 1) (2.0/2.0h used):
+  - p: 2.0h
 
-Tuesday (week 1) (2,0/2,0h used):
-  - Novel: 2,0h
+Tuesday (week 1) (2.0/2.0h used):
+  - p: 2.0h
 
-Wednesday (week 1) (2,0/2,0h used):
-  - Novel: 2,0h
+Wednesday (week 1) (2.0/2.0h used):
+  - p: 2.0h
 
-Thursday (week 1) (2,0/2,0h used):
-  - Novel: 2,0h
+Thursday (week 1) (2.0/2.0h used):
+  - p: 2.0h
 
-Friday (week 1) (2,0/2,0h used):
-  - Novel: 2,0h
+Friday (week 1) (2.0/2.0h used):
+  - p: 0.4h
+  - w: 1.6h
 
-Saturday (week 1) (2,1/5,0h used):
-  - SubStack: 2,1h
+Saturday (week 1) (4.2/5.0h used):
+  - p: 2.1h
+  - w: 2.1h
 
-Sunday (week 1) (2,1/5,0h used):
-  - SubStack: 2,1h
+Sunday (week 1) (3.6/5.0h used):
+  - p: 1.5h
+  - w: 2.1h
 
-Monday (week 1) (2,0/2,0h used):
-  - Novel: 2,0h
+Monday (week 1) (2.0/2.0h used):
+  - w: 2.0h
 
-Tuesday (week 1) (2,0/2,0h used):
-  - Novel: 2,0h
+Tuesday (week 1) (2.0/2.0h used):
+  - w: 2.0h
 
-Wednesday (week 1) (2,0/2,0h used):
-  - Novel: 2,0h
+Wednesday (week 1) (2.0/2.0h used):
+  - w: 2.0h
 
-Thursday (week 1) (2,0/2,0h used):
-  - Novel: 2,0h
+Thursday (week 1) (2.0/2.0h used):
+  - w: 2.0h
 
-Friday (week 1) (2,0/2,0h used):
-  - Novel: 2,0h
+Friday (week 1) (2.0/2.0h used):
+  - w: 2.0h
 
-Saturday (week 1) (2,1/5,0h used):
-  - SubStack: 2,1h
+Saturday (week 1) (2.1/5.0h used):
+  - w: 2.1h
 
-Sunday (week 1) (1,7/5,0h used):
-  - SubStack: 1,7h
+Sunday (week 1) (2.1/5.0h used):
+  - w: 2.1h
 
 === TASK COMPLETION ===
-Novel: 20,0/20,0 hours scheduled
-SubStack: 8,0/8,0 hours scheduled
+p: 12.0/12.0 hours scheduled
+w: 20.0/20.0 hours scheduled

@@ -20,8 +20,6 @@
 (require '[clojure.string :as str]
          '[clojure.java.io :as io]
          '[clojure.pprint :as pprint])
-(import 'org.apache.commons.lang3.StringUtils)
-(import 'us.bpsm.edn.Keyword)
 
 (def nl (System/getProperty "line.separator"))
 

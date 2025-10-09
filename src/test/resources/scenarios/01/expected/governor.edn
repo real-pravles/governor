@@ -27,17 +27,22 @@
     [:in-process "w"
      :assume-activity-requires-effort-of "20h"]
 
+    [:in-process "w"
+     :assume-min-session-duration-of "1h"]
+
     [:in-process "p"
      :assume-activity-requires-effort-of "12h"]
 
+    [:in-process "p"
+     :assume-min-session-duration-of "15m"]
 
   [:comment "Priorities"]
 
     [:process "w"
-     :has-priority 100]
+     :has-priority 10]
     
     [:process "p"
-     :has-priority 200]
+     :has-priority 5]
 
   [:comment "Scheduling settings (end)"]
 
