@@ -27,15 +27,19 @@
 
 (declare extract-assumed-efforts)
 (declare extract-min-session-hours)
+(declare extract-priorities)
 
 (defn гав
   [old-ctx]
   (let [activities (get old-ctx "activities")
         assumed-efforts (extract-assumed-efforts old-ctx)
-        assumed-min-session-hours (extract-min-session-hours old-ctx)]
+        assumed-min-session-hours (extract-min-session-hours old-ctx)
+        priorities (extract-priorities old-ctx)
+        ]
     (println "create-effort-estimates")
     (println "assumed-efforts: " assumed-efforts)
     (println "assumed-min-session-hours: " assumed-min-session-hours)
+    (println "priorities: " priorities)
     (println "activities: " activities)
     old-ctx))
 
@@ -68,4 +72,13 @@
                    (and (= :in-process (first t))
                         (= :assume-min-session-duration-of (get t 2)))))
          (map parse-effort)
+         (into {} (map (fn [[_ name _ effort]] [name effort]))))))
+
+(defn extract-priorities
+  [ctx]
+  (let [low-code (get ctx "low-code")]
+    (->> low-code
+         (filter (fn [t]
+                   (and (= :process (first t))
+                        (= :has-priority (get t 2)))))
          (into {} (map (fn [[_ name _ effort]] [name effort]))))))
