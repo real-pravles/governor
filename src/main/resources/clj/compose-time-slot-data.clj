@@ -97,23 +97,27 @@
   [ctx]
   (let [low-code (get ctx "low-code")
         rules (->> low-code
-                   (filter is-from-through-rule))]
+                   (filter is-from-through-rule))
+        x (->> rules
+               (map (fn [rule]
+                      (println "rule:" rule)
+                      {})))
+
+        ]
     (println "extract-from-through-rules, rules: " (count rules))
+    (println "x: " x)
     {}))
 
 (defn is-from-through-rule
   [clex]
   (if (= 6 (count clex))
-    (let [i1 (first clex)
-          i3 (nth clex 2)
-          i5 (nth clex 4)]
-      (println "i1: " i1 ", i3: " i3, ", i5:" i5)
-      (and)
-      (= :on i1)
-      (= :i-can-work-from i3)
-      (= :through i5)
-      false ;; (count clex) != 6
-    )))
+    (let [i0 (first clex)
+          i2 (nth clex 2)
+          i4 (nth clex 4)]
+      (println "i0: " i0 ", i2: " i2 ", i4:" i4)
+      (and (= :on i0) (= :i-can-work-from i2) (= :through i4)))
+    false ;; (count clex) != 6
+  ))
 
 ;; Function for extracting rules like these:
 ;;
