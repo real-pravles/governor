@@ -60,6 +60,10 @@
     (println "first-day: " first-day)
     (println "number-of-weeks-to-schedule: " number-of-weeks-to-schedule)
     (println "last-day: " last-day)
+    (println "rules-by-day-of-week: " rules-by-day-of-week)
+
+
+
     ctx))
 
 (defn traverse-days
@@ -81,3 +85,11 @@
     (println "compose-time-slots-for-day: " day-of-week " " current-day-txt)
     ;; Return state (potentially modified)
     state))
+
+(defn extract-from-through-rules
+  [ctx]
+  {})
+(defn extract-after-rules
+  {})
+(defn extract-duration-rules
+  {})
