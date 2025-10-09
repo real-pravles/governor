@@ -88,7 +88,7 @@
 
 (declare is-from-through-rule)
 
-(declare transform-from-through-rules)
+(declare transform-from-through-rule)
 
 ;; Function for extracting rules like these:
 ;;
@@ -100,7 +100,13 @@
   (let [low-code (get ctx "low-code")
         rules (->> low-code
                    (filter is-from-through-rule))
-        x (transform-from-through-rules rules)]
+        x (transform-from-through-rule rules)
+        rules (->> low-code
+                   (filter is-from-through-rule)
+                   (map transform-from-through-rule))
+
+
+        ]
     (println "extract-from-through-rules, rules: " (count rules))
     {}))
 
@@ -130,10 +136,9 @@
 (defn extract-duration-rules [ctx] {})
 
 
-(defn transform-from-through-rules
+(defn transform-from-through-rule
   [rules]
   (let [x (->> rules
                (map (fn [rule] (println "rule:" rule) {})))]
-    (println "transform-from-through-rules, rules: " (count rules))
-    (println "x: " x)
-    x))
+    (println "transform-from-through-rule, rule: " rule)
+    nil))
