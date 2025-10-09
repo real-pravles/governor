@@ -139,11 +139,10 @@
   [rule]
   (let [
         dict (apply hash-map rule)
-       ;; days-of-week (:on dict)
+       days-of-week (:on dict)
 
         ]
     (println "transform-from-through-rule, rule: " rule)
-    (println "foo: " (apply hash-map rule))
     (println "dict: " dict)
-;;    (println "days-of-week: " days-of-week)
+    (println "days-of-week: " days-of-week)
     nil))
