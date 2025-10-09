@@ -25,6 +25,10 @@
 (import 'java.text.SimpleDateFormat)
 
 (def nl (System/getProperty "line.separator"))
+(def sdf (java.text.SimpleDateFormat. "yyyy-MM-dd"))
+
+(declare traverse-days)
+(declare compose-time-slots-for-day)
 
 (defn гав
   [ctx]
@@ -39,14 +43,30 @@
                                          (last)
                                          (#(str/replace % "w" ""))
                                          (Integer/parseInt))
-        last-day (DateUtils/addWeeks 
-  (.parse (java.text.SimpleDateFormat. "yyyy-MM-dd") first-day)
-  number-of-weeks-to-schedule)
+        last-day (.format sdf
+                          (DateUtils/addWeeks (.parse sdf first-day)
+                                              number-of-weeks-to-schedule))
 
-
+        days-traversal-result (traverse-days first-day last-day compose-time-slots-for-day)
         ]
     (println "compose-time-slot-data")
     (println "first-day: " first-day)
     (println "number-of-weeks-to-schedule: " number-of-weeks-to-schedule)
     (println "last-day: " last-day)
     ctx))
+
+(defn traverse-days
+  [first-day last-day process-day]
+  (let [first-day-date (.parse sdf first-day)
+        last-day-date (.parse sdf last-day)]
+    (loop [state {}
+           current-day first-day-date]
+      (when-not (.after current-day last-day-date)
+        (let [new-state (process-day state current-day)]
+          (recur new-state (DateUtils/addDays current-day 1)))))))
+
+(defn compose-time-slots-for-day [state]
+  ;; Print the current day from state
+  (println (.format sdf (:current-day state)))
+  ;; Return state (potentially modified)
+  state)
