@@ -21,6 +21,9 @@
          '[clojure.java.io :as io]
          '[clojure.pprint :as pprint])
 
+(import 'org.apache.commons.lang3.time.DateUtils)
+(import 'java.text SimpleDateFormat)
+
 (def nl (System/getProperty "line.separator"))
 
 (defn гав
@@ -35,8 +38,15 @@
                                          (first)
                                          (last)
                                          (#(str/replace % "w" ""))
-                                         (Integer/parseInt))]
+                                         (Integer/parseInt))
+        last-day (DateUtils/addWeeks 
+  (.parse (java.text.SimpleDateFormat. "yyyy-MM-dd") first-day)
+  number-of-weeks-to-schedule)
+
+
+        ]
     (println "compose-time-slot-data")
     (println "first-day: " first-day)
     (println "number-of-weeks-to-schedule: " number-of-weeks-to-schedule)
+    (println "last-day: " last-day)
     ctx))
