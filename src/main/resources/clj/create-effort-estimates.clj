@@ -54,6 +54,7 @@
     (println "priorities: " priorities)
     (println "activities: " activities)
     (println "effort-estimates: " effort-estimates)
+    (.put old-ctx "effort-estimates" effort-estimates)
     old-ctx))
 
 (defn parse-effort
