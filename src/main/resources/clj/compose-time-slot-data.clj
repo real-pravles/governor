@@ -150,7 +150,7 @@
                          (let [duration nil
                                note nil]
                            {day {:duration nil
-                                 :note nil}}))))
+                                 :note (str rule)}}))))
 
         ]
     (println "transform-from-through-rule, rule: " rule)
