@@ -58,12 +58,16 @@ public class RunORRoutine implements ActivityFunction {
         );
 
         // Define tasks - now as single tasks with total hours
+        final List<Task> tasks = (List<Task>) ctx.get("effort-estimates");
+        /*
         List<Task> tasks = Arrays.asList(
                 new Task("novel", "Novel", 10, 20.0, 1.0),        // 20 hours
                 // total
                 new Task("substack", "SubStack", 5, 8.0, 0.25)     // 8 hours
                 // total
         );
+        */
+
 
         // Create the CP-SAT model
         CpModel model = new CpModel();

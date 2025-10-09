@@ -84,7 +84,7 @@ public class DetermineActivitiesToScheduleTest {
 
         assertTrue(activities.contains(of(intern("process"), "w", intern("activity"), "sc024")));
 
-        final List<Map> effortEstimates = (List<Map>) actualCtx.get("effort-estimates");
+        final List<Task> effortEstimates = (List<Task>) actualCtx.get("effort-estimates");
         assertNotNull(effortEstimates);
 
         assertTrue(effortEstimates.contains(new Task("first_naked_post", "p", 5, 12.0, 0.25)));
