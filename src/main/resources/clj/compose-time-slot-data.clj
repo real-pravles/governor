@@ -29,6 +29,9 @@
 
 (declare traverse-days)
 (declare compose-time-slots-for-day)
+(declare extract-from-through-rules)
+(declare extract-after-rules)
+(declare extract-duration-rules)
 
 (defn гав
   [ctx]
@@ -46,6 +49,11 @@
         last-day (.format sdf
                           (DateUtils/addWeeks (.parse sdf first-day)
                                               number-of-weeks-to-schedule))
+        from-through-rules (extract-from-through-rules ctx)
+        after-rules (extract-after-rules ctx)
+        duration-rules (extract-duration-rules ctx)
+        rules-by-day-of-week
+          (merge-with concat from-through-rules after-rules duration-rules)
         days-traversal-result
           (traverse-days first-day last-day compose-time-slots-for-day)]
     (println "compose-time-slot-data")
@@ -67,8 +75,8 @@
 (defn compose-time-slots-for-day
   [state current-day]
   (let [current-day-txt (.format sdf current-day)
-        day-of-week (.toUpperCase (.format (java.text.SimpleDateFormat. "EEE") current-day))
-        ]
+        day-of-week (.toUpperCase (.format (java.text.SimpleDateFormat. "EEE")
+                                           current-day))]
     ;; Print the current day from state
     (println "compose-time-slots-for-day: " day-of-week " " current-day-txt)
     ;; Return state (potentially modified)
