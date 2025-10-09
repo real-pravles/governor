@@ -88,6 +88,8 @@
 
 (declare is-from-through-rule)
 
+(declare transform-from-through-rules)
+
 ;; Function for extracting rules like these:
 ;;
 ;;    [:on [:monday :wednesday :friday]
@@ -98,14 +100,8 @@
   (let [low-code (get ctx "low-code")
         rules (->> low-code
                    (filter is-from-through-rule))
-        x (->> rules
-               (map (fn [rule]
-                      (println "rule:" rule)
-                      {})))
-
-        ]
+        x (transform-from-through-rules rules)]
     (println "extract-from-through-rules, rules: " (count rules))
-    (println "x: " x)
     {}))
 
 (defn is-from-through-rule
@@ -132,3 +128,12 @@
 ;; [:on [:saturday :sunday]
 ;;   :i-can-work-for "5h"]
 (defn extract-duration-rules [ctx] {})
+
+
+(defn transform-from-through-rules
+  [rules]
+  (let [x (->> rules
+               (map (fn [rule] (println "rule:" rule) {})))]
+    (println "transform-from-through-rules, rules: " (count rules))
+    (println "x: " x)
+    x))
