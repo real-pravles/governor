@@ -89,7 +89,7 @@ public class DetermineActivitiesToScheduleTest {
 
         assertTrue(effortEstimates.contains(new Task("first_naked_post", "p", 5, 12.0, 0.25)));
 
-        assertTrue(effortEstimates.contains(new Task("sc024", "p", 10, 20.0, 1.0)));
+        assertTrue(effortEstimates.contains(new Task("sc024", "w", 10, 20.0, 1.0)));
 
         System.out.println("Hello");
     }
