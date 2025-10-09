@@ -26,7 +26,7 @@
 
 (def nl (System/getProperty "line.separator"))
 (def sdf (java.text.SimpleDateFormat. "yyyy-MM-dd"))
-(def days-of-week {
+(def days-of-week-conv-table {
                    :monday "MON"
                    :tuesday "TUE"
                    :wednesday "WED"
@@ -145,7 +145,7 @@
   (let [dict (apply hash-map rule)
         days-of-week (:on dict)
         x (->> days-of-week
-                  (map #(get days-of-week %))
+                  (map #(get days-of-week-conv-table %))
                   (map (fn [day]
                          (let []
                            {day {}}))))
