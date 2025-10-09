@@ -35,12 +35,21 @@
         assumed-efforts (extract-assumed-efforts old-ctx)
         assumed-min-session-hours (extract-min-session-hours old-ctx)
         priorities (extract-priorities old-ctx)
+        effort-estimates (->> activities
+                              (map (fn [a]
+                                     (let []
+(Task. "first_naked_post" "p" 5 12.0 0.25)
+
+                                       )))
+
+                              )
         ]
     (println "create-effort-estimates")
     (println "assumed-efforts: " assumed-efforts)
     (println "assumed-min-session-hours: " assumed-min-session-hours)
     (println "priorities: " priorities)
     (println "activities: " activities)
+    (println "effort-estimates: " effort-estimates)
     old-ctx))
 
 (defn parse-effort
