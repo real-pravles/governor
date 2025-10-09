@@ -86,10 +86,29 @@
     ;; Return state (potentially modified)
     state))
 
+;; Function for extracting rules like these:
+;;
+;;    [:on [:monday :wednesday :friday]
+;;     :i-can-work-from "06:00"
+;;     :through "08:00"]
 (defn extract-from-through-rules
   [ctx]
   {})
+
+;; Function for extracting rules like these:
+;;
+;; [:on [:monday :tuesday
+;;       :wednesday :thursday :friday]
+;;      :i-can-work-for "1h"
+;;      :after "17:00"]
 (defn extract-after-rules
+  [ctx]
   {})
+
+;; Function for extracting rules like these:
+;;
+;; [:on [:saturday :sunday]
+;;   :i-can-work-for "5h"]
 (defn extract-duration-rules
+  [ctx]
   {})
