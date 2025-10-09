@@ -47,7 +47,8 @@ public class ProdLaunchInfoFactory extends AbstractLaunchInfoFactory {
                         "calc-tech-ceiling",
                         "write-summary",
                         "det-act-to-schedule",
-                        "create-effort-estimates")
+                        "create-effort-estimates",
+                        "compose-time-slot-data")
                 .stream()
                 .forEach(f -> {
                     fnBindings.put(f,

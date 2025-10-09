@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xmlns:smil="urn:oasis:names:tc:opendocument:xmlns:smil-compatible:1.0" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" xmlns:css3t="http://www.w3.org/TR/css3-text/" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:officeooo="http://openoffice.org/2009/office" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:rpt="http://openoffice.org/2005/report" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" office:version="1.3" office:mimetype="application/vnd.oasis.opendocument.graphics">
- <office:meta><meta:creation-date>2024-10-19T22:20:26.536678360</meta:creation-date><dc:date>2025-10-08T06:06:14.990718822</dc:date><meta:editing-duration>P1DT5H3M58S</meta:editing-duration><meta:editing-cycles>85</meta:editing-cycles><meta:generator>LibreOffice/7.0.2.2$MacOSX_X86_64 LibreOffice_project/8349ace3c3162073abd90d81fd06dcfb6b36b994</meta:generator><meta:document-statistic meta:object-count="11"/></office:meta>
+ <office:meta><meta:creation-date>2024-10-19T22:20:26.536678360</meta:creation-date><dc:date>2025-10-09T05:41:23.715057239</dc:date><meta:editing-duration>P1DT5H7M36S</meta:editing-duration><meta:editing-cycles>88</meta:editing-cycles><meta:generator>LibreOffice/7.0.2.2$MacOSX_X86_64 LibreOffice_project/8349ace3c3162073abd90d81fd06dcfb6b36b994</meta:generator><meta:document-statistic meta:object-count="13"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
-   <config:config-item config:name="VisibleAreaTop" config:type="int">2637</config:config-item>
+   <config:config-item config:name="VisibleAreaTop" config:type="int">7109</config:config-item>
    <config:config-item config:name="VisibleAreaLeft" config:type="int">-3542</config:config-item>
    <config:config-item config:name="VisibleAreaWidth" config:type="int">14099</config:config-item>
    <config:config-item config:name="VisibleAreaHeight" config:type="int">9999</config:config-item>
@@ -35,7 +35,7 @@
      <config:config-item config:name="IsClickChangeRotation" config:type="boolean">true</config:config-item>
      <config:config-item config:name="SlidesPerRow" config:type="short">4</config:config-item>
      <config:config-item config:name="EditMode" config:type="int">0</config:config-item>
-     <config:config-item config:name="VisibleAreaTop" config:type="int">2637</config:config-item>
+     <config:config-item config:name="VisibleAreaTop" config:type="int">7109</config:config-item>
      <config:config-item config:name="VisibleAreaLeft" config:type="int">-3542</config:config-item>
      <config:config-item config:name="VisibleAreaWidth" config:type="int">20372</config:config-item>
      <config:config-item config:name="VisibleAreaHeight" config:type="int">12887</config:config-item>
@@ -132,7 +132,7 @@
   <draw:marker draw:name="Arrowheads_20_4" draw:display-name="Arrowheads 4" svg:viewBox="0 0 20 20" svg:d="M0 20l10-20 10 20z"/>
   <style:default-style style:family="graphic">
    <style:graphic-properties svg:stroke-color="#3465a4" draw:fill-color="#729fcf" fo:wrap-option="no-wrap"/>
-   <style:paragraph-properties style:text-autospace="ideograph-alpha" style:punctuation-wrap="simple" style:line-break="strict" style:writing-mode="lr-tb" style:font-independent-line-spacing="false">
+   <style:paragraph-properties style:text-autospace="ideograph-alpha" style:punctuation-wrap="simple" style:line-break="strict" style:font-independent-line-spacing="false">
     <style:tab-stops/>
    </style:paragraph-properties>
    <style:text-properties style:use-window-font-color="true" loext:opacity="0%" style:font-name="Liberation Serif" fo:font-size="24pt" fo:language="en" fo:country="US" style:font-name-asian="Tahoma" style:font-size-asian="24pt" style:language-asian="zh" style:country-asian="CN" style:font-name-complex="Tahoma" style:font-size-complex="24pt" style:language-complex="hi" style:country-complex="IN"/>
@@ -387,7 +387,7 @@
      <text:p/>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:glue-points="10800 0 3163 3163 0 10800 3163 18437 10800 21600 18437 18437 21600 10800 18437 3163" draw:text-areas="3163 3163 18437 18437" draw:type="ellipse" draw:enhanced-path="U 10800 10800 10800 10800 0 360 Z N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:name="process 5" draw:style-name="gr2" draw:text-style-name="P3" xml:id="id3" draw:id="id3" draw:layer="layout" svg:width="3.027cm" svg:height="1.905cm" svg:x="2.218cm" svg:y="9.517cm">
+    <draw:custom-shape draw:name="process 5" draw:style-name="gr2" draw:text-style-name="P3" xml:id="id3" draw:id="id3" draw:layer="layout" svg:width="3.027cm" svg:height="1.905cm" svg:x="2.218cm" svg:y="11.517cm">
      <svg:desc>{:type :activity
 :fn &quot;create-OR-input&quot;}</svg:desc>
      <text:p text:style-name="P2"><text:span text:style-name="T1">Create input data for the OR routine</text:span></text:p>
@@ -396,19 +396,19 @@
     <draw:connector draw:style-name="gr3" draw:text-style-name="P4" draw:layer="layout" draw:type="line" svg:x1="3.732cm" svg:y1="2.251cm" svg:x2="3.731cm" svg:y2="3.222cm" draw:start-shape="id1" draw:start-glue-point="8" draw:end-shape="id2" draw:end-glue-point="0" svg:d="M3732 2251l-1 971" svg:viewBox="0 0 2 972">
      <text:p/>
     </draw:connector>
-    <draw:custom-shape draw:name="process 6" draw:style-name="gr4" draw:text-style-name="P3" xml:id="id4" draw:id="id4" draw:layer="layout" svg:width="3.027cm" svg:height="1.275cm" svg:x="2.218cm" svg:y="12.117cm">
+    <draw:custom-shape draw:name="process 6" draw:style-name="gr4" draw:text-style-name="P3" xml:id="id4" draw:id="id4" draw:layer="layout" svg:width="3.027cm" svg:height="1.275cm" svg:x="2.218cm" svg:y="14.117cm">
      <svg:desc>{:type :activity
 :fn &quot;run-OR&quot;}</svg:desc>
      <text:p text:style-name="P2"><text:span text:style-name="T1">Run the OR routine</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>
-    <draw:connector draw:style-name="gr3" draw:text-style-name="P4" draw:layer="layout" draw:type="line" svg:x1="3.731cm" svg:y1="11.422cm" svg:x2="3.731cm" svg:y2="12.117cm" draw:start-shape="id3" draw:start-glue-point="2" draw:end-shape="id4" draw:end-glue-point="0" svg:d="M3731 11422v695" svg:viewBox="0 0 1 696">
+    <draw:connector draw:style-name="gr3" draw:text-style-name="P4" draw:layer="layout" draw:type="line" svg:x1="3.731cm" svg:y1="13.422cm" svg:x2="3.731cm" svg:y2="14.117cm" draw:start-shape="id3" draw:start-glue-point="2" draw:end-shape="id4" draw:end-glue-point="0" svg:d="M3731 13422v695" svg:viewBox="0 0 1 696">
      <text:p/>
     </draw:connector>
-    <draw:connector draw:style-name="gr3" draw:text-style-name="P4" draw:layer="layout" draw:type="line" svg:x1="3.731cm" svg:y1="13.392cm" svg:x2="3.732cm" svg:y2="14.479cm" draw:start-shape="id4" draw:start-glue-point="2" draw:end-shape="id5" draw:end-glue-point="4" svg:d="M3731 13392l1 1087" svg:viewBox="0 0 2 1088">
+    <draw:connector draw:style-name="gr3" draw:text-style-name="P4" draw:layer="layout" draw:type="line" svg:x1="3.731cm" svg:y1="15.392cm" svg:x2="3.732cm" svg:y2="16.479cm" draw:start-shape="id4" draw:start-glue-point="2" draw:end-shape="id5" draw:end-glue-point="4" svg:d="M3731 15392l1 1087" svg:viewBox="0 0 2 1088">
      <text:p/>
     </draw:connector>
-    <draw:custom-shape draw:name="end 3" draw:style-name="gr5" draw:text-style-name="P1" xml:id="id5" draw:id="id5" draw:layer="layout" svg:width="0.953cm" svg:height="0.953cm" svg:x="3.255cm" svg:y="14.479cm">
+    <draw:custom-shape draw:name="end 3" draw:style-name="gr5" draw:text-style-name="P1" xml:id="id5" draw:id="id5" draw:layer="layout" svg:width="0.953cm" svg:height="0.953cm" svg:x="3.255cm" svg:y="16.479cm">
      <svg:desc>{:type :end}</svg:desc>
      <text:p/>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:glue-points="10800 0 3163 3163 0 10800 3163 18437 10800 21600 18437 18437 21600 10800 18437 3163" draw:text-areas="3163 3163 18437 18437" draw:type="ellipse" draw:enhanced-path="U 10800 10800 10800 10800 0 360 Z N"/>
@@ -428,7 +428,16 @@
      <text:p text:style-name="P2"><text:span text:style-name="T1">Create effort estimates</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>
-    <draw:connector draw:style-name="gr3" draw:text-style-name="P4" draw:layer="layout" draw:type="line" svg:x1="3.731cm" svg:y1="8.022cm" svg:x2="3.731cm" svg:y2="9.517cm" draw:start-shape="id6" draw:start-glue-point="2" draw:end-shape="id3" draw:end-glue-point="0" svg:d="M3731 8022v1495" svg:viewBox="0 0 1 1496">
+    <draw:connector draw:style-name="gr3" draw:text-style-name="P4" draw:layer="layout" draw:type="line" svg:x1="3.731cm" svg:y1="8.022cm" svg:x2="3.731cm" svg:y2="8.717cm" draw:start-shape="id6" draw:start-glue-point="2" draw:end-shape="id7" draw:end-glue-point="0" svg:d="M3731 8022v695" svg:viewBox="0 0 1 696">
+     <text:p/>
+    </draw:connector>
+    <draw:custom-shape draw:name="process 5_1" draw:style-name="gr2" draw:text-style-name="P3" xml:id="id7" draw:id="id7" draw:layer="layout" svg:width="3.027cm" svg:height="1.905cm" svg:x="2.218cm" svg:y="8.717cm">
+     <svg:desc>{:type :activity
+:fn &quot;compose-time-slot-data&quot;}</svg:desc>
+     <text:p text:style-name="P2"><text:span text:style-name="T1">Compose time slot data</text:span></text:p>
+     <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
+    </draw:custom-shape>
+    <draw:connector draw:style-name="gr3" draw:text-style-name="P4" draw:layer="layout" draw:type="line" svg:x1="3.731cm" svg:y1="10.622cm" svg:x2="3.731cm" svg:y2="11.517cm" draw:start-shape="id7" draw:start-glue-point="2" draw:end-shape="id3" draw:end-glue-point="0" svg:d="M3731 10622v895" svg:viewBox="0 0 1 896">
      <text:p/>
     </draw:connector>
    </draw:page>
