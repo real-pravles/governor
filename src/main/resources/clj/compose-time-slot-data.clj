@@ -32,10 +32,15 @@
         first-day (->> low-code
                        (filter #(= :schedule-from (first %)))
                        (first)
-                       (second)
+                       (second))
+        number-of-weeks-to-schedule (->> low-code
+                       (filter #(= :schedule-from (first %)))
+                       (first)
+                       (second))
 
-                       )
-        number-of-weeks-to-schedule nil]
+
+        ]
     (println "compose-time-slot-data")
     (println "first-day: " first-day)
+    (println "number-of-weeks-to-schedule: " number-of-weeks-to-schedule)
     ctx))
