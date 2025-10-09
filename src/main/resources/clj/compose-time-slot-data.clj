@@ -55,15 +55,15 @@
         rules-by-day-of-week
           (merge-with concat from-through-rules after-rules duration-rules)
         days-traversal-result
-          (traverse-days first-day last-day compose-time-slots-for-day)]
+          (traverse-days
+            first-day
+            last-day
+            #(compose-time-slots-for-day rules-by-day-of-week %1 %2))]
     (println "compose-time-slot-data")
     (println "first-day: " first-day)
     (println "number-of-weeks-to-schedule: " number-of-weeks-to-schedule)
     (println "last-day: " last-day)
     (println "rules-by-day-of-week: " rules-by-day-of-week)
-
-
-
     ctx))
 
 (defn traverse-days
@@ -77,7 +77,7 @@
           (recur new-state (DateUtils/addDays current-day 1)))))))
 
 (defn compose-time-slots-for-day
-  [state current-day]
+  [rules state current-day]
   (let [current-day-txt (.format sdf current-day)
         day-of-week (.toUpperCase (.format (java.text.SimpleDateFormat. "EEE")
                                            current-day))]
@@ -91,9 +91,7 @@
 ;;    [:on [:monday :wednesday :friday]
 ;;     :i-can-work-from "06:00"
 ;;     :through "08:00"]
-(defn extract-from-through-rules
-  [ctx]
-  {})
+(defn extract-from-through-rules [ctx] {})
 
 ;; Function for extracting rules like these:
 ;;
@@ -101,14 +99,10 @@
 ;;       :wednesday :thursday :friday]
 ;;      :i-can-work-for "1h"
 ;;      :after "17:00"]
-(defn extract-after-rules
-  [ctx]
-  {})
+(defn extract-after-rules [ctx] {})
 
 ;; Function for extracting rules like these:
 ;;
 ;; [:on [:saturday :sunday]
 ;;   :i-can-work-for "5h"]
-(defn extract-duration-rules
-  [ctx]
-  {})
+(defn extract-duration-rules [ctx] {})
