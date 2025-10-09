@@ -26,6 +26,15 @@
 
 (def nl (System/getProperty "line.separator"))
 (def sdf (java.text.SimpleDateFormat. "yyyy-MM-dd"))
+(def days-of-week {
+                   :monday "MON"
+                   :tuesday "TUE"
+                   :wednesday "WED"
+                   :thursday "THU"
+                   :friday "FRI"
+                   :saturday "SAT"
+                   :sunday "SUN"
+                   })
 
 (declare traverse-days)
 (declare compose-time-slots-for-day)
@@ -131,17 +140,15 @@
 ;;   :i-can-work-for "5h"]
 (defn extract-duration-rules [ctx] {})
 
-
 (defn transform-from-through-rule
   [rule]
   (let [dict (apply hash-map rule)
         days-of-week (:on dict)
-        x -> (->> days-of-week
+        x (->> days-of-week
+                  (map #(get days-of-week %))
                   (map (fn [day]
                          (let []
-                           nil)))
-                  )
-
+                           {day {}}))))
 
         ]
     (println "transform-from-through-rule, rule: " rule)
@@ -149,3 +156,4 @@
     (println "days-of-week: " days-of-week)
     (println "x: " x)
     nil))
+
