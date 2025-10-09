@@ -103,10 +103,7 @@
         ;; x (transform-from-through-rule rules)
         rules (->> low-code
                    (filter is-from-through-rule)
-                   (map transform-from-through-rule))
-
-
-        ]
+                   (map transform-from-through-rule))]
     (println "extract-from-through-rules, rules: " (count rules))
     {}))
 
@@ -137,12 +134,18 @@
 
 (defn transform-from-through-rule
   [rule]
-  (let [
-        dict (apply hash-map rule)
-       days-of-week (:on dict)
+  (let [dict (apply hash-map rule)
+        days-of-week (:on dict)
+        x -> (->> days-of-week
+                  (map (fn [day]
+                         (let []
+                           nil)))
+                  )
+
 
         ]
     (println "transform-from-through-rule, rule: " rule)
     (println "dict: " dict)
     (println "days-of-week: " days-of-week)
+    (println "x: " x)
     nil))
