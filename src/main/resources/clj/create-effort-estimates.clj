@@ -40,12 +40,13 @@
           (->>
             activities
             (map
-              (fn [a]
-                (let [priority 5
+              (fn [activity]
+                (let [
+                      project (:process activity)
+                      priority (get prirorities project)
                       effort 12.0
                       min-session-duration 0.25
-                      project "p"
-                      name "first_naked_post"]
+                      name (:activity activity)]
                   (Task. name project priority effort min-session-duration)))))]
     (println "create-effort-estimates")
     (println "assumed-efforts: " assumed-efforts)
