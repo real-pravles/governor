@@ -144,13 +144,15 @@
   [rule]
   (let [dict (apply hash-map rule)
         days-of-week (:on dict)
+        start-time (:i-can-work-from dict)
+        end-time (:through dict)
         x (->> days-of-week
                   (map #(get days-of-week-conv-table %))
                   (map (fn [day]
                          (let [duration nil
                                note nil]
                            {day {:duration nil
-                                 :note (str rule)}}))))
+                                 :rule (str rule)}}))))
 
         ]
     (println "transform-from-through-rule, rule: " rule)
