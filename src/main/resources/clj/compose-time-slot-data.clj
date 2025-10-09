@@ -147,8 +147,10 @@
         x (->> days-of-week
                   (map #(get days-of-week-conv-table %))
                   (map (fn [day]
-                         (let []
-                           {day {}}))))
+                         (let [duration nil
+                               note nil]
+                           {day {:duration nil
+                                 :note nil}}))))
 
         ]
     (println "transform-from-through-rule, rule: " rule)
