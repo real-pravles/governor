@@ -21,6 +21,7 @@
          '[clojure.java.io :as io]
          '[clojure.pprint :as pprint])
 (import 'org.apache.commons.lang3.StringUtils)
+(import 'com.pravles.governor.or.Task)
 (import 'us.bpsm.edn.Keyword)
 
 (def nl (System/getProperty "line.separator"))
@@ -35,15 +36,17 @@
         assumed-efforts (extract-assumed-efforts old-ctx)
         assumed-min-session-hours (extract-min-session-hours old-ctx)
         priorities (extract-priorities old-ctx)
-        effort-estimates (->> activities
-                              (map (fn [a]
-                                     (let []
-(Task. "first_naked_post" "p" 5 12.0 0.25)
-
-                                       )))
-
-                              )
-        ]
+        effort-estimates
+          (->>
+            activities
+            (map
+              (fn [a]
+                (let [priority 5
+                      effort 12.0
+                      min-session-duration 0.25
+                      project "p"
+                      name "first_naked_post"]
+                  (Task. name project priority effort min-session-duration)))))]
     (println "create-effort-estimates")
     (println "assumed-efforts: " assumed-efforts)
     (println "assumed-min-session-hours: " assumed-min-session-hours)
@@ -88,6 +91,5 @@
   (let [low-code (get ctx "low-code")]
     (->> low-code
          (filter (fn [t]
-                   (and (= :process (first t))
-                        (= :has-priority (get t 2)))))
+                   (and (= :process (first t)) (= :has-priority (get t 2)))))
          (into {} (map (fn [[_ name _ effort]] [name effort]))))))
