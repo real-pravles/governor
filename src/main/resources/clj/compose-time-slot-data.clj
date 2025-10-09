@@ -98,9 +98,9 @@
 (defn extract-from-through-rules
   [ctx]
   (let [low-code (get ctx "low-code")
-        rules (->> low-code
-                   (filter is-from-through-rule))
-        x (transform-from-through-rule rules)
+        ;; rules (->> low-code
+        ;;            (filter is-from-through-rule))
+        ;; x (transform-from-through-rule rules)
         rules (->> low-code
                    (filter is-from-through-rule)
                    (map transform-from-through-rule))
@@ -139,7 +139,11 @@
   [rule]
   (let [
         dict (apply hash-map rule)
-        days-of-week (:on dict)]
+       ;; days-of-week (:on dict)
+
+        ]
     (println "transform-from-through-rule, rule: " rule)
-    (println "days-of-week: " days-of-week)
+    (println "foo: " (apply hash-map rule))
+    (println "dict: " dict)
+;;    (println "days-of-week: " days-of-week)
     nil))
