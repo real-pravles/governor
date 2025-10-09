@@ -116,7 +116,6 @@
     (let [i0 (first clex)
           i2 (nth clex 2)
           i4 (nth clex 4)]
-      (println "i0: " i0 ", i2: " i2 ", i4:" i4)
       (and (= :on i0) (= :i-can-work-from i2) (= :through i4)))
     false ;; (count clex) != 6
   ))
@@ -137,8 +136,10 @@
 
 
 (defn transform-from-through-rule
-  [rules]
-  (let [x (->> rules
-               (map (fn [rule] (println "rule:" rule) {})))]
+  [rule]
+  (let [
+        dict (apply hash-map rule)
+        days-of-week (:on dict)]
     (println "transform-from-through-rule, rule: " rule)
+    (println "days-of-week: " days-of-week)
     nil))
