@@ -20,11 +20,8 @@
 (require '[clojure.string :as str]
          '[clojure.java.io :as io]
          '[clojure.pprint :as pprint])
-(import 'org.apache.commons.lang3.StringUtils)
-(import 'us.bpsm.edn.Keyword)
 
 (def nl (System/getProperty "line.separator"))
-
 
 (defn гав
   [ctx]
@@ -34,12 +31,11 @@
                        (first)
                        (second))
         number-of-weeks-to-schedule (->> low-code
-                       (filter #(= :schedule-from (first %)))
-                       (first)
-                       (second))
-
-
-        ]
+                                         (filter #(= :schedule-from (first %)))
+                                         (first)
+                                         (last)
+                                         (#(str/replace % "w" ""))
+                                         (Integer/parseInt))]
     (println "compose-time-slot-data")
     (println "first-day: " first-day)
     (println "number-of-weeks-to-schedule: " number-of-weeks-to-schedule)
