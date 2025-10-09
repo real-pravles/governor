@@ -100,7 +100,7 @@
                   (filter is-from-through-rule))
 
         ]
-    (println "rules: " rules)
+    (println "extract-from-through-rules, rules: " rules)
     {})
   )
 
