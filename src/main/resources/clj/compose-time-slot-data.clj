@@ -106,7 +106,19 @@
 
 (defn is-from-through-rule
   [clex]
-  false)
+  (let [i1 (first clex)
+        i3 (nth clex 2)
+        i5 (nth clex 4)
+        ]
+
+    (println "item-1: " item-1 ", item-2: " item-2)
+    (and (= :on i1)
+         (= :i-can-work-from i3)
+         (= :through i5)
+         (= 6 (count clex))
+         )
+    )
+  )
 
 ;; Function for extracting rules like these:
 ;;
