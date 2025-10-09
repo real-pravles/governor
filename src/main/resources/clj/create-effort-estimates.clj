@@ -41,11 +41,11 @@
             activities
             (map
               (fn [activity]
-                (let [
-                      project (:process activity)
+                (let [project (:process activity)
                       priority (get priorities project)
                       effort (get assumed-efforts project)
-                      min-session-duration (get assumed-min-session-hours project)
+                      min-session-duration (get assumed-min-session-hours
+                                                project)
                       name (:activity activity)]
                   (Task. name project priority effort min-session-duration)))))]
     (.put old-ctx "effort-estimates" effort-estimates)
