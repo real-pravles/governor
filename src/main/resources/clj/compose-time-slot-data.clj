@@ -91,7 +91,12 @@
 ;;    [:on [:monday :wednesday :friday]
 ;;     :i-can-work-from "06:00"
 ;;     :through "08:00"]
-(defn extract-from-through-rules [ctx] {})
+(defn extract-from-through-rules
+  [ctx]
+  (let []
+
+    {})
+  )
 
 ;; Function for extracting rules like these:
 ;;
