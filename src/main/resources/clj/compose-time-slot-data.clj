@@ -99,8 +99,9 @@
         applicable-rules (get rules day-of-week)
         start-index (:idx state)
         time-slots (->> applicable-rules
-                        (map (fn [rule]
-                               (let [
+                        (map-indexed (fn [idx rule]
+                                       (let [index (+ start-index idx)
+                                             (println "index: " index ", rule: " rule)
                                      ]
                                  nil))))
         
