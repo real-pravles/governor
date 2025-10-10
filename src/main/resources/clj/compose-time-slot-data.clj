@@ -110,13 +110,14 @@
 (defn extract-from-through-rules
   [ctx]
   (let [low-code (get ctx "low-code")
-        ;; rules (->> low-code
-        ;;            (filter is-from-through-rule))
-        ;; x (transform-from-through-rule rules)
         rules (->> low-code
                    (filter is-from-through-rule)
-                   (map transform-from-through-rule))]
-    (println "extract-from-through-rules, rules: " (count rules))
+                   (map transform-from-through-rule)
+                   (first)
+                   (apply merge)
+
+                   )]
+    (println "extract-from-through-rules, rules: " rules)
     {}))
 
 (defn is-from-through-rule
@@ -157,7 +158,6 @@
                       (.getTime))
         duration-millis (- end-time start-time)
         duration-hours (/ duration-millis 1000.0 60.0 60.0)]
-    (println "transform-from-through-rule, rule: " rule)
     (->> days-of-week
          (map #(get days-of-week-conv-table %))
          (map (fn [day]
