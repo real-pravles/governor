@@ -63,9 +63,8 @@
         from-through-rules (extract-from-through-rules ctx)
         after-rules (extract-after-rules ctx)
         duration-rules (extract-duration-rules ctx)
-        rules-by-day-of-week (concat from-through-rules
-                                     after-rules
-                                     duration-rules)
+        rules-by-day-of-week
+          (merge-with concat from-through-rules after-rules duration-rules)
         days-traversal-result
           (traverse-days
             first-day
@@ -157,13 +156,13 @@
 ;;       :wednesday :thursday :friday]
 ;;      :i-can-work-for "1h"
 ;;      :after "17:00"]
-(defn extract-after-rules [ctx] [])
+(defn extract-after-rules [ctx] {"AFR" [[:foo :bar]]})
 
 ;; Function for extracting rules like these:
 ;;
 ;; [:on [:saturday :sunday]
 ;;   :i-can-work-for "5h"]
-(defn extract-duration-rules [ctx] [])
+(defn extract-duration-rules [ctx] {"DUR" [[:bar :foo]]})
 
 (defn transform-from-through-rule
   [rule]
