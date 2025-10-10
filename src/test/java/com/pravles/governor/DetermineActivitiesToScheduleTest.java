@@ -126,6 +126,11 @@ public class DetermineActivitiesToScheduleTest {
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-17", 1.0,
                 AFTER_RULE)));
 
+        assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-18", 5.0,
+                "[:on [:saturday :sunday] :i-can-work-for \"5h\"]")));
+        assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-19", 5.0,
+                "[:on [:saturday :sunday] :i-can-work-for \"5h\"]")));
+
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-20", 2.0,
                 FROM_THROUGH_RULE)));
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-20", 1.0,
