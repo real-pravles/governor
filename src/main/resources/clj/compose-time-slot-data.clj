@@ -23,6 +23,7 @@
 
 (import 'org.apache.commons.lang3.time.DateUtils)
 (import 'java.text.SimpleDateFormat)
+(import 'com.pravles.governor.or.TimeSlot)
 
 (def nl (System/getProperty "line.separator"))
 (def sdf (java.text.SimpleDateFormat. "yyyy-MM-dd"))
@@ -99,10 +100,16 @@
         start-index (:idx state)
         time-slots (->> applicable-rules
                         (map-indexed (fn [idx rule]
-                                       (let [index (+ start-index idx)]
+                                       (let [index (+ start-index idx)
+                                             day nil
+                                             rule nil
+                                             ]
                                          (println "index: " index
                                                   ", rule: " rule)
-                                         nil))))]
+                                         
+(.TimeSlot index day rule)
+
+                                         ))))]
     ;; Print the current day from state
     (println "compose-time-slots-for-day: " day-of-week " " current-day-txt)
     (println "applicable-rules (size):" (count applicable-rules))
