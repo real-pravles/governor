@@ -74,6 +74,7 @@
     (println "first-day: " first-day)
     (println "number-of-weeks-to-schedule: " number-of-weeks-to-schedule)
     (println "last-day: " last-day)
+    (println "from-through-rules: " from-through-rules)
     (println "rules-by-day-of-week: " rules-by-day-of-week)
     ctx))
 
