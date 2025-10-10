@@ -156,13 +156,16 @@
 (defn extract-after-rules
   [ctx]
   (let [low-code (get ctx "low-code")
-        x (->> "low-code"
+]
+   ;; (println "extract-after-rules, x:" x)
+   ;; {"AFR" [[:foo :bar]]}
+         (->> "low-code"
                (get ctx)
                (filter is-after-rule)
                (mapcat transform-after-rule)
-               (apply merge-with concat))]
-    (println "extract-after-rules, x:" x)
-    {"AFR" [[:foo :bar]]}))
+               (apply merge-with concat))   
+
+    ))
 
 (defn is-after-rule
   [clex]
