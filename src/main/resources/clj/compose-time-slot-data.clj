@@ -71,7 +71,6 @@
             last-day
             #(compose-time-slots-for-day rules-by-day-of-week %1 %2))
         time-slots (:time-slots days-traversal-result)]
-    (println "duration-rules: " duration-rules)
     (.put ctx "time-slots" time-slots)
     ctx))
 
@@ -102,11 +101,6 @@
                                   hours (:duration-hours rule)]
                               (TimeSlot. index day hours rule-txt)))))]
     ;; Print the current day from state
-    (println "compose-time-slots-for-day: " day-of-week " " current-day-txt)
-    (println "applicable-rules (size):" (count applicable-rules))
-    (println "applicable-rules:" applicable-rules)
-    (println "(first applicable-rules):" (first applicable-rules))
-    (println "time-slots: " time-slots)
     (-> state
         (assoc :idx (+ start-index (count applicable-rules)))
         (update :time-slots concat time-slots))))
@@ -195,36 +189,25 @@
 (declare is-duration-rule)
 (declare transform-duration-rule)
 
-(defn extract-duration-rules [ctx]
+(defn extract-duration-rules
+  [ctx]
   (let [low-code (get ctx "low-code")]
     (->> "low-code"
          (get ctx)
          (filter is-duration-rule)
          (mapcat transform-duration-rule)
-         (apply merge-with concat)))
-
-
-;;  {"DUR" [[:bar :foo]]}
-
-  )
+         (apply merge-with concat))))
 
 (defn is-duration-rule
   [clex]
   (if (= 4 (count clex))
     (let [i0 (first clex)
           i2 (nth clex 2)]
-      (and (= :on i0)
-           (= :i-can-work-for i2)
-           ))
+      (and (= :on i0) (= :i-can-work-for i2)))
+    false ;; (count clex) != 4
+  ))
 
-
-  false ;; (count clex) != 4
-    )
-  )
-
-(defn transform-duration-rule
-  [rule]
-  (transform-after-rule rule))
+(defn transform-duration-rule [rule] (transform-after-rule rule))
 
 
 (defn transform-from-through-rule
