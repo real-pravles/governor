@@ -17,26 +17,21 @@
 
 package com.pravles.governor;
 
-import clojure.lang.Keyword;
-import com.pravles.governor.or.Task;
+import com.pravles.governor.or.Activity;
 import com.pravles.governor.or.TimeSlot;
 import com.pravles.processengine.util.LaunchInfoFactory;
 import com.pravles.processengine.util.ProcessEngineLauncher;
-import org.apache.commons.io.FileUtils;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
 import static clojure.lang.Keyword.intern;
-import static com.pravles.TestUtils.assertFilesEqual;
 import static java.lang.String.format;
 import static java.util.Map.of;
 import static org.apache.commons.io.FileUtils.cleanDirectory;
@@ -90,12 +85,12 @@ public class DetermineActivitiesToScheduleTest {
 
         assertTrue(activities.contains(of(intern("process"), "w", intern("activity"), "sc024")));
 
-        final List<Task> effortEstimates = (List<Task>) actualCtx.get("effort-estimates");
+        final List<Activity> effortEstimates = (List<Activity>) actualCtx.get("effort-estimates");
         assertNotNull(effortEstimates);
 
-        assertTrue(effortEstimates.contains(new Task("first_naked_post", "p", 5, 12.0, 0.25)));
+        assertTrue(effortEstimates.contains(new Activity("first_naked_post", "p", 5, 12.0, 0.25)));
 
-        assertTrue(effortEstimates.contains(new Task("sc024", "w", 10, 20.0, 1.0)));
+        assertTrue(effortEstimates.contains(new Activity("sc024", "w", 10, 20.0, 1.0)));
 
         final List<TimeSlot> timeSlots = (List<TimeSlot>) actualCtx.get("time-slots");
         assertEquals(22, timeSlots.size());

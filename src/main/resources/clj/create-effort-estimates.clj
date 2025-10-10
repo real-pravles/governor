@@ -21,7 +21,7 @@
          '[clojure.java.io :as io]
          '[clojure.pprint :as pprint])
 (import 'org.apache.commons.lang3.StringUtils)
-(import 'com.pravles.governor.or.Task)
+(import 'com.pravles.governor.or.Activity)
 (import 'us.bpsm.edn.Keyword)
 
 (def nl (System/getProperty "line.separator"))
@@ -38,16 +38,16 @@
         priorities (extract-priorities old-ctx)
         effort-estimates
           (->>
-            activities
-            (map
-              (fn [activity]
+           activities
+           (map
+            (fn [activity]
                 (let [project (:process activity)
                       priority (get priorities project)
                       effort (get assumed-efforts project)
                       min-session-duration (get assumed-min-session-hours
                                                 project)
                       name (:activity activity)]
-                  (Task. name project priority effort min-session-duration)))))]
+                  (Activity. name project priority effort min-session-duration)))))]
     (.put old-ctx "effort-estimates" effort-estimates)
     old-ctx))
 

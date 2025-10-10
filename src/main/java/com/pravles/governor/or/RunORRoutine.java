@@ -28,7 +28,6 @@ import com.pravles.governor.LowCodeUtils;
 import com.pravles.processengine.api.ActivityFunction;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +41,7 @@ public class RunORRoutine implements ActivityFunction {
         final List<TimeSlot> timeSlots = (List<TimeSlot>)ctx.get("time-slots");
 
         // Define tasks - now as single tasks with total hours
-        final List<Task> tasks = (List<Task>) ctx.get("effort-estimates");
+        final List<Activity> tasks = (List<Activity>) ctx.get("effort-estimates");
 
         // Create the CP-SAT model
         CpModel model = new CpModel();
@@ -53,7 +52,7 @@ public class RunORRoutine implements ActivityFunction {
 
         for (int i = 0; i < tasks.size(); i++) {
             for (int j = 0; j < timeSlots.size(); j++) {
-                Task task = tasks.get(i);
+                Activity task = tasks.get(i);
                 TimeSlot slot = timeSlots.get(j);
 
                 // Can assign between 0 and min(task_remaining, slot_available) hours
@@ -65,7 +64,7 @@ public class RunORRoutine implements ActivityFunction {
 
         // Constraint 1: Each task must have exactly its required total hours scheduled
         for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
+            Activity task = tasks.get(i);
             LinearExprBuilder totalTaskHours = LinearExpr.newBuilder();
 
             for (int j = 0; j < timeSlots.size(); j++) {
@@ -94,7 +93,7 @@ public class RunORRoutine implements ActivityFunction {
         // SubStack: If worked on, must be at least 15 minutes (0.25 hours)
         // We use: hours[i][j] == 0 OR hours[i][j] >= minHoursScaled
         for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
+            Activity task = tasks.get(i);
             long minHoursScaled = (long)(task.minSessionHours * 10);
             long maxPossibleHours = (long)(Math.min(task.totalHoursNeeded,
                     timeSlots.get(i < timeSlots.size() ? i : 0).availableHours) * 10);
@@ -129,7 +128,7 @@ public class RunORRoutine implements ActivityFunction {
         // (In this model, all work must be scheduled, so we optimize for priority placement)
         LinearExprBuilder objective = LinearExpr.newBuilder();
         for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
+            Activity task = tasks.get(i);
             for (int j = 0; j < timeSlots.size(); j++) {
                 // Reward: priority * hours for each task-slot assignment
                 // Higher priority work in earlier slots gets bonus
@@ -138,8 +137,6 @@ public class RunORRoutine implements ActivityFunction {
             }
         }
         model.maximize(objective);
-
-        System.out.println("Hello");
 
         // Solve the model
         CpSolver solver = new CpSolver();
@@ -163,7 +160,7 @@ public class RunORRoutine implements ActivityFunction {
     private String composeMessage(final CpSolverStatus status,
                                   final CpSolver solver,
                                   final List<TimeSlot> timeSlots,
-                                  final List<Task> tasks,
+                                  final List<Activity> tasks,
                                   final IntVar[][] hours,
                                   final boolean includeSolverStats) {
         final StringBuilder sb = new StringBuilder();
@@ -188,8 +185,11 @@ public class RunORRoutine implements ActivityFunction {
                     if (hoursValue > 0) {
                         double actualHours = hoursValue / 10.0;
                         totalHoursInSlot += actualHours;
-                        workInSlot.add(String.format("%s: %.1fh",
-                                tasks.get(i).project, actualHours));
+                        final Activity activity = tasks.get(i);
+                        workInSlot.add(String.format("%s.%s: %.1fh",
+                                activity.project,
+                                activity.id,
+                                actualHours));
                     }
                 }
 
@@ -210,7 +210,7 @@ public class RunORRoutine implements ActivityFunction {
             sb.append("=== TASK COMPLETION ===");
             sb.append(nl);
             for (int i = 0; i < tasks.size(); i++) {
-                Task task = tasks.get(i);
+                Activity task = tasks.get(i);
                 double totalScheduled = 0;
 
                 for (int j = 0; j < timeSlots.size(); j++) {

@@ -20,15 +20,15 @@ package com.pravles.governor.or;
 import lombok.Data;
 
 @Data
-public class Task {
+public class Activity {
     String id;
     String project;
     int priority;
     double totalHoursNeeded;
     double minSessionHours;  // Minimum hours per session
 
-    public Task(String id, String project, int priority, double totalHoursNeeded,
-         double minSessionHours) {
+    public Activity(String id, String project, int priority, double totalHoursNeeded,
+                    double minSessionHours) {
         this.id = id;
         this.project = project;
         this.priority = priority;

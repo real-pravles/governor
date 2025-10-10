@@ -3,79 +3,79 @@ Status: OPTIMAL
 Objective value: 2600.0
 === SCHEDULE ===
 2025-10-13 (2,0/2,0h used):
-  - p: 1,0h
-  - w: 1,0h
+  - p.first_naked_post: 1,0h
+  - w.sc024: 1,0h
 
 2025-10-13 (1,0/1,0h used):
-  - w: 1,0h
+  - w.sc024: 1,0h
 
 2025-10-14 (1,0/1,0h used):
-  - w: 1,0h
+  - w.sc024: 1,0h
 
 2025-10-15 (2,0/2,0h used):
-  - p: 0,9h
-  - w: 1,1h
+  - p.first_naked_post: 0,9h
+  - w.sc024: 1,1h
 
 2025-10-15 (1,0/1,0h used):
-  - w: 1,0h
+  - w.sc024: 1,0h
 
 2025-10-16 (1,0/1,0h used):
-  - w: 1,0h
+  - w.sc024: 1,0h
 
 2025-10-17 (2,0/2,0h used):
-  - p: 0,9h
-  - w: 1,1h
+  - p.first_naked_post: 0,9h
+  - w.sc024: 1,1h
 
 2025-10-17 (1,0/1,0h used):
-  - w: 1,0h
+  - w.sc024: 1,0h
 
 2025-10-18 (3,2/5,0h used):
-  - p: 2,1h
-  - w: 1,1h
+  - p.first_naked_post: 2,1h
+  - w.sc024: 1,1h
 
 2025-10-19 (1,6/5,0h used):
-  - p: 0,5h
-  - w: 1,1h
+  - p.first_naked_post: 0,5h
+  - w.sc024: 1,1h
 
 2025-10-20 (2,0/2,0h used):
-  - p: 0,9h
-  - w: 1,1h
+  - p.first_naked_post: 0,9h
+  - w.sc024: 1,1h
 
 2025-10-20 (1,0/1,0h used):
-  - w: 1,0h
+  - w.sc024: 1,0h
 
 2025-10-21 (1,0/1,0h used):
-  - w: 1,0h
+  - w.sc024: 1,0h
 
 2025-10-22 (2,0/2,0h used):
-  - p: 0,9h
-  - w: 1,1h
+  - p.first_naked_post: 0,9h
+  - w.sc024: 1,1h
 
 2025-10-22 (1,0/1,0h used):
-  - w: 1,0h
+  - w.sc024: 1,0h
 
 2025-10-23 (1,0/1,0h used):
-  - p: 1,0h
+  - p.first_naked_post: 1,0h
 
 2025-10-24 (2,0/2,0h used):
-  - p: 0,9h
-  - w: 1,1h
+  - p.first_naked_post: 0,9h
+  - w.sc024: 1,1h
 
 2025-10-24 (1,0/1,0h used):
-  - p: 1,0h
+  - p.first_naked_post: 1,0h
 
 2025-10-25 (1,1/5,0h used):
-  - w: 1,1h
+  - w.sc024: 1,1h
 
 2025-10-26 (1,1/5,0h used):
-  - w: 1,1h
+  - w.sc024: 1,1h
 
 2025-10-27 (2,0/2,0h used):
-  - p: 0,9h
-  - w: 1,1h
+  - p.first_naked_post: 0,9h
+  - w.sc024: 1,1h
 
 2025-10-27 (1,0/1,0h used):
-  - p: 1,0h
+  - p.first_naked_post: 1,0h
 
 === TASK COMPLETION ===
 p: 12,0/12,0 hours scheduled
