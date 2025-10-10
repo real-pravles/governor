@@ -188,22 +188,11 @@
         days-of-week (:on dict)
         duration-hours (-> dict
                            (:i-can-work-for)
-                           (parse-duration))
- ;;       x (->> days-of-week
- ;;              (map #(get days-of-week-conv-table %))
- ;;              (map (fn [day]
- ;;                     {day [{:duration-hours duration-hours,
-        ;;                            :rule (str rule)}]})))
-        ]
-;;    (println "x:" x)
-;;    x
-(->> days-of-week
-               (map #(get days-of-week-conv-table %))
-               (map (fn [day]
-                      {day [{:duration-hours duration-hours,
-                             :rule (str rule)}]})))
-
-    ))
+                           (parse-duration))]
+    (->> days-of-week
+         (map #(get days-of-week-conv-table %))
+         (map (fn [day]
+                {day [{:duration-hours duration-hours, :rule (str rule)}]})))))
 
 ;; Function for extracting rules like these:
 ;;
