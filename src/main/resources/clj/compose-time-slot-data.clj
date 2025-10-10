@@ -84,8 +84,7 @@
   [first-day last-day process-day]
   (let [first-day-date (.parse sdf first-day)
         last-day-date (.parse sdf last-day)]
-    (loop [state {:time-slots []
-                  :idx 0}
+    (loop [state {:time-slots [], :idx 0}
            current-day first-day-date]
       (when-not (.after current-day last-day-date)
         (let [new-state (process-day state current-day)]
@@ -100,14 +99,10 @@
         start-index (:idx state)
         time-slots (->> applicable-rules
                         (map-indexed (fn [idx rule]
-                                       (let [index (+ start-index idx)
-                                             (println "index: " index ", rule: " rule)
-                                     ]
-                                 nil))))
-        
-
-
-        ]
+                                       (let [index (+ start-index idx)]
+                                         (println "index: " index
+                                                  ", rule: " rule)
+                                         nil))))]
     ;; Print the current day from state
     (println "compose-time-slots-for-day: " day-of-week " " current-day-txt)
     (println "applicable-rules (size):" (count applicable-rules))
@@ -115,7 +110,7 @@
     (println "(first applicable-rules):" (first applicable-rules))
     (println "time-slots: " time-slots)
     ;; Return state (potentially modified)
-    ;; TODO: Update idx 
+    ;; TODO: Update idx
     state))
 
 (declare is-from-through-rule)
