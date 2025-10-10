@@ -204,6 +204,7 @@
          )
         ]
     (println "transform-after-rule, rule: " rule)
+    (println "transform-after-rule, y: " (:i-can-work-for dict))
     (println "transform-after-rule, duration-hours: " duration-hours)
     (println "x:" x)
     x 
