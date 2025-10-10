@@ -79,6 +79,7 @@
     (println "last-day: " last-day)
     (println "from-through-rules: " from-through-rules)
     (println "rules-by-day-of-week: " rules-by-day-of-week)
+    (.put ctx "time-slots" (:time-slots days-traversal-result))
     ctx))
 
 (defn traverse-days
@@ -102,7 +103,7 @@
                         (map-indexed (fn [idx rule]
                                        (let [index (+ start-index idx)
                                              day "day TBD"
-                                             rule "rule TBD" 
+                                             rule "rule TBD"
                                              hours 0.0]
                                          (println "index: " index
                                                   ", rule: " rule)
@@ -113,16 +114,9 @@
     (println "applicable-rules:" applicable-rules)
     (println "(first applicable-rules):" (first applicable-rules))
     (println "time-slots: " time-slots)
-    ;; Return state (potentially modified)
-    ;; TODO: Update idx
-(-> state
-    (assoc :idx (+ start-index (count applicable-rules)))
-    (update :time-slots concat time-slots))
-
-
-
-
-    ))
+    (-> state
+        (assoc :idx (+ start-index (count applicable-rules)))
+        (update :time-slots concat time-slots))))
 
 (declare is-from-through-rule)
 
