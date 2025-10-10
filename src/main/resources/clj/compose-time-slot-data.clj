@@ -191,7 +191,37 @@
 ;;
 ;; [:on [:saturday :sunday]
 ;;   :i-can-work-for "5h"]
-(defn extract-duration-rules [ctx] {"DUR" [[:bar :foo]]})
+(declare is-duration-rule)
+(declare transform-duration-rule)
+
+(defn extract-duration-rules [ctx]
+  (let [low-code (get ctx "low-code")]
+    (->> "low-code"
+         (get ctx)
+         (filter is-duration-rule)
+         (mapcat transform-duration-rule)
+         (apply merge-with concat)))
+
+
+;;  {"DUR" [[:bar :foo]]}
+
+  )
+
+(defn is-duration-rule
+  [clex]
+  (if (= 4 (count clex))
+    (let [i0 (first clex)
+          i2 (nth clex 2)]
+      (and (= :on i0)
+           (= :i-can-work-for i2)
+           )))
+  false ;; (count clex) != 4
+  )
+
+(defn transform-duration-rule
+  [rule]
+  (transform-after-rule rule))
+
 
 (defn transform-from-through-rule
   [rule]
