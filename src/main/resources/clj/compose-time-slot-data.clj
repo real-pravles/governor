@@ -159,7 +159,7 @@
         x     (->> "low-code"
          (get ctx)
          (filter is-after-rule)
-         (mapcat transform-from-through-rule)
+         (mapcat transform-after-rule)
          (apply merge-with concat))
         ]
     (println "extract-after-rules, x:" x )
