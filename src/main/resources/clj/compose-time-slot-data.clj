@@ -63,8 +63,11 @@
         from-through-rules (extract-from-through-rules ctx)
         after-rules (extract-after-rules ctx)
         duration-rules (extract-duration-rules ctx)
-        rules-by-day-of-week
-          (merge-with concat from-through-rules after-rules duration-rules)
+;;        rules-by-day-of-week
+;;        (merge-with concat from-through-rules after-rules duration-rules)
+rules-by-day-of-week (apply merge from-through-rules)
+
+
         days-traversal-result
           (traverse-days
             first-day
