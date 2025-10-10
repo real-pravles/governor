@@ -17,6 +17,9 @@
 
 package com.pravles.governor.or;
 
+import lombok.Data;
+
+@Data
 public class TimeSlot {
     int index;
     String day;

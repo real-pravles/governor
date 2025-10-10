@@ -105,7 +105,7 @@
         time-slots (->> applicable-rules
                         (map-indexed (fn [idx rule]
                                        (let [index (+ start-index idx)
-                                             day current-day
+                                             day  (.format sdf current-day)
                                              rule-txt (:rule rule)
                                              hours (:duration-hours rule)]
                                          (println "index: " index
