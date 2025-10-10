@@ -21,10 +21,15 @@ public class TimeSlot {
     int index;
     String day;
     double availableHours;
+    String dateTime;
+    String rule;
 
-    TimeSlot(int index, String day, double availableHours) {
+    TimeSlot(int index, String day, double availableHours,
+             String dateTime, String rule) {
         this.index = index;
         this.day = day;
         this.availableHours = availableHours;
+        this.dateTime = dateTime;
+        this.rule = rule;
     }
 }

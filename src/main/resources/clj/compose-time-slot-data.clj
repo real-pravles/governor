@@ -63,12 +63,11 @@
         from-through-rules (extract-from-through-rules ctx)
         after-rules (extract-after-rules ctx)
         duration-rules (extract-duration-rules ctx)
-;;        rules-by-day-of-week
-;;        (merge-with concat from-through-rules after-rules duration-rules)
-;; rules-by-day-of-week (apply merge from-through-rules)
-rules-by-day-of-week from-through-rules
-
-
+        ;;        rules-by-day-of-week
+        ;;        (merge-with concat from-through-rules after-rules
+        ;;        duration-rules)
+        ;; rules-by-day-of-week (apply merge from-through-rules)
+        rules-by-day-of-week from-through-rules
         days-traversal-result
           (traverse-days
             first-day
@@ -98,6 +97,8 @@ rules-by-day-of-week from-through-rules
         day-of-week (.toUpperCase (.format (java.text.SimpleDateFormat. "EEE")
                                            current-day))
         applicable-rules (get rules day-of-week)
+        
+
 
         ]
     ;; Print the current day from state
@@ -120,14 +121,10 @@ rules-by-day-of-week from-through-rules
 (defn extract-from-through-rules
   [ctx]
   (let [low-code (get ctx "low-code")
-        x     (->> low-code
-         (filter is-from-through-rule)
-         (mapcat transform-from-through-rule)
-         (apply merge)
-
-         )
-
-        ]
+        x (->> low-code
+               (filter is-from-through-rule)
+               (mapcat transform-from-through-rule)
+               (apply merge))]
     (println "x:")
     (pprint/pprint x)
     (->> low-code
