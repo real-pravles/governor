@@ -158,7 +158,7 @@
   (let [low-code (get ctx "low-code")
         x     (->> "low-code"
          (get ctx)
-         (filter is-from-through-rule)
+         (filter is-after-rule)
          (mapcat transform-from-through-rule)
          (apply merge-with concat))
         ]
