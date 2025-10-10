@@ -97,19 +97,16 @@
         day-of-week (.toUpperCase (.format (java.text.SimpleDateFormat. "EEE")
                                            current-day))
         applicable-rules (get rules day-of-week)
-        start-index (:idx state)
+        start-index (int (:idx state))
         time-slots (->> applicable-rules
                         (map-indexed (fn [idx rule]
                                        (let [index (+ start-index idx)
-                                             day nil
-                                             rule nil
-                                             ]
+                                             day "day TBD"
+                                             rule "rule TBD" 
+                                             hours 0.0]
                                          (println "index: " index
                                                   ", rule: " rule)
-                                         
-(.TimeSlot index day rule)
-
-                                         ))))]
+                                         (.TimeSlot index day hours rule)))))]
     ;; Print the current day from state
     (println "compose-time-slots-for-day: " day-of-week " " current-day-txt)
     (println "applicable-rules (size):" (count applicable-rules))
