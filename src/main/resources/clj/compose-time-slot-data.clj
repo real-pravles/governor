@@ -178,17 +178,18 @@
   ))
 
 (defn parse-duration
-  [v]
-  (println "v:" v)
-  (let [last-idx (dec (count v))
-        last-val (get v last-idx)]
-    (if (and (string? last-val) (re-matches #"\d+[hm]" last-val))
-      (let [num-str (subs last-val 0 (dec (count last-val)))
+  [txt]
+  (let []
+    (if (and (string? txt) (re-matches #"\d+[hm]" txt))
+      (let [num-str (subs txt 0 (dec (count txt)))
             num (Double/parseDouble num-str)
-            unit (last last-val)
+            unit (last txt)
             hours (if (= unit \m) (/ num 60.0) num)]
+        
         (println "parse-duration, unit: " unit)
-        (assoc v last-idx hours)))))
+        hours
+
+        ))))
 
 
 (defn transform-after-rule
