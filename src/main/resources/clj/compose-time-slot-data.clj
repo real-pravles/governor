@@ -176,5 +176,5 @@ rules-by-day-of-week from-through-rules
     (->> days-of-week
          (map #(get days-of-week-conv-table %))
          (map (fn [day]
-                {day {:duration-hours duration-hours, :rule (str rule)}})))))
+                {day [{:duration-hours duration-hours, :rule (str rule)}]})))))
 
