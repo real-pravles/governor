@@ -94,7 +94,10 @@
            current-day first-day-date]
       (when-not (.after current-day last-day-date)
         (let [new-state (process-day state current-day)]
-          (recur new-state (DateUtils/addDays current-day 1)))))))
+          (recur new-state (DateUtils/addDays current-day 1))))))
+  (println "traverse-days, state: " state)
+  state
+  )
 
 (defn compose-time-slots-for-day
   [rules state current-day]
