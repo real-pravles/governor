@@ -119,12 +119,21 @@ rules-by-day-of-week from-through-rules
 ;;     :through "08:00"]
 (defn extract-from-through-rules
   [ctx]
-  (let [low-code (get ctx "low-code")]
+  (let [low-code (get ctx "low-code")
+        x     (->> low-code
+         (filter is-from-through-rule)
+         (mapcat transform-from-through-rule)
+         (apply merge)
+
+         )
+
+        ]
+    (println "x:")
+    (pprint/pprint x)
     (->> low-code
          (filter is-from-through-rule)
-         (map transform-from-through-rule)
-         (first)
-         (apply merge))))
+         (mapcat transform-from-through-rule)
+         (apply merge-with concat))))
 
 (defn is-from-through-rule
   [clex]
