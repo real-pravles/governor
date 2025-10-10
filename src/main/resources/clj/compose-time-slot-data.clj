@@ -71,13 +71,6 @@
             last-day
             #(compose-time-slots-for-day rules-by-day-of-week %1 %2))
         time-slots (:time-slots days-traversal-result)]
-    (println "compose-time-slot-data")
-    (println "first-day: " first-day)
-    (println "number-of-weeks-to-schedule: " number-of-weeks-to-schedule)
-    (println "last-day: " last-day)
-    (println "from-through-rules: " from-through-rules)
-    (println "rules-by-day-of-week: " rules-by-day-of-week)
-    (println "time-slots: " time-slots)
     (.put ctx "time-slots" time-slots)
     ctx))
 
