@@ -109,16 +109,14 @@
 ;;     :through "08:00"]
 (defn extract-from-through-rules
   [ctx]
-  (let [low-code (get ctx "low-code")
-        rules (->> low-code
-                   (filter is-from-through-rule)
-                   (map transform-from-through-rule)
-                   (first)
-                   (apply merge)
-
-                   )]
+  (let [low-code (get ctx "low-code")]
     (println "extract-from-through-rules, rules: " rules)
-    {}))
+    rules
+    (->> low-code
+         (filter is-from-through-rule)
+         (map transform-from-through-rule)
+         (first)
+         (apply merge))))
 
 (defn is-from-through-rule
   [clex]
