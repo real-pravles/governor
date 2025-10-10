@@ -97,17 +97,17 @@ public class DetermineActivitiesToScheduleTest {
 
         assertTrue(timeSlots.contains(new TimeSlot(0, "2025-10-13", 2.0, "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]")));
 
-        assertTrue(timeSlots.contains(new TimeSlot(0, "2025-10-15", 2.0, "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]")));
+        assertTrue(timeSlots.contains(new TimeSlot(1, "2025-10-15", 2.0, "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]")));
 
-        assertTrue(timeSlots.contains(new TimeSlot(0, "2025-10-17", 2.0, "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]")));
+        assertTrue(timeSlots.contains(new TimeSlot(2, "2025-10-17", 2.0, "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]")));
 
-        assertTrue(timeSlots.contains(new TimeSlot(0, "2025-10-20", 2.0, "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]")));
+        assertTrue(timeSlots.contains(new TimeSlot(3, "2025-10-20", 2.0, "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]")));
 
-        assertTrue(timeSlots.contains(new TimeSlot(0, "2025-10-22", 2.0, "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]")));
+        assertTrue(timeSlots.contains(new TimeSlot(4, "2025-10-22", 2.0, "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]")));
 
-        assertTrue(timeSlots.contains(new TimeSlot(0, "2025-10-24", 2.0, "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]")));
+        assertTrue(timeSlots.contains(new TimeSlot(5, "2025-10-24", 2.0, "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]")));
 
-        assertTrue(timeSlots.contains(new TimeSlot(0, "2025-10-27", 2.0, "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]")));
+        assertTrue(timeSlots.contains(new TimeSlot(6, "2025-10-27", 2.0, "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]")));
 
 
         System.out.println("Hello");
