@@ -28,7 +28,6 @@
 (def sdf (java.text.SimpleDateFormat. "yyyy-MM-dd"))
 (def tf (java.text.SimpleDateFormat. "HH:mm"))
 
-
 (def days-of-week-conv-table
   {:monday "MON",
    :tuesday "TUE",
@@ -85,7 +84,8 @@
   [first-day last-day process-day]
   (let [first-day-date (.parse sdf first-day)
         last-day-date (.parse sdf last-day)]
-    (loop [state {:time-slots []}
+    (loop [state {:time-slots []
+                  :idx 0}
            current-day first-day-date]
       (when-not (.after current-day last-day-date)
         (let [new-state (process-day state current-day)]
@@ -97,6 +97,12 @@
         day-of-week (.toUpperCase (.format (java.text.SimpleDateFormat. "EEE")
                                            current-day))
         applicable-rules (get rules day-of-week)
+        start-index (:idx state)
+        time-slots (->> applicable-rules
+                        (map (fn [rule]
+                               (let [
+                                     ]
+                                 nil))))
         
 
 
@@ -106,7 +112,9 @@
     (println "applicable-rules (size):" (count applicable-rules))
     (println "applicable-rules:" applicable-rules)
     (println "(first applicable-rules):" (first applicable-rules))
+    (println "time-slots: " time-slots)
     ;; Return state (potentially modified)
+    ;; TODO: Update idx 
     state))
 
 (declare is-from-through-rule)
