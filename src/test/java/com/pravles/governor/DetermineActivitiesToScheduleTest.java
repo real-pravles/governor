@@ -46,6 +46,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DetermineActivitiesToScheduleTest {
+
+    public static final String FROM_THROUGH_RULE = "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]";
+    public static final String AFTER_RULE = "[:on [:monday :tuesday :wednesday :thursday :friday] :i-can-work-for \"1h\" :after \"17:00\"]";
+
     static Stream<Arguments> scenarios() {
         return Stream.of(
                 Arguments.of("01")
@@ -98,57 +102,57 @@ public class DetermineActivitiesToScheduleTest {
         int i = 0;
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-13", 2.0,
-                "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]")));
+                FROM_THROUGH_RULE)));
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-13", 1.0,
-                "[:on [:monday :tuesday :wednesday :thursday :friday] :i-can-work-for 1h :after 17:00]")));
+                AFTER_RULE)));
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-14", 1.0,
-                "[:on [:monday :tuesday :wednesday :thursday :friday] :i-can-work-for 1h :after 17:00]")));
+                AFTER_RULE)));
 
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-15", 2.0,
-                "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]")));
+                FROM_THROUGH_RULE)));
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-15", 1.0,
-                "[:on [:monday :tuesday :wednesday :thursday :friday] :i-can-work-for 1h :after 17:00]")));
+                AFTER_RULE)));
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-16", 1.0,
-                "[:on [:monday :tuesday :wednesday :thursday :friday] :i-can-work-for 1h :after 17:00]")));
+                AFTER_RULE)));
 
 
-        assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-17", 2.0, "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]")));
+        assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-17", 2.0, FROM_THROUGH_RULE)));
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-17", 1.0,
-                "[:on [:monday :tuesday :wednesday :thursday :friday] :i-can-work-for 1h :after 17:00]")));
+                AFTER_RULE)));
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-20", 2.0,
-                "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]")));
+                FROM_THROUGH_RULE)));
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-20", 1.0,
-                "[:on [:monday :tuesday :wednesday :thursday :friday] :i-can-work-for 1h :after 17:00]")));
+                AFTER_RULE)));
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-21", 1.0,
-                "[:on [:monday :tuesday :wednesday :thursday :friday] :i-can-work-for 1h :after 17:00]")));
+                AFTER_RULE)));
 
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-22", 2.0,
-                "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]")));
+                FROM_THROUGH_RULE)));
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-22", 1.0,
-                "[:on [:monday :tuesday :wednesday :thursday :friday] :i-can-work-for 1h :after 17:00]")));
+                AFTER_RULE)));
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-23", 1.0,
-                "[:on [:monday :tuesday :wednesday :thursday :friday] :i-can-work-for 1h :after 17:00]")));
+                AFTER_RULE)));
 
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-24", 2.0,
-                "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]")));
+                FROM_THROUGH_RULE)));
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-24", 1.0,
-                "[:on [:monday :tuesday :wednesday :thursday :friday] :i-can-work-for 1h :after 17:00]")));
+                AFTER_RULE)));
 
 
-        assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-27", 2.0, "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]")));
+        assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-27", 2.0, FROM_THROUGH_RULE)));
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-27", 1.0,
-                "[:on [:monday :tuesday :wednesday :thursday :friday] :i-can-work-for 1h :after 17:00]")));
+                AFTER_RULE)));
 
         System.out.println("Hello");
     }
