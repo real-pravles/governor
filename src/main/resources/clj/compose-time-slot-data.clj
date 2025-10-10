@@ -128,17 +128,11 @@
 ;;     :through "08:00"]
 (defn extract-from-through-rules
   [ctx]
-  (let [low-code (get ctx "low-code")
-        x (->> low-code
-               (filter is-from-through-rule)
-               (mapcat transform-from-through-rule)
-               (apply merge))]
-    (println "x:")
-    (pprint/pprint x)
-    (->> low-code
+    (->> "low-code"
+         (get ctx)
          (filter is-from-through-rule)
          (mapcat transform-from-through-rule)
-         (apply merge-with concat))))
+         (apply merge-with concat)))
 
 (defn is-from-through-rule
   [clex]
@@ -156,7 +150,11 @@
 ;;       :wednesday :thursday :friday]
 ;;      :i-can-work-for "1h"
 ;;      :after "17:00"]
-(defn extract-after-rules [ctx] {"AFR" [[:foo :bar]]})
+(defn extract-after-rules
+  [ctx]
+  (let [low-code (get ctx "low-code")]
+
+    {"AFR" [[:foo :bar]]}))
 
 ;; Function for extracting rules like these:
 ;;
