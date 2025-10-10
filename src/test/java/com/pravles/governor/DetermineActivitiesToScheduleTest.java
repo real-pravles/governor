@@ -49,6 +49,7 @@ public class DetermineActivitiesToScheduleTest {
 
     public static final String FROM_THROUGH_RULE = "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]";
     public static final String AFTER_RULE = "[:on [:monday :tuesday :wednesday :thursday :friday] :i-can-work-for \"1h\" :after \"17:00\"]";
+    public static final String DURATION_RULE = "[:on [:saturday :sunday] :i-can-work-for \"5h\"]";
 
     static Stream<Arguments> scenarios() {
         return Stream.of(
@@ -127,9 +128,9 @@ public class DetermineActivitiesToScheduleTest {
                 AFTER_RULE)));
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-18", 5.0,
-                "[:on [:saturday :sunday] :i-can-work-for \"5h\"]")));
+                DURATION_RULE)));
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-19", 5.0,
-                "[:on [:saturday :sunday] :i-can-work-for \"5h\"]")));
+                DURATION_RULE)));
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-20", 2.0,
                 FROM_THROUGH_RULE)));
@@ -154,6 +155,10 @@ public class DetermineActivitiesToScheduleTest {
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-24", 1.0,
                 AFTER_RULE)));
 
+        assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-25", 5.0,
+                DURATION_RULE)));
+        assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-26", 5.0,
+                DURATION_RULE)));
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-27", 2.0, FROM_THROUGH_RULE)));
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-27", 1.0,
