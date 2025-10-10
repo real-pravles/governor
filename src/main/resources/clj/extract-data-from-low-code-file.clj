@@ -32,18 +32,12 @@
   [old-ctx]
   (let [base-dir (get old-ctx "baseDir")
         low-code-file (get old-ctx "settings-file")
-        low-code-data (with-open [r (io/reader low-code-file)]
-          (let [pbr (java.io.PushbackReader. r)]
-            (loop [objects []]
-              (let [obj (edn/read {:eof ::eof} pbr)]
-                (if (= obj ::eof)
-                  objects
-                  (recur (conj objects obj)))))))
-        ]
-   (println "extract-data-from-low-code-file")
-    (println "basedir:" (get old-ctx "baseDir"))
+        low-code-data
+          (with-open [r (io/reader low-code-file)]
+            (let [pbr (java.io.PushbackReader. r)]
+              (loop [objects []]
+                (let [obj (edn/read {:eof ::eof} pbr)]
+                  (if (= obj ::eof) objects (recur (conj objects obj)))))))]
     (.put old-ctx "low-code" low-code-data)
-    old-ctx
-    )
-)
+    old-ctx))
 

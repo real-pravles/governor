@@ -27,18 +27,9 @@
 
 (defn гав
   [old-ctx]
-  (let [
-         base-dir (get old-ctx "baseDir")
+  (let [base-dir (get old-ctx "baseDir")
         low-code-file (get old-ctx "settings-file")
-         f (java.io.File. low-code-file)
-        low-code-file-invalid (not (and
-                                    (.isFile f)
-                                    (.canRead f)
-                                    (.exists f)
-                                     ))
-
-         ]
+        f (java.io.File. low-code-file)
+        low-code-file-invalid (not (and (.isFile f) (.canRead f) (.exists f)))]
     (.put old-ctx "input-data-invalid?" false)
-   old-ctx
-    )
-)
+    old-ctx))
