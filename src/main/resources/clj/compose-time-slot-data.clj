@@ -128,11 +128,11 @@
 ;;     :through "08:00"]
 (defn extract-from-through-rules
   [ctx]
-    (->> "low-code"
-         (get ctx)
-         (filter is-from-through-rule)
-         (mapcat transform-from-through-rule)
-         (apply merge-with concat)))
+  (->> "low-code"
+       (get ctx)
+       (filter is-from-through-rule)
+       (mapcat transform-from-through-rule)
+       (apply merge-with concat)))
 
 (defn is-from-through-rule
   [clex]
@@ -156,13 +156,12 @@
 (defn extract-after-rules
   [ctx]
   (let [low-code (get ctx "low-code")
-        x     (->> "low-code"
-         (get ctx)
-         (filter is-after-rule)
-         (mapcat transform-after-rule)
-         (apply merge-with concat))
-        ]
-    (println "extract-after-rules, x:" x )
+        x (->> "low-code"
+               (get ctx)
+               (filter is-after-rule)
+               (mapcat transform-after-rule)
+               (apply merge-with concat))]
+    (println "extract-after-rules, x:" x)
     {"AFR" [[:foo :bar]]}))
 
 (defn is-after-rule
@@ -171,9 +170,7 @@
     (let [i0 (first clex)
           i2 (nth clex 2)
           i4 (nth clex 4)]
-      (and (= :on i0)
-           (= :i-can-work-for i2)
-           (= :after i4)))
+      (and (= :on i0) (= :i-can-work-for i2) (= :after i4)))
     false ;; (count clex) != 6
   ))
 
@@ -185,11 +182,7 @@
             num (Double/parseDouble num-str)
             unit (last txt)
             hours (if (= unit \m) (/ num 60.0) num)]
-        
-        (println "parse-duration, unit: " unit)
-        hours
-
-        ))))
+        hours))))
 
 
 (defn transform-after-rule
@@ -201,17 +194,15 @@
                            (parse-duration))
         x (->> days-of-week
                (map #(get days-of-week-conv-table %))
-         (map (fn [day]
-                {day [{:duration-hours duration-hours, :rule (str rule)}]}))
-
-         )
-        ]
+               (map (fn [day]
+                      {day [{:duration-hours duration-hours,
+                             :rule (str rule)}]})))]
     (println "transform-after-rule, rule: " rule)
-    (println "transform-after-rule, y: " (parse-duration (:i-can-work-for dict)))
+    (println "transform-after-rule, y: "
+             (parse-duration (:i-can-work-for dict)))
     (println "transform-after-rule, duration-hours: " duration-hours)
     (println "x:" x)
-    x 
-    ))
+    x))
 
 ;; Function for extracting rules like these:
 ;;
