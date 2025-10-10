@@ -150,11 +150,62 @@
 ;;       :wednesday :thursday :friday]
 ;;      :i-can-work-for "1h"
 ;;      :after "17:00"]
+(declare is-after-rule)
+(declare transform-after-rule)
+
 (defn extract-after-rules
   [ctx]
-  (let [low-code (get ctx "low-code")]
-
+  (let [low-code (get ctx "low-code")
+        x     (->> "low-code"
+         (get ctx)
+         (filter is-from-through-rule)
+         (mapcat transform-from-through-rule)
+         (apply merge-with concat))
+        ]
+    (println "extract-after-rules, x:" x )
     {"AFR" [[:foo :bar]]}))
+
+(defn is-after-rule
+  [clex]
+  (if (= 6 (count clex))
+    (let [i0 (first clex)
+          i2 (nth clex 2)
+          i4 (nth clex 4)]
+      (and (= :on i0)
+           (= :i-can-work-for i2)
+           (= :after i4)))
+    false ;; (count clex) != 6
+  ))
+
+(defn parse-duration
+  [v]
+  (let [last-idx (dec (count v))
+        last-val (get v last-idx)]
+    (if (and (string? last-val) (re-matches #"\d+[hm]" last-val))
+      (let [num-str (subs last-val 0 (dec (count last-val)))
+            num (Double/parseDouble num-str)
+            unit (last last-val)
+            hours (if (= unit \m) (/ num 60.0) num)]
+        (assoc v last-idx hours)))))
+
+
+(defn transform-after-rule
+  [rule]
+  (let [dict (apply hash-map rule)
+        days-of-week (:on dict)
+        duration-hours (-> dict
+                           (:i-can-work-for)
+                           (parse-duration))
+        x (->> days-of-week
+               (map #(get days-of-week-conv-table %))
+         (map (fn [day]
+                {day [{:duration-hours duration-hours, :rule (str rule)}]}))
+
+         )
+        ]
+    (println "x:" x)
+    x 
+    ))
 
 ;; Function for extracting rules like these:
 ;;
