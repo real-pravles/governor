@@ -26,6 +26,9 @@
 
 (def nl (System/getProperty "line.separator"))
 (def sdf (java.text.SimpleDateFormat. "yyyy-MM-dd"))
+(def tf (java.text.SimpleDateFormat. "HH:mm"))
+
+
 (def days-of-week-conv-table {
                    :monday "MON"
                    :tuesday "TUE"
@@ -144,14 +147,23 @@
   [rule]
   (let [dict (apply hash-map rule)
         days-of-week (:on dict)
-        start-time (:i-can-work-from dict)
-        end-time (:through dict)
+        start-time (->> dict
+                         (:i-can-work-from)
+                         (.parse tf)
+                         (.getTime))
+        end-time (->> dict
+                      (:through)
+                      (.parse tf)
+                      (.getTime))
+        duration-millis (- end-time start-time)
+        duration-hours (/ duration-millis 1000.0 60.0 60.0)
         x (->> days-of-week
                   (map #(get days-of-week-conv-table %))
                   (map (fn [day]
                          (let [duration nil
                                note nil]
-                           {day {:duration nil
+                           ;; TODO: Continue to fill out data here
+                           {day {:duration-hours duration-hours
                                  :rule (str rule)}}))))
 
         ]
