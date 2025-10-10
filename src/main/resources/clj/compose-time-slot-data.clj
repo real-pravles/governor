@@ -92,9 +92,14 @@
   [rules state current-day]
   (let [current-day-txt (.format sdf current-day)
         day-of-week (.toUpperCase (.format (java.text.SimpleDateFormat. "EEE")
-                                           current-day))]
+                                           current-day))
+        applicable-rules (get rules day-of-week)
+
+        ]
     ;; Print the current day from state
     (println "compose-time-slots-for-day: " day-of-week " " current-day-txt)
+    (println "applicable-rules (size):" (count applicable-rules))
+    (println "applicable-rules:" applicable-rules)
     ;; Return state (potentially modified)
     state))
 
@@ -110,8 +115,6 @@
 (defn extract-from-through-rules
   [ctx]
   (let [low-code (get ctx "low-code")]
-    (println "extract-from-through-rules, rules: " rules)
-    rules
     (->> low-code
          (filter is-from-through-rule)
          (map transform-from-through-rule)
