@@ -2,51 +2,81 @@
 Status: OPTIMAL
 Objective value: 2600.0
 === SCHEDULE ===
-Monday (week 1) (2.0/2.0h used):
-  - p: 2.0h
+2025-10-13 (2,0/2,0h used):
+  - p: 1,0h
+  - w: 1,0h
 
-Tuesday (week 1) (2.0/2.0h used):
-  - p: 2.0h
+2025-10-13 (1,0/1,0h used):
+  - w: 1,0h
 
-Wednesday (week 1) (2.0/2.0h used):
-  - p: 2.0h
+2025-10-14 (1,0/1,0h used):
+  - w: 1,0h
 
-Thursday (week 1) (2.0/2.0h used):
-  - p: 2.0h
+2025-10-15 (2,0/2,0h used):
+  - p: 0,9h
+  - w: 1,1h
 
-Friday (week 1) (2.0/2.0h used):
-  - p: 0.4h
-  - w: 1.6h
+2025-10-15 (1,0/1,0h used):
+  - w: 1,0h
 
-Saturday (week 1) (4.2/5.0h used):
-  - p: 2.1h
-  - w: 2.1h
+2025-10-16 (1,0/1,0h used):
+  - w: 1,0h
 
-Sunday (week 1) (3.6/5.0h used):
-  - p: 1.5h
-  - w: 2.1h
+2025-10-17 (2,0/2,0h used):
+  - p: 0,9h
+  - w: 1,1h
 
-Monday (week 1) (2.0/2.0h used):
-  - w: 2.0h
+2025-10-17 (1,0/1,0h used):
+  - w: 1,0h
 
-Tuesday (week 1) (2.0/2.0h used):
-  - w: 2.0h
+2025-10-18 (3,2/5,0h used):
+  - p: 2,1h
+  - w: 1,1h
 
-Wednesday (week 1) (2.0/2.0h used):
-  - w: 2.0h
+2025-10-19 (1,6/5,0h used):
+  - p: 0,5h
+  - w: 1,1h
 
-Thursday (week 1) (2.0/2.0h used):
-  - w: 2.0h
+2025-10-20 (2,0/2,0h used):
+  - p: 0,9h
+  - w: 1,1h
 
-Friday (week 1) (2.0/2.0h used):
-  - w: 2.0h
+2025-10-20 (1,0/1,0h used):
+  - w: 1,0h
 
-Saturday (week 1) (2.1/5.0h used):
-  - w: 2.1h
+2025-10-21 (1,0/1,0h used):
+  - w: 1,0h
 
-Sunday (week 1) (2.1/5.0h used):
-  - w: 2.1h
+2025-10-22 (2,0/2,0h used):
+  - p: 0,9h
+  - w: 1,1h
+
+2025-10-22 (1,0/1,0h used):
+  - w: 1,0h
+
+2025-10-23 (1,0/1,0h used):
+  - p: 1,0h
+
+2025-10-24 (2,0/2,0h used):
+  - p: 0,9h
+  - w: 1,1h
+
+2025-10-24 (1,0/1,0h used):
+  - p: 1,0h
+
+2025-10-25 (1,1/5,0h used):
+  - w: 1,1h
+
+2025-10-26 (1,1/5,0h used):
+  - w: 1,1h
+
+2025-10-27 (2,0/2,0h used):
+  - p: 0,9h
+  - w: 1,1h
+
+2025-10-27 (1,0/1,0h used):
+  - p: 1,0h
 
 === TASK COMPLETION ===
-p: 12.0/12.0 hours scheduled
-w: 20.0/20.0 hours scheduled
+p: 12,0/12,0 hours scheduled
+w: 20,0/20,0 hours scheduled
