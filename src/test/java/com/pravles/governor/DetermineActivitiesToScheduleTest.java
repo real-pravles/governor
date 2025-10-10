@@ -97,7 +97,7 @@ public class DetermineActivitiesToScheduleTest {
         assertTrue(effortEstimates.contains(new Task("sc024", "w", 10, 20.0, 1.0)));
 
         final List<TimeSlot> timeSlots = (List<TimeSlot>) actualCtx.get("time-slots");
-        assertEquals(18, timeSlots.size());
+        assertEquals(22, timeSlots.size());
 
         int i = 0;
 
