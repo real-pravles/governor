@@ -29,15 +29,14 @@
 (def tf (java.text.SimpleDateFormat. "HH:mm"))
 
 
-(def days-of-week-conv-table {
-                   :monday "MON"
-                   :tuesday "TUE"
-                   :wednesday "WED"
-                   :thursday "THU"
-                   :friday "FRI"
-                   :saturday "SAT"
-                   :sunday "SUN"
-                   })
+(def days-of-week-conv-table
+  {:monday "MON",
+   :tuesday "TUE",
+   :wednesday "WED",
+   :thursday "THU",
+   :friday "FRI",
+   :saturday "SAT",
+   :sunday "SUN"})
 
 (declare traverse-days)
 (declare compose-time-slots-for-day)
@@ -148,28 +147,18 @@
   (let [dict (apply hash-map rule)
         days-of-week (:on dict)
         start-time (->> dict
-                         (:i-can-work-from)
-                         (.parse tf)
-                         (.getTime))
+                        (:i-can-work-from)
+                        (.parse tf)
+                        (.getTime))
         end-time (->> dict
                       (:through)
                       (.parse tf)
                       (.getTime))
         duration-millis (- end-time start-time)
-        duration-hours (/ duration-millis 1000.0 60.0 60.0)
-        x (->> days-of-week
-                  (map #(get days-of-week-conv-table %))
-                  (map (fn [day]
-                         (let [duration nil
-                               note nil]
-                           ;; TODO: Continue to fill out data here
-                           {day {:duration-hours duration-hours
-                                 :rule (str rule)}}))))
-
-        ]
+        duration-hours (/ duration-millis 1000.0 60.0 60.0)]
     (println "transform-from-through-rule, rule: " rule)
-    (println "dict: " dict)
-    (println "days-of-week: " days-of-week)
-    (println "x: " x)
-    nil))
+    (->> days-of-week
+         (map #(get days-of-week-conv-table %))
+         (map (fn [day]
+                {day {:duration-hours duration-hours, :rule (str rule)}})))))
 
