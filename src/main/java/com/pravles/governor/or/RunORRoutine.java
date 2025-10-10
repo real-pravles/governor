@@ -39,23 +39,7 @@ public class RunORRoutine implements ActivityFunction {
         Loader.loadNativeLibraries();
 
         // Define time slots (one week)
-        List<TimeSlot> timeSlots = Arrays.asList(
-                new TimeSlot(0, "Monday (week 1)", 2.0, ""),
-                new TimeSlot(1, "Tuesday (week 1)", 2.0, ""),
-                new TimeSlot(2, "Wednesday (week 1)", 2.0, ""),
-                new TimeSlot(3, "Thursday (week 1)", 2.0, ""),
-                new TimeSlot(4, "Friday (week 1)", 2.0, ""),
-                new TimeSlot(5, "Saturday (week 1)", 5.0, ""),
-                new TimeSlot(6, "Sunday (week 1)", 5.0, ""),
-                new TimeSlot(7, "Monday (week 1)", 2.0, ""),
-                new TimeSlot(8, "Tuesday (week 1)", 2.0, ""),
-                new TimeSlot(9, "Wednesday (week 1)", 2.0, ""),
-                new TimeSlot(10, "Thursday (week 1)", 2.0, ""),
-                new TimeSlot(11, "Friday (week 1)", 2.0, ""),
-                new TimeSlot(12, "Saturday (week 1)", 5.0, ""),
-                new TimeSlot(13, "Sunday (week 1)", 5.0,  "")
-
-        );
+        final List<TimeSlot> timeSlots = (List<TimeSlot>)ctx.get("time-slots");
 
         // Define tasks - now as single tasks with total hours
         final List<Task> tasks = (List<Task>) ctx.get("effort-estimates");
