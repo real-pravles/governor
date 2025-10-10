@@ -71,6 +71,7 @@
             last-day
             #(compose-time-slots-for-day rules-by-day-of-week %1 %2))
         time-slots (:time-slots days-traversal-result)]
+    (println "duration-rules: " duration-rules)
     (.put ctx "time-slots" time-slots)
     ctx))
 
