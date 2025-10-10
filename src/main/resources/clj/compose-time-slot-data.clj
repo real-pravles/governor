@@ -73,9 +73,7 @@
             first-day
             last-day
             #(compose-time-slots-for-day rules-by-day-of-week %1 %2))
-        time-slots (:time-slots days-traversal-result)
-
-        ]
+        time-slots (:time-slots days-traversal-result)]
     (println "compose-time-slot-data")
     (println "first-day: " first-day)
     (println "number-of-weeks-to-schedule: " number-of-weeks-to-schedule)
@@ -95,10 +93,7 @@
       (if (.after current-day last-day-date)
         state
         (let [new-state (process-day state current-day)]
-          (recur new-state (DateUtils/addDays current-day 1))))))
-;;  (println "traverse-days, state: " state)
-;;  state
-  )
+          (recur new-state (DateUtils/addDays current-day 1)))))))
 
 (defn compose-time-slots-for-day
   [rules state current-day]
