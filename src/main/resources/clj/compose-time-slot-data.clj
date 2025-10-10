@@ -105,12 +105,12 @@
         time-slots (->> applicable-rules
                         (map-indexed (fn [idx rule]
                                        (let [index (+ start-index idx)
-                                             day "day TBD"
-                                             rule "rule TBD"
-                                             hours 0.0]
+                                             day current-day
+                                             rule-txt (:rule rule)
+                                             hours (:duration-hours rule)]
                                          (println "index: " index
                                                   ", rule: " rule)
-                                         (TimeSlot. index day hours rule)))))]
+                                         (TimeSlot. index day hours rule-txt)))))]
     ;; Print the current day from state
     (println "compose-time-slots-for-day: " day-of-week " " current-day-txt)
     (println "applicable-rules (size):" (count applicable-rules))
