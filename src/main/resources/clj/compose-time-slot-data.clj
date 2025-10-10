@@ -92,11 +92,12 @@
         last-day-date (.parse sdf last-day)]
     (loop [state {:time-slots [], :idx 0}
            current-day first-day-date]
-      (when-not (.after current-day last-day-date)
+      (if (.after current-day last-day-date)
+        state
         (let [new-state (process-day state current-day)]
           (recur new-state (DateUtils/addDays current-day 1))))))
-  (println "traverse-days, state: " state)
-  state
+;;  (println "traverse-days, state: " state)
+;;  state
   )
 
 (defn compose-time-slots-for-day

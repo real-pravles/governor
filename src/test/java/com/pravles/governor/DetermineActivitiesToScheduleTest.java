@@ -19,6 +19,7 @@ package com.pravles.governor;
 
 import clojure.lang.Keyword;
 import com.pravles.governor.or.Task;
+import com.pravles.governor.or.TimeSlot;
 import com.pravles.processengine.util.LaunchInfoFactory;
 import com.pravles.processengine.util.ProcessEngineLauncher;
 import org.apache.commons.io.FileUtils;
@@ -90,6 +91,9 @@ public class DetermineActivitiesToScheduleTest {
         assertTrue(effortEstimates.contains(new Task("first_naked_post", "p", 5, 12.0, 0.25)));
 
         assertTrue(effortEstimates.contains(new Task("sc024", "w", 10, 20.0, 1.0)));
+
+        final List<TimeSlot> timeSlots = (List<TimeSlot>) actualCtx.get("time-slots");
+        assertEquals(7, timeSlots.size());
 
         System.out.println("Hello");
     }
