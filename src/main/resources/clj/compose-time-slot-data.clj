@@ -215,8 +215,11 @@
           i2 (nth clex 2)]
       (and (= :on i0)
            (= :i-can-work-for i2)
-           )))
+           ))
+
+
   false ;; (count clex) != 4
+    )
   )
 
 (defn transform-duration-rule
