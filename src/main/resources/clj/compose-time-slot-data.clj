@@ -186,6 +186,7 @@
             num (Double/parseDouble num-str)
             unit (last last-val)
             hours (if (= unit \m) (/ num 60.0) num)]
+        (println "parse-duration, unit: " unit)
         (assoc v last-idx hours)))))
 
 
@@ -204,7 +205,7 @@
          )
         ]
     (println "transform-after-rule, rule: " rule)
-    (println "transform-after-rule, y: " (:i-can-work-for dict))
+    (println "transform-after-rule, y: " (parse-duration (:i-can-work-for dict)))
     (println "transform-after-rule, duration-hours: " duration-hours)
     (println "x:" x)
     x 
