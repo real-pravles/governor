@@ -104,6 +104,7 @@ rules-by-day-of-week from-through-rules
     (println "compose-time-slots-for-day: " day-of-week " " current-day-txt)
     (println "applicable-rules (size):" (count applicable-rules))
     (println "applicable-rules:" applicable-rules)
+    (println "(first applicable-rules):" (first applicable-rules))
     ;; Return state (potentially modified)
     state))
 
