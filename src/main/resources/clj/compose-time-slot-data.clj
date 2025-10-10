@@ -179,6 +179,7 @@
 
 (defn parse-duration
   [v]
+  (println "v:" v)
   (let [last-idx (dec (count v))
         last-val (get v last-idx)]
     (if (and (string? last-val) (re-matches #"\d+[hm]" last-val))
