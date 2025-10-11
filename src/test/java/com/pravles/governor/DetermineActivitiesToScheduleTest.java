@@ -42,9 +42,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DetermineActivitiesToScheduleTest {
 
-    private static final String FROM_THROUGH_RULE = "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]";
-    private static final String AFTER_RULE = "[:on [:monday :tuesday :wednesday :thursday :friday] :i-can-work-for \"1h\" :after \"17:00\"]";
-    private static final String DURATION_RULE = "[:on [:saturday :sunday] :i-can-work-for \"5h\"]";
+    private static final String FROM_THROUGH_RULE = "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\" :with-slot-quality-of 5]";
+    private static final String AFTER_RULE = "[:on [:monday :tuesday :wednesday :thursday :friday] :i-can-work-for \"1h\" :after \"17:00\" :with-slot-quality-of 1]";
+    private static final String DURATION_RULE = "[:on [:saturday :sunday] :i-can-work-for \"5h\" :with-slot-quality-of 10]";
 
     private static final long FROM_THROUGH_QUALITY = 5L;
     private static final long AFTER_QUALITY = 1L;
