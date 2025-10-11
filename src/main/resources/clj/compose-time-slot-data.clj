@@ -210,10 +210,15 @@
 
 (defn is-duration-rule
   [clex]
-  (if (= 4 (count clex))
+  (if (= 6 (count clex))
     (let [i0 (first clex)
-          i2 (nth clex 2)]
-      (and (= :on i0) (= :i-can-work-for i2)))
+          i2 (nth clex 2)
+          i4 (nth clex 4)
+          ]
+      (and (= :on i0) (= :i-can-work-for i2)
+(= :with-slot-quality-of i4)
+
+           ))
     false ;; (count clex) != 4
   ))
 
