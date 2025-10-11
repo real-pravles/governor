@@ -1,37 +1,37 @@
 
 Status: OPTIMAL
-Objective value: 2.300338E7
+Objective value: 3223000.0
 === SCHEDULE ===
-2025-10-13 (2.0/2.0h used):
-  - p.first_naked_post: 2.0h
+2025-10-15 (2,0/2,0h used):
+  - p.first_naked_post: 2,0h
 
-2025-10-15 (2.0/2.0h used):
-  - p.first_naked_post: 2.0h
+2025-10-17 (2,0/2,0h used):
+  - p.first_naked_post: 2,0h
 
-2025-10-17 (2.0/2.0h used):
-  - p.first_naked_post: 2.0h
+2025-10-18 (5,0/5,0h used):
+  - w.sc024: 5,0h
 
-2025-10-18 (5.0/5.0h used):
-  - w.sc024: 5.0h
+2025-10-19 (5,0/5,0h used):
+  - w.sc024: 5,0h
 
-2025-10-19 (5.0/5.0h used):
-  - w.sc024: 5.0h
+2025-10-20 (2,0/2,0h used):
+  - p.first_naked_post: 2,0h
 
-2025-10-20 (2.0/2.0h used):
-  - p.first_naked_post: 2.0h
+2025-10-22 (2,0/2,0h used):
+  - p.first_naked_post: 2,0h
 
-2025-10-22 (2.0/2.0h used):
-  - p.first_naked_post: 2.0h
+2025-10-24 (2,0/2,0h used):
+  - p.first_naked_post: 2,0h
 
-2025-10-24 (2.0/2.0h used):
-  - p.first_naked_post: 2.0h
+2025-10-25 (5,0/5,0h used):
+  - w.sc024: 5,0h
 
-2025-10-25 (5.0/5.0h used):
-  - w.sc024: 5.0h
+2025-10-26 (5,0/5,0h used):
+  - w.sc024: 5,0h
 
-2025-10-26 (5.0/5.0h used):
-  - w.sc024: 5.0h
+2025-10-27 (2,0/2,0h used):
+  - p.first_naked_post: 2,0h
 
 === TASK COMPLETION ===
-p: 12.0/12.0 hours scheduled
-w: 20.0/20.0 hours scheduled
+p: 12,0/12,0 hours scheduled
+w: 20,0/20,0 hours scheduled
