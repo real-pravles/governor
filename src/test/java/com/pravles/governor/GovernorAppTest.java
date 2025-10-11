@@ -39,12 +39,14 @@ import static java.lang.String.format;
 import static org.apache.commons.io.FileUtils.cleanDirectory;
 import static org.apache.commons.io.FileUtils.copyDirectory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.params.provider.Arguments.of;
 
 class GovernorAppTest {
     static Stream<Arguments> scenarios() {
         return Stream.of(
-                Arguments.of("01"),
-                Arguments.of("02")
+                of("01"),
+                of("02"),
+                of("03")
         );
     }
 
