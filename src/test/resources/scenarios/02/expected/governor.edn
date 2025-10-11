@@ -17,7 +17,7 @@
     [:on [:monday :wednesday :friday]
      :i-can-work-from "06:00"
      :through "08:00"
-     :with-slot-quality-of 5]
+     :with-slot-quality-of 8]
     
     [:on [:monday :tuesday
           :wednesday :thursday :friday]
