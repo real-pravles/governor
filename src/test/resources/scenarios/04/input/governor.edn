@@ -12,7 +12,7 @@
   [:comment "(This is the basis for time slot data.)"]
 
     [:schedule-from "2025-10-13"
-     :for "2w"]
+     :for "52w"]
 
     [:on [:monday :wednesday :friday]
      :i-can-work-from "06:00"
