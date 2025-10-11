@@ -98,8 +98,9 @@
                             (let [index (+ start-index idx)
                                   day (.format sdf current-day)
                                   rule-txt (:rule rule)
-                                  hours (:duration-hours rule)]
-                              (TimeSlot. index day hours rule-txt 0)))))]
+                                  hours (:duration-hours rule)
+                                  quality (:quality rule)]
+                              (TimeSlot. index day hours rule-txt quality)))))]
     (-> state
         (assoc :idx (+ start-index (count applicable-rules)))
         (update :time-slots concat time-slots))))
@@ -186,11 +187,15 @@
         days-of-week (:on dict)
         duration-hours (-> dict
                            (:i-can-work-for)
-                           (parse-duration))]
+                           (parse-duration))
+
+        quality (->> dict
+                     (:with-slot-quality-of))
+        ]
     (->> days-of-week
          (map #(get days-of-week-conv-table %))
          (map (fn [day]
-                {day [{:duration-hours duration-hours, :rule (str rule)}]})))))
+                {day [{:duration-hours duration-hours, :rule (str rule) :quality quality}]})))))
 
 ;; Function for extracting rules like these:
 ;;
@@ -238,9 +243,12 @@
                       (.parse tf)
                       (.getTime))
         duration-millis (- end-time start-time)
-        duration-hours (/ duration-millis 1000.0 60.0 60.0)]
+        duration-hours (/ duration-millis 1000.0 60.0 60.0)
+        quality (->> dict
+                     (:with-slot-quality-of))
+        ]
     (->> days-of-week
          (map #(get days-of-week-conv-table %))
          (map (fn [day]
-                {day [{:duration-hours duration-hours, :rule (str rule)}]})))))
+                {day [{:duration-hours duration-hours, :rule (str rule) :quality quality}]})))))
 
