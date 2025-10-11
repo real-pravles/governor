@@ -123,11 +123,16 @@
 
 (defn is-from-through-rule
   [clex]
-  (if (= 6 (count clex))
+  (if (= 8 (count clex))
     (let [i0 (first clex)
           i2 (nth clex 2)
-          i4 (nth clex 4)]
-      (and (= :on i0) (= :i-can-work-from i2) (= :through i4)))
+          i4 (nth clex 4)
+          i6 (nth clex 6)
+          ]
+      (and (= :on i0) (= :i-can-work-from i2) (= :through i4)
+(= :with-slot-quality-of i6)
+
+           ))
     false ;; (count clex) != 6
   ))
 
