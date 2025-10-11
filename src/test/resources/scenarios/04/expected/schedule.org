@@ -1,6 +1,6 @@
 
 Status: OPTIMAL
-Objective value: 2.480338E7
+Objective value: 2.5400338E8
 === SCHEDULE ===
 2025-10-13 (2.0/2.0h used):
   - p.first_naked_post: 2.0h

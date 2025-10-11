@@ -23,7 +23,7 @@
           :wednesday :thursday :friday]
          :i-can-work-for "1h"
          :after "17:00"
-         :with-slot-quality-of 80
+         :with-slot-quality-of 85
      ]
     
     [:on [:saturday :sunday]
