@@ -46,7 +46,8 @@ class GovernorAppTest {
         return Stream.of(
                 of("01"),
                 of("02"),
-                of("03")
+                of("03"),
+                of("04")
         );
     }
 
