@@ -99,7 +99,7 @@
                                   day (.format sdf current-day)
                                   rule-txt (:rule rule)
                                   hours (:duration-hours rule)]
-                              (TimeSlot. index day hours rule-txt)))))]
+                              (TimeSlot. index day hours rule-txt 0)))))]
     (-> state
         (assoc :idx (+ start-index (count applicable-rules)))
         (update :time-slots concat time-slots))))

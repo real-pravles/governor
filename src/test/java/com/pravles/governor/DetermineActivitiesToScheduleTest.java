@@ -42,9 +42,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DetermineActivitiesToScheduleTest {
 
-    public static final String FROM_THROUGH_RULE = "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]";
-    public static final String AFTER_RULE = "[:on [:monday :tuesday :wednesday :thursday :friday] :i-can-work-for \"1h\" :after \"17:00\"]";
-    public static final String DURATION_RULE = "[:on [:saturday :sunday] :i-can-work-for \"5h\"]";
+    private static final String FROM_THROUGH_RULE = "[:on [:monday :wednesday :friday] :i-can-work-from \"06:00\" :through \"08:00\"]";
+    private static final String AFTER_RULE = "[:on [:monday :tuesday :wednesday :thursday :friday] :i-can-work-for \"1h\" :after \"17:00\"]";
+    private static final String DURATION_RULE = "[:on [:saturday :sunday] :i-can-work-for \"5h\"]";
+
+    private static final long FROM_THROUGH_QUALITY = 5L;
+    private static final long AFTER_QUALITY = 1L;
+    private static final long DURATION_QUALITY = 10L;
 
     static Stream<Arguments> scenarios() {
         return Stream.of(
@@ -98,67 +102,65 @@ public class DetermineActivitiesToScheduleTest {
         int i = 0;
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-13", 2.0,
-                FROM_THROUGH_RULE)));
+                FROM_THROUGH_RULE, FROM_THROUGH_QUALITY)));
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-13", 1.0,
-                AFTER_RULE)));
+                AFTER_RULE, AFTER_QUALITY)));
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-14", 1.0,
-                AFTER_RULE)));
+                AFTER_RULE, AFTER_QUALITY)));
 
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-15", 2.0,
-                FROM_THROUGH_RULE)));
+                FROM_THROUGH_RULE, FROM_THROUGH_QUALITY)));
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-15", 1.0,
-                AFTER_RULE)));
+                AFTER_RULE, AFTER_QUALITY)));
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-16", 1.0,
-                AFTER_RULE)));
+                AFTER_RULE, AFTER_QUALITY)));
 
 
-        assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-17", 2.0, FROM_THROUGH_RULE)));
+        assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-17", 2.0, FROM_THROUGH_RULE, FROM_THROUGH_QUALITY)));
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-17", 1.0,
-                AFTER_RULE)));
+                AFTER_RULE, AFTER_QUALITY)));
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-18", 5.0,
-                DURATION_RULE)));
+                DURATION_RULE, DURATION_QUALITY)));
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-19", 5.0,
-                DURATION_RULE)));
+                DURATION_RULE, DURATION_QUALITY)));
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-20", 2.0,
-                FROM_THROUGH_RULE)));
+                FROM_THROUGH_RULE, FROM_THROUGH_QUALITY)));
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-20", 1.0,
-                AFTER_RULE)));
+                AFTER_RULE, AFTER_QUALITY)));
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-21", 1.0,
-                AFTER_RULE)));
+                AFTER_RULE, AFTER_QUALITY)));
 
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-22", 2.0,
-                FROM_THROUGH_RULE)));
+                FROM_THROUGH_RULE, FROM_THROUGH_QUALITY)));
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-22", 1.0,
-                AFTER_RULE)));
+                AFTER_RULE, AFTER_QUALITY)));
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-23", 1.0,
-                AFTER_RULE)));
+                AFTER_RULE, AFTER_QUALITY)));
 
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-24", 2.0,
-                FROM_THROUGH_RULE)));
+                FROM_THROUGH_RULE, FROM_THROUGH_QUALITY)));
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-24", 1.0,
-                AFTER_RULE)));
+                AFTER_RULE, AFTER_QUALITY)));
 
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-25", 5.0,
-                DURATION_RULE)));
+                DURATION_RULE, DURATION_QUALITY)));
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-26", 5.0,
-                DURATION_RULE)));
+                DURATION_RULE, DURATION_QUALITY)));
 
-        assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-27", 2.0, FROM_THROUGH_RULE)));
+        assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-27", 2.0, FROM_THROUGH_RULE, FROM_THROUGH_QUALITY)));
         assertTrue(timeSlots.contains(new TimeSlot(i++, "2025-10-27", 1.0,
-                AFTER_RULE)));
-
-        System.out.println("Hello");
+                AFTER_RULE, AFTER_QUALITY)));
     }
 }

@@ -25,12 +25,14 @@ public class TimeSlot {
     String day;
     double availableHours;
     String rule;
+    long quality;
 
     public TimeSlot(int index, String day, double availableHours,
-             String rule) {
+             String rule, long quality) {
         this.index = index;
         this.day = day;
         this.availableHours = availableHours;
         this.rule = rule;
+        this.quality = quality;
     }
 }
