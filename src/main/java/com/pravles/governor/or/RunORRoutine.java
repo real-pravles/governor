@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 public class RunORRoutine implements ActivityFunction {
-    private final CreateModel CREATE_MODEL_FN = new CreateModelVersion5();
+    private final CreateModel CREATE_MODEL_FN = new CreateModelVersion6();
 
     @Override
     public Map<String, Object> apply(final Map<String, Object> ctx) {
