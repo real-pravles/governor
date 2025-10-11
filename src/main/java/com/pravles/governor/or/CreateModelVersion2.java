@@ -18,42 +18,26 @@
 package com.pravles.governor.or;
 
 import com.google.ortools.sat.CpModel;
-import com.google.ortools.Loader;
-import com.google.ortools.sat.CpModel;
-import com.google.ortools.sat.CpSolver;
-import com.google.ortools.sat.CpSolverStatus;
 import com.google.ortools.sat.IntVar;
 import com.google.ortools.sat.LinearExpr;
 import com.google.ortools.sat.LinearExprBuilder;
-import com.pravles.governor.LowCodeUtils;
-import com.pravles.processengine.api.ActivityFunction;
 
 import java.util.List;
-import java.util.Map;
 
-public class CreateDefaultModel implements CreateModel {
+public class CreateModelVersion2 implements CreateModel {
     @Override
     public CpModel apply(final CreateModelInput input) {
 
-        // Define time slots (one week)
-        final List<TimeSlot> timeSlots = (List<TimeSlot>)input.getTimeSlots();
-
-        // Define tasks - now as single tasks with total hours
-        final List<Activity> tasks = (List<Activity>) input.getTasks();
-
-        // Create the CP-SAT model
+        final List<TimeSlot> timeSlots = input.getTimeSlots();
+        final List<Activity> tasks = input.getTasks();
         final CpModel model = new CpModel();
-
-        // Decision variables: hours[i][j] = how many hours of task i in slot j
-        // Scale by 10 to work with integers (e.g., 2.5 hours = 25 tenths)
         final IntVar[][] hours = input.getHours();
 
+        // Initialize decision variables
         for (int i = 0; i < tasks.size(); i++) {
             for (int j = 0; j < timeSlots.size(); j++) {
                 Activity task = tasks.get(i);
                 TimeSlot slot = timeSlots.get(j);
-
-                // Can assign between 0 and min(task_remaining, slot_available) hours
                 long maxHours = (long)(Math.min(task.totalHoursNeeded, slot.availableHours) * 10);
                 hours[i][j] = model.newIntVar(0, maxHours,
                         "task_" + i + "_slot_" + j + "_hours");
@@ -64,12 +48,9 @@ public class CreateDefaultModel implements CreateModel {
         for (int i = 0; i < tasks.size(); i++) {
             Activity task = tasks.get(i);
             LinearExprBuilder totalTaskHours = LinearExpr.newBuilder();
-
             for (int j = 0; j < timeSlots.size(); j++) {
                 totalTaskHours.add(hours[i][j]);
             }
-
-            // Sum of hours across all slots must equal total needed (scaled by 10)
             model.addEquality(totalTaskHours, (long)(task.totalHoursNeeded * 10));
         }
 
@@ -77,44 +58,36 @@ public class CreateDefaultModel implements CreateModel {
         for (int j = 0; j < timeSlots.size(); j++) {
             TimeSlot slot = timeSlots.get(j);
             LinearExprBuilder slotHours = LinearExpr.newBuilder();
-
             for (int i = 0; i < tasks.size(); i++) {
                 slotHours.add(hours[i][j]);
             }
-
-            // Must not exceed available hours (scaled by 10)
             model.addLessOrEqual(slotHours, (long)(slot.availableHours * 10));
         }
 
-        // Optional Constraint 3: Task-specific minimum hours per session
-        // Novel: If worked on, must be at least 1 hour
-        // SubStack: If worked on, must be at least 15 minutes (0.25 hours)
-        // We use: hours[i][j] == 0 OR hours[i][j] >= minHoursScaled
+        // Constraint 3: Task-specific minimum hours per session
         for (int i = 0; i < tasks.size(); i++) {
             Activity task = tasks.get(i);
             long minHoursScaled = (long)(task.minSessionHours * 10);
-            long maxPossibleHours = (long)(Math.min(task.totalHoursNeeded,
-                    timeSlots.get(i < timeSlots.size() ? i : 0).availableHours) * 10);
 
             for (int j = 0; j < timeSlots.size(); j++) {
-                // Create boolean variable indicating if we work on this task in this slot
                 IntVar isWorked = model.newBoolVar("task_" + i + "_slot_" + j + "_worked");
 
-                // Big-M formulation to enforce: hours == 0 OR hours >= minHours
-                // If isWorked == 0: hours[i][j] == 0
-                // If isWorked == 1: hours[i][j] >= minHoursScaled
+                // Find the maximum possible hours for this task in any slot
+                long maxPossibleHours = 0;
+                for (TimeSlot slot : timeSlots) {
+                    long candidate = (long)(Math.min(task.totalHoursNeeded, slot.availableHours) * 10);
+                    if (candidate > maxPossibleHours) {
+                        maxPossibleHours = candidate;
+                    }
+                }
+                long M = maxPossibleHours + 1;
 
-                long M = maxPossibleHours + 1; // Big-M value
-
-                // hours[i][j] <= M * isWorked
-                // (if isWorked = 0, then hours must be 0)
+                // Big-M constraints
                 LinearExprBuilder lhs = LinearExpr.newBuilder();
                 lhs.add(hours[i][j]);
                 lhs.addTerm(isWorked, -M);
                 model.addLessOrEqual(lhs, 0);
 
-                // hours[i][j] >= minHoursScaled * isWorked
-                // (if isWorked = 1, then hours >= minHours; if 0, then >= 0)
                 LinearExprBuilder lhs2 = LinearExpr.newBuilder();
                 lhs2.add(hours[i][j]);
                 lhs2.addTerm(isWorked, -minHoursScaled);
@@ -122,19 +95,23 @@ public class CreateDefaultModel implements CreateModel {
             }
         }
 
-        // Objective: Maximize priority-weighted work scheduled
-        // (In this model, all work must be scheduled, so we optimize for priority placement)
+        // NEW OBJECTIVE: Prioritize earlier completion
+        // Earlier time slots get higher weight to encourage "pack work early"
         LinearExprBuilder objective = LinearExpr.newBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             Activity task = tasks.get(i);
             for (int j = 0; j < timeSlots.size(); j++) {
-                // Reward: priority * hours for each task-slot assignment
-                // Higher priority work in earlier slots gets bonus
+                // Weight decreases for later slots: earlier slots are more valuable
+                // This encourages the solver to schedule work as early as possible
+                long timeWeight = (timeSlots.size() - j) * 100; // Scale by 100 for more impact
                 long priorityWeight = task.priority;
-                objective.addTerm(hours[i][j], priorityWeight);
+                long combinedWeight = priorityWeight * timeWeight;
+
+                objective.addTerm(hours[i][j], combinedWeight);
             }
         }
         model.maximize(objective);
+
         return model;
     }
 }
