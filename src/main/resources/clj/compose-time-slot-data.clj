@@ -133,7 +133,7 @@
 (= :with-slot-quality-of i6)
 
            ))
-    false ;; (count clex) != 6
+    false ;; (count clex) != 8
   ))
 
 ;; Function for extracting rules like these:
@@ -156,12 +156,18 @@
 
 (defn is-after-rule
   [clex]
-  (if (= 6 (count clex))
+  (if (= 8 (count clex))
     (let [i0 (first clex)
           i2 (nth clex 2)
-          i4 (nth clex 4)]
-      (and (= :on i0) (= :i-can-work-for i2) (= :after i4)))
-    false ;; (count clex) != 6
+          i4 (nth clex 4)
+
+          i6 (nth clex 6)
+          ]
+      (and (= :on i0) (= :i-can-work-for i2) (= :after i4)
+(= :with-slot-quality-of i6)
+
+           ))
+    false ;; (count clex) != 8
   ))
 
 (defn parse-duration
