@@ -1,0 +1,57 @@
+[:comment "Governor instructions start here"]
+
+  [:control-state-root-file-is-located-in
+   "@{basedir}/r.dot"]
+
+  [:include-solver-stats-in-schedule-file? false]
+  [:write-schedule-to-file "@{basedir}/schedule.org"]
+  
+  [:comment "Scheduling settings (start)"]
+
+  [:comment "When can I work?"]
+  [:comment "(This is the basis for time slot data.)"]
+
+    [:schedule-from "2025-10-13"
+     :for "2w"]
+
+    [:on [:monday :wednesday :friday]
+     :i-can-work-from "06:00"
+     :through "08:00"
+     :with-slot-quality-of 8]
+    
+    [:on [:monday :tuesday
+          :wednesday :thursday :friday]
+         :i-can-work-for "1h"
+         :after "17:00"
+         :with-slot-quality-of 5
+     ]
+    
+    [:on [:saturday :sunday]
+     :i-can-work-for "5h"
+     :with-slot-quality-of 10]
+
+  [:comment "Effort estimates"]
+
+    [:in-process "w"
+     :assume-activity-requires-effort-of "20h"]
+
+    [:in-process "w"
+     :assume-min-session-duration-of "1h"]
+
+    [:in-process "p"
+     :assume-activity-requires-effort-of "12h"]
+
+    [:in-process "p"
+     :assume-min-session-duration-of "15m"]
+
+  [:comment "Priorities"]
+
+    [:process "w"
+     :has-priority 10]
+    
+    [:process "p"
+     :has-priority 5]
+
+  [:comment "Scheduling settings (end)"]
+
+[:comment "Governor instructions end here"]

@@ -1,0 +1,16 @@
+digraph G {
+  rankdir="TB"
+  bgcolor="transparent"
+
+  node [fontname="Courier Prime"]
+  graph [fontname="Courier Prime"]
+
+  start [shape=circle, label=""]
+
+  gutenberg_1 [shape=box, label=<✓gutengerg1<br/>Write and publish GUTENBERG-1 post>, style=rounded]
+  first_naked_post [shape=box, label=<▢⬤firstNakedPost<br/>Write and publish the first "naked" post>, style=rounded]
+  gutenberg_2 [shape=box, label=<gutenberg2<br/>Write and publish the GUTENBERG-2 post>, style=rounded]
+
+  end [shape=circle, label="", penwidth=5]
+  start -> gutenberg_1 -> first_naked_post -> gutenberg_2 -> end
+}

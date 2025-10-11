@@ -48,3 +48,8 @@ build/
 /src/test/resources/scenarios/02/actual/r.p.dot
 /src/test/resources/scenarios/02/actual/r.w.dot
 /src/test/resources/scenarios/02/actual/schedule.org
+/src/test/resources/scenarios/03/actual/governor.edn
+/src/test/resources/scenarios/03/actual/r.dot
+/src/test/resources/scenarios/03/actual/r.p.dot
+/src/test/resources/scenarios/03/actual/r.w.dot
+/src/test/resources/scenarios/03/actual/schedule.org
