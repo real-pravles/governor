@@ -1,0 +1,27 @@
+digraph G {
+  rankdir="LR"
+  bgcolor="transparent"
+
+  node [fontname="Courier Prime"]
+  graph [fontname="Courier Prime"]
+
+  start [shape=circle, label=""]
+
+  pgw_open [shape=diamond, label="+"]
+
+  pgw_close [shape=diamond, label="+"]
+
+
+  "w" [label=<⬤<br/><b>w</b><br/>Write novel #1>, shape=box, style=rounded, penwidth=5]
+  "p" [label=<⬤<br/><b>p</b><br/>Write and publish SubStack<br/>posts to find first readers>, shape=box, style=rounded, penwidth=5]
+
+  end [shape=circle, label="", penwidth=5]
+  start -> pgw_open
+
+  {rank=same;  "w"; "p"}
+  ordering=out
+  pgw_open -> "w" -> pgw_close
+  pgw_open -> "p" -> pgw_close
+
+  pgw_close -> end
+}

@@ -1,0 +1,16 @@
+digraph G {
+  rankdir="TB"
+  bgcolor="transparent"
+
+  node [fontname="Courier Prime"]
+  graph [fontname="Courier Prime"]
+
+  start [shape=circle, label=""]
+
+  sc054 [shape=box, label=<✓sc054<br/>Self-edit scene 54>, style=rounded]
+  sc024 [shape=box, label=<▢⬤sc024<br/>Self-edit scene 24>, style=rounded]
+  sc025 [shape=box, label=<sc025<br/>Self-edit scene 25>, style=rounded]
+
+  end [shape=circle, label="", penwidth=5]
+  start -> sc054 -> sc024 -> sc025 -> end
+}

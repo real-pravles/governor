@@ -43,7 +43,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class GovernorAppTest {
     static Stream<Arguments> scenarios() {
         return Stream.of(
-                Arguments.of("01")
+                Arguments.of("01"),
+                Arguments.of("02")
         );
     }
 
