@@ -31,7 +31,7 @@ import java.util.Map;
 import static com.pravles.TestLaunchInfoFactory.EXECUTED_ACTIVITIES;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ProcessDrivenAppTest {
+class GovernorAppTest {
     @Test
     public void givenCall_whenRun_thenProduceCorrectResult() {
         // Given
