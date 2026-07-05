@@ -43,7 +43,6 @@ public class GovernorApp {
         app.run(args);
     }
 
-    @SneakyThrows
     void run(final String[] args) {
         final Options options = createOptions();
         final CommandLineParser parser = new DefaultParser();
@@ -61,7 +60,11 @@ public class GovernorApp {
 
         } catch (final ParseException e) {
             log.error("Command-line parsing error", e);
-            formatter.printOptions(options);
+            try {
+                formatter.printOptions(options);
+            } catch (final IOException ex) {
+                log.error("", ex);
+            }
         }
         /*
         final LaunchInfoFactory lif = new ProdLaunchInfoFactory();
