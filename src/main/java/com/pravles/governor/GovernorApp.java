@@ -38,6 +38,9 @@ import java.io.IOException;
 
 @Slf4j
 public class GovernorApp {
+
+    public static final String DAILY_WORKLOAD_SWITCH = "d";
+
     public static void main(final String[] args) {
         final GovernorApp app = new GovernorApp();
         app.run(args);
@@ -51,13 +54,10 @@ public class GovernorApp {
         try {
             CommandLine cmd = parser.parse(options, args);
 
-            if (cmd.hasOption("s")) {
-                System.out.println("S switch is ON");
+            if (cmd.hasOption(DAILY_WORKLOAD_SWITCH)) {
+                System.out.println("Daily workload switch is ON");
                 // your logic here
-            } else {
-                System.out.println("S switch is OFF");
             }
-
         } catch (final ParseException e) {
             log.error("Command-line parsing error", e);
             try {
@@ -75,7 +75,7 @@ public class GovernorApp {
 
     private Options createOptions() {
         final Options options = new Options();
-        final Option dOption = Option.builder("d")
+        final Option dOption = Option.builder(DAILY_WORKLOAD_SWITCH)
                 .longOpt("dailyWorkload")
                 .desc("Read Singularity CSV file from stdin and write daily workloads to stdout")
                 .build();
