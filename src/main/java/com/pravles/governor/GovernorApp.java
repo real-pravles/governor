@@ -55,8 +55,7 @@ public class GovernorApp {
             CommandLine cmd = parser.parse(options, args);
 
             if (cmd.hasOption(DAILY_WORKLOAD_SWITCH)) {
-                System.out.println("Daily workload switch is ON");
-                // your logic here
+                runInDailyWorkloadMode();
             }
         } catch (final ParseException e) {
             log.error("Command-line parsing error", e);
@@ -66,11 +65,10 @@ public class GovernorApp {
                 log.error("", ex);
             }
         }
-        /*
-        final LaunchInfoFactory lif = new ProdLaunchInfoFactory();
-        new ProcessEngineLauncher().run(lif);
+    }
 
-         */
+    private void runInDailyWorkloadMode() {
+        // TODO: Continue here
     }
 
     private Options createOptions() {
