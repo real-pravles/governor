@@ -77,7 +77,6 @@ public class GovernorApp {
         final Options options = new Options();
         final Option dOption = Option.builder("d")
                 .longOpt("dailyWorkload")
-                .hasArg()
                 .desc("Read Singularity CSV file from stdin and write daily workloads to stdout")
                 .build();
         options.addOption(dOption);
